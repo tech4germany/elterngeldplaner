@@ -2,5 +2,8 @@
     "basis": 1000,
     "plus": 500,
     "bonus": 500,
-    "none": 0
+    "none": 0,
+    "months": 32,
+    "parent1": "Charlotte",
+    "parent2" : "Pete"
 }

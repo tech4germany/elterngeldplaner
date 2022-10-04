@@ -1,20 +1,23 @@
 import { Button, Card } from 'react-bootstrap';
+import { Fragment, useState } from 'react';
 import Month from './Month';
 import constants from '../utils/constants.json';
 
-const Parent = ({ id, name }) => {
-  const months = [];
-
-  for (let i = 0; i < 32; i += 1) {
-    months.push({ monthid: i, variant: 'none', value: constants.none });
-  }
-
+const Parent = ({ id, name, setOverlay, monthsParent }) => {
   return (
     <Card>
       <Card.Header>{name}</Card.Header>
       <Card.Body>
-        {months.map(({ monthid, variant, value }) => (
-          <Month key={monthid} variant={variant} value={value} />
+        {monthsParent.map(({ monthid, variant, value }) => (
+          <Fragment key={monthid}>
+            <Month
+              monthKey={monthid}
+              variant={variant}
+              value={value}
+              setOverlay={setOverlay}
+              parentName={name}
+            />
+          </Fragment>
         ))}
       </Card.Body>
     </Card>
