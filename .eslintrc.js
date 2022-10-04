@@ -27,6 +27,7 @@ module.exports = {
         namedComponents: 'arrow-function',
         unnamedComponents: 'arrow-function'
       }
-    ]
+    ],
+    'no-unused-vars': 'warn'
   }
 };
