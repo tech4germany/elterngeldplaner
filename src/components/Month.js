@@ -2,7 +2,7 @@ import { Button, Container, Col, Row } from 'react-bootstrap';
 import { useState } from 'react';
 import SelectionOverlay from './SelectionOverlay';
 
-const Month = ({ monthKey, variant, value, setOverlay, parentName }) => {
+const Month = ({ monthKey, variant, value, updateOverlay, parentId }) => {
   const [selected, setSelected] = useState(false);
 
   return (
@@ -13,14 +13,7 @@ const Month = ({ monthKey, variant, value, setOverlay, parentName }) => {
             variant="secondary"
             onClick={() => {
               setSelected(!selected);
-              setOverlay(
-                <SelectionOverlay
-                  monthid={monthKey}
-                  parentName={parentName}
-                  selectedVariant={variant}
-                  isVisible
-                />
-              );
+              updateOverlay(monthKey, parentId, variant, true);
             }}>
             {variant}
           </Button>

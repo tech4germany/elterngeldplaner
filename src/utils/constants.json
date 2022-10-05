@@ -1,8 +1,44 @@
 {
-    "basis": 1000,
-    "plus": 500,
-    "bonus": 500,
-    "none": 0,
+    "varianten":[
+        {
+            "id": "basis",
+            "fullname": "Basiselterngeld",
+            "abbrv": "B",
+            "amount": 1000,
+            "buttonVariantDefault": "outline-success",
+            "buttonVariantSelected": "success"
+        },
+        {
+            "id": "plus",
+            "fullname": "ElterngeldPlus",
+            "abbrv": "EG+",
+            "amount": 500,
+            "buttonVariantDefault": "outline-warning",
+            "buttonVariantSelected": "warning"
+        },
+        {
+            "id": "bonus",
+            "fullname": "Partnerschaftsbonus",
+            "abbrv": "PB",
+            "amount": 500,
+            "buttonVariantDefault": "outline-danger",
+            "buttonVariantSelected": "danger"
+        },
+        {
+            "id": "none",
+            "fullname": "Kein Elterngeld",
+            "abbrv": "Kein EG",
+            "amount": 0,
+            "buttonVariantDefault": "outline-secondary",
+            "buttonVariantSelected": "secondary"
+        }
+    ],
+
+    "parents":[
+        {"name": "Charlotte"},
+        {"name": "Pete"}
+    ],
+
     "months": 32,
     "parent1": "Charlotte",
     "parent2" : "Pete"

@@ -3,10 +3,11 @@ import { Fragment, useState } from 'react';
 import Month from './Month';
 import constants from '../utils/constants.json';
 
-const Parent = ({ id, name, setOverlay, monthsParent }) => {
+const Parent = ({ id, updateOverlay, monthsParent }) => {
+  console.log(constants.parents[id].name);
   return (
     <Card>
-      <Card.Header>{name}</Card.Header>
+      <Card.Header>{constants.parents[id].name}</Card.Header>
       <Card.Body>
         {monthsParent.map(({ monthid, variant, value }) => (
           <Fragment key={monthid}>
@@ -14,8 +15,8 @@ const Parent = ({ id, name, setOverlay, monthsParent }) => {
               monthKey={monthid}
               variant={variant}
               value={value}
-              setOverlay={setOverlay}
-              parentName={name}
+              updateOverlay={updateOverlay}
+              parentId={id}
             />
           </Fragment>
         ))}
