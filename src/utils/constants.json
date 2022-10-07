@@ -4,39 +4,39 @@
             "id": "basis",
             "fullname": "Basiselterngeld",
             "abbrv": "B",
-            "amount": 1000,
-            "buttonVariantDefault": "outline-success",
-            "buttonVariantSelected": "success"
+            "amount": "1000 €",
+            "buttonVariantDefault": "success",
+            "buttonVariantSelected": "border border-success"
         },
         "plus": {
             "id": "plus",
             "fullname": "ElterngeldPlus",
             "abbrv": "EG+",
-            "amount": 500,
-            "buttonVariantDefault": "outline-warning",
-            "buttonVariantSelected": "warning"
+            "amount": "500 €",
+            "buttonVariantDefault": "warning",
+            "buttonVariantSelected": "border border-warning"
         },
         "bonus": {
             "id": "bonus",
             "fullname": "Partnerschaftsbonus",
             "abbrv": "PB",
-            "amount": 500,
-            "buttonVariantDefault": "outline-danger",
-            "buttonVariantSelected": "danger"
+            "amount": "500 €",
+            "buttonVariantDefault": "danger",
+            "buttonVariantSelected": "border border-danger"
         },
         "none": {
             "id": "none",
             "fullname": "Kein Elterngeld",
-            "abbrv": "Kein EG",
-            "amount": 0,
-            "buttonVariantDefault": "outline-secondary",
-            "buttonVariantSelected": "secondary"
+            "abbrv": "+",
+            "amount": "0 €",
+            "buttonVariantDefault": "secondary",
+            "buttonVariantSelected": "border border-secondary"
         }}
     ,
 
     "parents":[
-        {"name": "Charlotte"},
-        {"name": "Pete"}
+        {"name": "Charlotte", "amount": {"basis": 1268}},
+        {"name": "Pete", "amount": {"basis": 745}}
     ],
 
     "months": 32,

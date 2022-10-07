@@ -17,7 +17,7 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
         onClick={() => {
           updateMonthSelection(monthid, parentId);
         }}>
-        {variant}
+        {constants.varianten[variant].abbrv}
       </Button>
     );
   }, [variant, amount, selected]);
@@ -26,7 +26,7 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
     <Container key={monthid}>
       <Row>
         <Col>{monthButton}</Col>
-        <Col>{amount}</Col>
+        <Col>{amount} €</Col>
       </Row>
     </Container>
   );

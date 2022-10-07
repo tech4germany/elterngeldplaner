@@ -12,7 +12,7 @@ const Parent = ({ id, updateMonthSelection, months }) => {
         <Month
           monthid={monthid}
           variant={variant}
-          amount={amount}
+          amount={amount[variant]}
           updateMonthSelection={updateMonthSelection}
           parentId={id}
           selected={selected}

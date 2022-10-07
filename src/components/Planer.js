@@ -11,11 +11,18 @@ const Planer = () => {
   for (let j = 0; j < 2; j += 1) {
     const initialMonthsOneParent = { parentid: j, months: [] };
     for (let i = 0; i < constants.months; i += 1) {
+      const initialAmount =
+        j === 0
+          ? { basis: 1268, plus: 634, bonus: 634, none: 0 }
+          : { basis: 745, plus: 372, bonus: 372, none: 0 }; // TODO constants verwenden für IDs?
+
       initialMonthsOneParent.months.push({
         monthid: i,
         variant: constants.varianten.none.id, // default variant is "none"
-        amount: constants.varianten.none.amount, // TODO: kann evtl weg da oben bereits weitergegeben
+        amount: initialAmount, // current amount
         selected: false
+
+        // TODO: was wäre in dem monat betrag für basis, plus und bonus?
       });
     }
     initialMonths.push(initialMonthsOneParent);
@@ -27,7 +34,8 @@ const Planer = () => {
     // TODO unnötig
     monthid: 0,
     parentid: 0,
-    selectedVariant: 'none',
+    // selectedVariant: 'none',
+    months,
     isVisible: false
   });
 
@@ -39,8 +47,9 @@ const Planer = () => {
     const currentMonth = months[parentid].months[monthid];
 
     const newVariant = variant === undefined ? currentMonth.variant : variant;
-    const newAmount = amount === undefined ? currentMonth.amount : amount;
-    const newSelected = selected === undefined ? currentMonth.selected : selected; // selected || currentMonth.selected;
+    const newAmount =
+      amount === undefined ? currentMonth.amount : { ...currentMonth.amount, variant: amount }; // TODO variant
+    const newSelected = selected === undefined ? currentMonth.selected : selected;
     const newMonths = [...months];
 
     newMonths[parentid].months[monthid] = {
@@ -50,7 +59,16 @@ const Planer = () => {
       selected: newSelected
     };
 
-    setMonths(newMonths); // TODO
+    setMonths(newMonths);
+
+    // update overlay
+    setSelectionOverlayProps({
+      monthid,
+      parentid,
+      // selectedVariant: months[parentid].months.variant,
+      months,
+      isVisible: true
+    });
   };
 
   const updateMonthSelection = (monthid, parentid) => {
@@ -62,13 +80,6 @@ const Planer = () => {
     }
     // set selection for selected month
     updateMonth(parentid, monthid, undefined, undefined, true);
-
-    setSelectionOverlayProps({
-      monthid,
-      parentid,
-      selectedVariant: months[parentid].months.variant,
-      isVisible: true
-    });
   };
 
   return (

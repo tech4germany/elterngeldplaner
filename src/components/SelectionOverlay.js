@@ -2,8 +2,8 @@ import { Toast, ToastContainer, Button, ButtonGroup } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import constants from '../utils/constants.json';
 
-const SelectionOverlay = ({ monthid, parentid, selectedVariant, isVisible, updateMonth }) => {
-  const [buttons, setButtons] = useState([]);
+const SelectionOverlay = ({ monthid, parentid, months, isVisible, updateMonth }) => {
+  const [buttons, setButtons] = useState();
   useEffect(() => {
     const newButtons = [];
     Object.values(constants.varianten).forEach((value) => {
@@ -11,7 +11,9 @@ const SelectionOverlay = ({ monthid, parentid, selectedVariant, isVisible, updat
         <Button
           key={value.id}
           variant={
-            value.id === selectedVariant ? value.buttonVariantSelected : value.buttonVariantDefault
+            months[parentid].months[monthid].variant === value.id
+              ? value.buttonVariantSelected
+              : value.buttonVariantDefault
           }
           value={value.id}
           onClick={(e) =>
@@ -19,40 +21,22 @@ const SelectionOverlay = ({ monthid, parentid, selectedVariant, isVisible, updat
               parentid,
               monthid,
               e.currentTarget.value, // variant
-              value.amount,
+              // constants.parents[parentid].amount[e.currentTarget.value], //TODO: calculate individual month amount
+              undefined,
               undefined
             )
           }>
-          {value.abbrv}
+          <div>
+            {value.abbrv}
+            <br />
+            {value.amount}
+          </div>
         </Button>
       );
     });
-    // for (let i = 0; i < Object.keys(constants.varianten).length; i += 1) {
-    //   const variantObj = Object.values(constants.varianten)[i]; // TODO!
-    //   newButtons.push(
-    //     <Button
-    //       key={i}
-    //       variant={
-    //         variantObj.id === selectedVariant
-    //           ? variantObj.buttonVariantSelected
-    //           : variantObj.buttonVariantDefault
-    //       }
-    //       value={Object.values(constants.varianten)[i].id}
-    //       onClick={(e) =>
-    //         updateMonth(
-    //           parentid,
-    //           monthid,
-    //           e.currentTarget.value, // variant
-    //           Object.values(constants.varianten)[i].amount,
-    //           undefined
-    //         )
-    //       }>
-    //       {Object.values(constants.varianten)[i].abbrv}
-    //     </Button>
-    //   );
-    // }
+
     setButtons(newButtons);
-  }, [monthid, parentid, selectedVariant, isVisible]);
+  }, [monthid, parentid, months, isVisible]);
 
   return (
     <ToastContainer position="bottom-center" containerPosition="fixed">
