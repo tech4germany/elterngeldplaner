@@ -3,18 +3,56 @@ import { useEffect, useState } from 'react';
 import constants from '../utils/constants.json';
 
 const SelectionOverlay = ({ monthid, parentid, selectedVariant, isVisible, updateMonth }) => {
-  const getButtons = () => {
-    const buttons = constants.varianten.map((item) => (
-      <Button
-        key={item.id}
-        variant={
-          item.id === selectedVariant ? item.buttonVariantSelected : item.buttonVariantDefault
-        }>
-        {item.abbrv}
-      </Button>
-    ));
-    return buttons;
-  };
+  const [buttons, setButtons] = useState([]);
+  useEffect(() => {
+    const newButtons = [];
+    Object.values(constants.varianten).forEach((value) => {
+      newButtons.push(
+        <Button
+          key={value.id}
+          variant={
+            value.id === selectedVariant ? value.buttonVariantSelected : value.buttonVariantDefault
+          }
+          value={value.id}
+          onClick={(e) =>
+            updateMonth(
+              parentid,
+              monthid,
+              e.currentTarget.value, // variant
+              value.amount,
+              undefined
+            )
+          }>
+          {value.abbrv}
+        </Button>
+      );
+    });
+    // for (let i = 0; i < Object.keys(constants.varianten).length; i += 1) {
+    //   const variantObj = Object.values(constants.varianten)[i]; // TODO!
+    //   newButtons.push(
+    //     <Button
+    //       key={i}
+    //       variant={
+    //         variantObj.id === selectedVariant
+    //           ? variantObj.buttonVariantSelected
+    //           : variantObj.buttonVariantDefault
+    //       }
+    //       value={Object.values(constants.varianten)[i].id}
+    //       onClick={(e) =>
+    //         updateMonth(
+    //           parentid,
+    //           monthid,
+    //           e.currentTarget.value, // variant
+    //           Object.values(constants.varianten)[i].amount,
+    //           undefined
+    //         )
+    //       }>
+    //       {Object.values(constants.varianten)[i].abbrv}
+    //     </Button>
+    //   );
+    // }
+    setButtons(newButtons);
+  }, [monthid, parentid, selectedVariant, isVisible]);
 
   return (
     <ToastContainer position="bottom-center" containerPosition="fixed">
@@ -24,7 +62,7 @@ const SelectionOverlay = ({ monthid, parentid, selectedVariant, isVisible, updat
           <div> Lebensmonat {monthid}</div>
         </Toast.Header>
         <Toast.Body>
-          <ButtonGroup aria-label="Basic example">{getButtons()}</ButtonGroup>
+          <ButtonGroup aria-label="Basic example">{buttons}</ButtonGroup>
         </Toast.Body>
       </Toast>
     </ToastContainer>

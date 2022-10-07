@@ -6,15 +6,16 @@ import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
 
 const Planer = () => {
-  const initialMonths = []; // PATTERN: [{parentid: 1, months: [{monthid: 1, variant: xx, value: xx},{monthid: 2, variant: xx, value: xx},{...}]}, {parentid: 2, months: [...]}]
+  const initialMonths = []; // PATTERN: [{parentid: 1, months: [{monthid: 1, variant: xx, value: xx, selected: false},{monthid: 2, variant: xx, value: xx, selected: true},{...}]}, {parentid: 2, months: [...]}]
 
   for (let j = 0; j < 2; j += 1) {
     const initialMonthsOneParent = { parentid: j, months: [] };
     for (let i = 0; i < constants.months; i += 1) {
       initialMonthsOneParent.months.push({
         monthid: i,
-        variant: constants.varianten[3].id, // default variant is "none"
-        value: constants.varianten[3].amount // TODO: kann evtl weg da oben bereits weitergegeben
+        variant: constants.varianten.none.id, // default variant is "none"
+        amount: constants.varianten.none.amount, // TODO: kann evtl weg da oben bereits weitergegeben
+        selected: false
       });
     }
     initialMonths.push(initialMonthsOneParent);
@@ -22,47 +23,75 @@ const Planer = () => {
 
   const [months, setMonths] = useState(initialMonths);
 
-  const updateMonth = (parentid, monthid, variant, value) => {
-    const newMonths = [...months];
-    const updatedValue = { monthid, variant, value };
-    newMonths[parentid].months[monthid] = updatedValue;
+  const [selectionOverlayProps, setSelectionOverlayProps] = useState({
+    // TODO unnötig
+    monthid: 0,
+    parentid: 0,
+    selectedVariant: 'none',
+    isVisible: false
+  });
 
-    setMonths(newMonths);
+  const updateMonth = (parentid, monthid, variant, amount, selected) => {
+    if (parentid === undefined || monthid === undefined) {
+      throw new Error('parentid and monthid are required arguments');
+    }
+
+    const currentMonth = months[parentid].months[monthid];
+
+    const newVariant = variant === undefined ? currentMonth.variant : variant;
+    const newAmount = amount === undefined ? currentMonth.amount : amount;
+    const newSelected = selected === undefined ? currentMonth.selected : selected; // selected || currentMonth.selected;
+    const newMonths = [...months];
+
+    newMonths[parentid].months[monthid] = {
+      monthid,
+      variant: newVariant,
+      amount: newAmount,
+      selected: newSelected
+    };
+
+    setMonths(newMonths); // TODO
   };
 
-  const [selectionOverlay, setSelectionOverlay] = useState(
-    <SelectionOverlay
-      monthid={0}
-      parentid={0}
-      selectedVariant="none"
-      isVisible={false}
-      updateMonth={updateMonth}
-    />
-  );
+  const updateMonthSelection = (monthid, parentid) => {
+    // reset selection for all months
+    for (let i = 0; i < months.length; i += 1) {
+      for (let j = 0; j < months[i].months.length; j += 1) {
+        updateMonth(i, j, undefined, undefined, false);
+      }
+    }
+    // set selection for selected month
+    updateMonth(parentid, monthid, undefined, undefined, true);
 
-  const updateOverlay = (monthid, parentid, selectedVariant, isVisible) => {
-    setSelectionOverlay(
-      <SelectionOverlay
-        monthid={monthid}
-        parentid={parentid}
-        selectedVariant={selectedVariant}
-        isVisible={isVisible}
-        updateMonth={updateMonth}
-      />
-    );
+    setSelectionOverlayProps({
+      monthid,
+      parentid,
+      selectedVariant: months[parentid].months.variant,
+      isVisible: true
+    });
   };
 
   return (
     <Container className="justify-content-md-center">
       <Row>
         <Col>
-          <Parent id={0} updateOverlay={updateOverlay} monthsParent={months[0].months} />
+          <Parent
+            id={0}
+            updateMonthSelection={updateMonthSelection}
+            // monthsParent={months[0].months}
+            months={months}
+          />
         </Col>
         <Col>
-          <Parent id={1} updateOverlay={updateOverlay} monthsParent={months[1].months} />
+          <Parent
+            id={1}
+            updateMonthSelection={updateMonthSelection}
+            // monthsParent={months[1].months}
+            months={months}
+          />
         </Col>
       </Row>
-      {selectionOverlay}
+      <SelectionOverlay {...selectionOverlayProps} updateMonth={updateMonth} />
     </Container>
   );
 };
