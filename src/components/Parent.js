@@ -3,31 +3,33 @@ import { Fragment, useEffect, useState } from 'react';
 import Month from './Month';
 import constants from '../utils/constants.json';
 
-const Parent = ({ id, updateMonthSelection, months }) => {
+const Parent = ({ id, updateMonthSelection, months, monthSelected }) => {
   const [monthComponents, setMonthComponents] = useState();
 
   useEffect(() => {
     const newMonthComponents = months[id].months.map(({ monthid, variant, amount, selected }) => (
-      <Fragment key={monthid}>
+      <Row key={monthid}>
         <Month
           monthid={monthid}
           variant={variant}
           amount={amount[variant]}
           updateMonthSelection={updateMonthSelection}
           parentId={id}
-          selected={selected}
+          selected={monthSelected.parentid === id && monthSelected.monthid === monthid}
         />
-      </Fragment>
+      </Row>
     ));
     setMonthComponents(newMonthComponents);
-  }, [months]);
+  }, [months, monthSelected]);
 
   return (
     <Card>
       <Card.Header>
         <Col>{constants.parents[id].name}</Col>
       </Card.Header>
-      <Card.Body>{monthComponents}</Card.Body>
+      <Card.Body>
+        <Container>{monthComponents}</Container>
+      </Card.Body>
     </Card>
   );
 };

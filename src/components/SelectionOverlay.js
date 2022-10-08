@@ -2,7 +2,7 @@ import { Toast, ToastContainer, Button, ButtonGroup } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import constants from '../utils/constants.json';
 
-const SelectionOverlay = ({ monthid, parentid, months, isVisible, updateMonth }) => {
+const SelectionOverlay = ({ monthid, parentid, egPlan, isVisible, updateMonth }) => {
   const [buttons, setButtons] = useState();
   useEffect(() => {
     const newButtons = [];
@@ -11,7 +11,7 @@ const SelectionOverlay = ({ monthid, parentid, months, isVisible, updateMonth })
         <Button
           key={value.id}
           variant={
-            months[parentid].months[monthid].variant === value.id
+            egPlan[parentid].months[monthid].variant === value.id
               ? value.buttonVariantSelected
               : value.buttonVariantDefault
           }
@@ -20,30 +20,27 @@ const SelectionOverlay = ({ monthid, parentid, months, isVisible, updateMonth })
             updateMonth(
               parentid,
               monthid,
-              e.currentTarget.value, // variant
-              // constants.parents[parentid].amount[e.currentTarget.value], //TODO: calculate individual month amount
-              undefined,
-              undefined
+              e.currentTarget.value // variant
             )
           }>
           <div>
             {value.abbrv}
             <br />
-            {value.amount}
+            {egPlan[parentid].months[monthid].amount[value.id]} €
           </div>
         </Button>
       );
     });
 
     setButtons(newButtons);
-  }, [monthid, parentid, months, isVisible]);
+  }, [monthid, parentid, egPlan, isVisible]);
 
   return (
     <ToastContainer position="bottom-center" containerPosition="fixed">
       <Toast show={isVisible}>
         <Toast.Header closeButton>
           <strong className="me-auto"> {constants.parents[parentid].name} </strong>
-          <div> Lebensmonat {monthid}</div>
+          <div> Lebensmonat {monthid + 1}</div>
         </Toast.Header>
         <Toast.Body>
           <ButtonGroup aria-label="Basic example">{buttons}</ButtonGroup>

@@ -1,107 +1,102 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Month from './Month';
 import Parent from './Parent';
 import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
+import useEGcalc from '../hooks/useEGcalc';
 
 const Planer = () => {
-  const initialMonths = []; // PATTERN: [{parentid: 1, months: [{monthid: 1, variant: xx, value: xx, selected: false},{monthid: 2, variant: xx, value: xx, selected: true},{...}]}, {parentid: 2, months: [...]}]
-
-  for (let j = 0; j < 2; j += 1) {
-    const initialMonthsOneParent = { parentid: j, months: [] };
-    for (let i = 0; i < constants.months; i += 1) {
-      const initialAmount =
-        j === 0
-          ? { basis: 1268, plus: 634, bonus: 634, none: 0 }
-          : { basis: 745, plus: 372, bonus: 372, none: 0 }; // TODO constants verwenden für IDs?
-
-      initialMonthsOneParent.months.push({
-        monthid: i,
-        variant: constants.varianten.none.id, // default variant is "none"
-        amount: initialAmount, // current amount
-        selected: false
-
-        // TODO: was wäre in dem monat betrag für basis, plus und bonus?
-      });
-    }
-    initialMonths.push(initialMonthsOneParent);
-  }
-
-  const [months, setMonths] = useState(initialMonths);
+  const [egPlan, { updateMonth }] = useEGcalc();
+  const [monthSelected, setMonthSelected] = useState({ parentid: 0, monthid: 0 });
 
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
     // TODO unnötig
     monthid: 0,
     parentid: 0,
-    // selectedVariant: 'none',
-    months,
+    egPlan,
     isVisible: false
   });
 
-  const updateMonth = (parentid, monthid, variant, amount, selected) => {
-    if (parentid === undefined || monthid === undefined) {
-      throw new Error('parentid and monthid are required arguments');
-    }
-
-    const currentMonth = months[parentid].months[monthid];
-
-    const newVariant = variant === undefined ? currentMonth.variant : variant;
-    const newAmount =
-      amount === undefined ? currentMonth.amount : { ...currentMonth.amount, variant: amount }; // TODO variant
-    const newSelected = selected === undefined ? currentMonth.selected : selected;
-    const newMonths = [...months];
-
-    newMonths[parentid].months[monthid] = {
-      monthid,
-      variant: newVariant,
-      amount: newAmount,
-      selected: newSelected
-    };
-
-    setMonths(newMonths);
-
-    // update overlay
+  useEffect(() => {
     setSelectionOverlayProps({
-      monthid,
-      parentid,
-      // selectedVariant: months[parentid].months.variant,
-      months,
+      monthid: monthSelected.monthid,
+      parentid: monthSelected.parentid,
+      egPlan,
       isVisible: true
     });
+  }, [egPlan, monthSelected]);
+
+  const getMonthNumbers = () => {
+    const monthNumbers = [];
+    for (let i = 0; i < constants.numberMonths; i += 1) {
+      monthNumbers.push(<div key={i}>{i + 1}</div>);
+    }
+    return monthNumbers;
   };
 
-  const updateMonthSelection = (monthid, parentid) => {
-    // reset selection for all months
-    for (let i = 0; i < months.length; i += 1) {
-      for (let j = 0; j < months[i].months.length; j += 1) {
-        updateMonth(i, j, undefined, undefined, false);
-      }
-    }
-    // set selection for selected month
-    updateMonth(parentid, monthid, undefined, undefined, true);
+  const [monthComponents, setMonthComponents] = useState();
+
+  const updateMonthSelection = (parentid, monthid) => {
+    setMonthSelected({ parentid, monthid });
   };
+
+  useEffect(() => {
+    const newMonthComponents = [];
+    for (let i = 0; i < constants.numberMonths; i += 1) {
+      newMonthComponents.push(
+        // TODO: column breite bei monat gleich machen wie bei überschrift
+        <Fragment key={i}>
+          <Row>
+            <Col>
+              <Month
+                monthid={egPlan[0].months[i].monthid}
+                variant={egPlan[0].months[i].variant}
+                amount={egPlan[0].months[i].amount[egPlan[0].months[i].variant]}
+                updateMonthSelection={updateMonthSelection}
+                parentId={0}
+                selected={
+                  monthSelected.parentid === 0 &&
+                  monthSelected.monthid === egPlan[0].months[i].monthid
+                }
+              />
+            </Col>
+            <Col className="align-self-center" xs={1}>
+              {i + 1}
+            </Col>
+            <Col>
+              <Month
+                monthid={egPlan[1].months[i].monthid}
+                variant={egPlan[1].months[i].variant}
+                amount={egPlan[1].months[i].amount[egPlan[1].months[i].variant]}
+                updateMonthSelection={updateMonthSelection}
+                parentId={1}
+                selected={
+                  monthSelected.parentid === 1 &&
+                  monthSelected.monthid === egPlan[1].months[i].monthid
+                }
+              />
+            </Col>
+          </Row>
+        </Fragment>
+      );
+    }
+
+    setMonthComponents(newMonthComponents);
+  }, [egPlan, monthSelected]);
 
   return (
-    <Container className="justify-content-md-center">
+    <Container className="justify-content-center text-center">
       <Row>
-        <Col>
-          <Parent
-            id={0}
-            updateMonthSelection={updateMonthSelection}
-            // monthsParent={months[0].months}
-            months={months}
-          />
+        <Col className="align-self-center"> {constants.parents[0].name}</Col>
+        <Col className="align-self-center" xs="auto">
+          Lebens
+          <br />
+          monat
         </Col>
-        <Col>
-          <Parent
-            id={1}
-            updateMonthSelection={updateMonthSelection}
-            // monthsParent={months[1].months}
-            months={months}
-          />
-        </Col>
+        <Col className="align-self-center">{constants.parents[1].name}</Col>
       </Row>
+      {monthComponents}
       <SelectionOverlay {...selectionOverlayProps} updateMonth={updateMonth} />
     </Container>
   );
