@@ -6,7 +6,8 @@
             "abbrv": "B",
             "abbrvOverlay": "Basis",
             "buttonVariantDefault": "success",
-            "buttonVariantSelected": "border border-success"
+            "buttonVariantSelected": "border border-success",
+            "maxMonths": 14
         },
         "plus": {
             "id": "plus",
@@ -14,7 +15,8 @@
             "abbrv": "EG+",
             "abbrvOverlay": "Plus",
             "buttonVariantDefault": "warning",
-            "buttonVariantSelected": "border border-warning"
+            "buttonVariantSelected": "border border-warning",
+            "maxMonths": 28
         },
         "bonus": {
             "id": "bonus",
@@ -22,7 +24,8 @@
             "abbrv": "PB",
             "abbrvOverlay": "Bonus",
             "buttonVariantDefault": "danger",
-            "buttonVariantSelected": "border border-danger"
+            "buttonVariantSelected": "border border-danger",
+            "maxMonths": 8
         },
         "none": {
             "id": "none",

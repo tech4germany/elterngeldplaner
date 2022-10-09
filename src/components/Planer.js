@@ -79,7 +79,7 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
-      <Kontingent />
+      <Kontingent egPlan={egPlan} />
       <Row>
         <Col className="align-self-center"> {constants.parents[0].name}</Col>
         <Col className="align-self-center" xs="auto">

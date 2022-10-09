@@ -57,12 +57,9 @@ const checkKontingentBasis = (newEgPlan) => {
 
 // check if month is possible for Basis
 const checkBasisAssignment = (newEgPlan) => {
-  for (let i = 0; i < 2; i += 1) {
+  for (let i = 0; i < newEgPlan.length; i += 1) {
     for (let j = maxMonthBasis; j < constants.numberMonths; j += 1) {
-      if (
-        newEgPlan[i].months.variant === BASIS &&
-        newEgPlan[i].months.monthid + 1 + 1 > maxMonthBasis
-      ) {
+      if (newEgPlan[i].months[j].variant === BASIS) {
         throw new Error('Du kannst Basiselterngeld nur bis zum 14. Lebensmonat beziehen,');
       }
     }
