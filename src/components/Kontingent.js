@@ -65,7 +65,7 @@ const Kontingent = ({ egPlan }) => {
     Object.keys(newKontingentDisplay).forEach((key) => {
       newKontingentDisplay[key].push(
         <Col>
-          {constants.varianten.basis.abbrvOverlay} {Math.ceil(availableKontingent[key])}/
+          {constants.varianten[key].abbrvOverlay} {Math.ceil(availableKontingent[key])}/
           {Math.ceil(maxKontingent[key])}
         </Col>
       );

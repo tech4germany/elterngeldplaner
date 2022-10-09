@@ -7,6 +7,7 @@
             "abbrvOverlay": "Basis",
             "buttonVariantDefault": "success",
             "buttonVariantSelected": "border border-success",
+            "colorScheme": "green",
             "maxMonths": 14
         },
         "plus": {
@@ -16,6 +17,7 @@
             "abbrvOverlay": "Plus",
             "buttonVariantDefault": "warning",
             "buttonVariantSelected": "border border-warning",
+            "colorScheme": "purple",
             "maxMonths": 28
         },
         "bonus": {
@@ -25,6 +27,7 @@
             "abbrvOverlay": "Bonus",
             "buttonVariantDefault": "danger",
             "buttonVariantSelected": "border border-danger",
+            "colorScheme": "pink",
             "maxMonths": 8
         },
         "none": {
@@ -33,7 +36,8 @@
             "abbrv": "+",
             "abbrvOverlay": "Kein",
             "buttonVariantDefault": "secondary",
-            "buttonVariantSelected": "border border-secondary"
+            "buttonVariantSelected": "border border-secondary",
+            "colorScheme": "gray"
         }}
     ,
 

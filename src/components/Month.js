@@ -1,7 +1,9 @@
-import { Button, Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { Button } from '@chakra-ui/react';
 import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
+import colors from '../utils/theme';
 
 const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selected }) => {
   const [monthButton, setMonthButton] = useState();
@@ -9,11 +11,11 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
   useEffect(() => {
     setMonthButton(
       <Button
-        variant={
-          selected
-            ? constants.varianten[variant].buttonVariantSelected
-            : constants.varianten[variant].buttonVariantDefault
-        }
+        colorScheme={constants.varianten[variant].colorScheme}
+        border={selected ? '4px' : '0px'}
+        // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+        borderColor="black"
+        padding="5px"
         size="sm"
         onClick={() => {
           updateMonthSelection(parentId, monthid);

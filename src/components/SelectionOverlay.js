@@ -1,10 +1,33 @@
-import { Toast, ToastContainer, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import {
+  Toast,
+  ToastContainer,
+  ButtonGroup,
+  ButtonToolbar,
+  Container,
+  Row,
+  Col
+} from 'react-bootstrap';
+import { Button } from '@chakra-ui/react';
 import { Fragment, useEffect, useState } from 'react';
+import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
 
 const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => {
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
+
+  const getDateText = (monthid) => {
+    const initialDate = DateTime.now();
+    const dateTextStart = initialDate
+      .plus({ months: monthid })
+      .setLocale('ge')
+      .toFormat('d LLL yy');
+    const dateTextEnd = initialDate
+      .plus({ months: monthid + 1 })
+      .setLocale('ge')
+      .toFormat('d LLL yy');
+    return `${dateTextStart} - ${dateTextEnd}`;
+  };
 
   useEffect(() => {
     const newButtons = [];
@@ -17,11 +40,22 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
         newButtons.push(
           <Button
             key={value.id}
-            variant={
+            // variant={
+            //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+            //     ? value.buttonVariantSelected
+            //     : value.buttonVariantDefault
+            // }
+            colorScheme={value.colorScheme}
+            border={
               egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                ? value.buttonVariantSelected
-                : value.buttonVariantDefault
+                ? '4px'
+                : '0px'
             }
+            margin="2px"
+            // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+            borderColor="black"
+            // fontSize="14px"
+            fontWeight="semibold"
             value={value.id}
             onClick={(e) =>
               updateMonth(
@@ -49,11 +83,26 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
         {show ? (
           <>
             <Toast.Header closeButton>
-              <strong className="me-auto">{constants.parents[monthSelected.parentid].name}</strong>
-              <div> Lebensmonat {monthSelected.monthid + 1}</div>
+              <Container>
+                <Row>
+                  <strong className="me-auto">
+                    {constants.parents[monthSelected.parentid].name}
+                  </strong>
+                </Row>
+                <Row>
+                  <Col className="d-flex align-items-left">
+                    <span style={{ marginRight: '10px', fontWeight: 'bold' }}>
+                      {monthSelected.monthid + 1}. Lebensmonat
+                    </span>
+                    <span>{getDateText(monthSelected.monthid)}</span>
+                  </Col>
+                  <div> </div>
+                  <div> </div>
+                </Row>
+              </Container>
             </Toast.Header>
             <Toast.Body>
-              <ButtonToolbar className="justify-content-center">{buttons}</ButtonToolbar>
+              <ButtonToolbar className="d-flex-row justify-content-center">{buttons}</ButtonToolbar>
             </Toast.Body>
           </>
         ) : (
