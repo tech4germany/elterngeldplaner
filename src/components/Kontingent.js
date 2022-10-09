@@ -5,8 +5,9 @@ import constants from '../utils/constants.json';
 
 const Kontingent = ({ egPlan }) => {
   const [kontingentItems, setKontingentItems] = useState({ basis: [], plus: [], bonus: [] });
+  const [kontingentDisplay, setKontingentDisplay] = useState({});
   const maxKontingent = {
-    basis: constants.varianten.basis.maxMonths - 0.5,
+    basis: constants.varianten.basis.maxMonths - 0.5, // because 0.5 months left cannot be used for another basis month
     plus: constants.varianten.plus.maxMonths,
     bonus: constants.varianten.bonus.maxMonths
   };
@@ -17,6 +18,7 @@ const Kontingent = ({ egPlan }) => {
       plus: maxKontingent.plus,
       bonus: maxKontingent.bonus
     };
+    // check how many months are available for each variant
     for (let i = 0; i < egPlan.length; i += 1) {
       for (let j = 0; j < egPlan[i].months.length; j += 1) {
         switch (egPlan[i].months[j].variant) {
@@ -37,30 +39,47 @@ const Kontingent = ({ egPlan }) => {
         }
       }
     }
-    const newKontingentItems = { basis: [], plus: [], bonus: [] };
 
+    // set up kontingent items
+    const newKontingentItems = { basis: [], plus: [], bonus: [] };
     Object.keys(kontingentItems).forEach((key) => {
       for (let i = 0; i < availableKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col>
+          <Col xs="auto">
             <KontingentItem variant={key} isAvailable />
           </Col>
         );
       }
       for (let i = availableKontingent[key]; i < maxKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col>
+          <Col xs="auto">
             <KontingentItem variant={key} isAvailable={false} />
           </Col>
         );
       }
     });
-
     setKontingentItems(newKontingentItems);
+
+    // set up kontingent display
+    const newKontingentDisplay = { basis: [], plus: [], bonus: [] };
+    Object.keys(newKontingentDisplay).forEach((key) => {
+      newKontingentDisplay[key].push(
+        <Col>
+          {constants.varianten.basis.abbrvOverlay} {Math.ceil(availableKontingent[key])}/
+          {Math.ceil(maxKontingent[key])}
+        </Col>
+      );
+    });
+    setKontingentDisplay(newKontingentDisplay);
   }, [egPlan]);
   return (
-    <Container fluid className="d-flex align-items-center justify-content-center">
-      <Row className="g-0">
+    <Container fluid className="d-flex-row align-items-center justify-content-center">
+      <Row>
+        {kontingentDisplay.basis}
+        {kontingentDisplay.plus}
+        {kontingentDisplay.bonus}
+      </Row>
+      <Row className="g-0 d-flex-row align-items-center justify-content-center">
         <Col xs="auto">
           <Row className="g-0"> {kontingentItems.basis}</Row>
           <Row className="g-0"> {kontingentItems.plus}</Row>
