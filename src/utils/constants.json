@@ -4,6 +4,7 @@
             "id": "basis",
             "fullname": "Basiselterngeld",
             "abbrv": "B",
+            "abbrvOverlay": "Basis",
             "buttonVariantDefault": "success",
             "buttonVariantSelected": "border border-success"
         },
@@ -11,6 +12,7 @@
             "id": "plus",
             "fullname": "ElterngeldPlus",
             "abbrv": "EG+",
+            "abbrvOverlay": "Plus",
             "buttonVariantDefault": "warning",
             "buttonVariantSelected": "border border-warning"
         },
@@ -18,6 +20,7 @@
             "id": "bonus",
             "fullname": "Partnerschaftsbonus",
             "abbrv": "PB",
+            "abbrvOverlay": "Bonus",
             "buttonVariantDefault": "danger",
             "buttonVariantSelected": "border border-danger"
         },
@@ -25,6 +28,7 @@
             "id": "none",
             "fullname": "Kein Elterngeld",
             "abbrv": "+",
+            "abbrvOverlay": "Kein",
             "buttonVariantDefault": "secondary",
             "buttonVariantSelected": "border border-secondary"
         }}

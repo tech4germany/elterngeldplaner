@@ -1,39 +1,31 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Month from './Month';
-import Parent from './Parent';
 import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
 import useEGcalc from '../hooks/useEGcalc';
+import Kontingent from './Kontingent';
 
 const Planer = () => {
   const [egPlan, { updateMonth }] = useEGcalc();
-  const [monthSelected, setMonthSelected] = useState({ parentid: 0, monthid: 0 });
+  const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
 
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
     // TODO unnötig
-    monthid: 0,
-    parentid: 0,
-    egPlan,
+    // monthid: 0,
+    // parentid: 0,
+    // egPlan,
     isVisible: false
   });
 
   useEffect(() => {
     setSelectionOverlayProps({
-      monthid: monthSelected.monthid,
-      parentid: monthSelected.parentid,
-      egPlan,
+      // monthid: monthSelected.monthid,
+      // parentid: monthSelected.parentid,
+      // egPlan,
       isVisible: true
     });
   }, [egPlan, monthSelected]);
-
-  const getMonthNumbers = () => {
-    const monthNumbers = [];
-    for (let i = 0; i < constants.numberMonths; i += 1) {
-      monthNumbers.push(<div key={i}>{i + 1}</div>);
-    }
-    return monthNumbers;
-  };
 
   const [monthComponents, setMonthComponents] = useState();
 
@@ -61,7 +53,7 @@ const Planer = () => {
                 }
               />
             </Col>
-            <Col className="align-self-center" xs={1}>
+            <Col className="d-flex align-items-center justify-content-center" xs={1}>
               {i + 1}
             </Col>
             <Col>
@@ -87,6 +79,7 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
+      <Kontingent />
       <Row>
         <Col className="align-self-center"> {constants.parents[0].name}</Col>
         <Col className="align-self-center" xs="auto">
@@ -97,7 +90,12 @@ const Planer = () => {
         <Col className="align-self-center">{constants.parents[1].name}</Col>
       </Row>
       {monthComponents}
-      <SelectionOverlay {...selectionOverlayProps} updateMonth={updateMonth} />
+      <SelectionOverlay
+        monthSelected={monthSelected}
+        egPlan={egPlan}
+        {...selectionOverlayProps}
+        updateMonth={updateMonth}
+      />
     </Container>
   );
 };

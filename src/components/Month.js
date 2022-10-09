@@ -27,7 +27,7 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
     <Row>
       {parentId === 0 ? (
         <>
-          <Col className="align-self-center" xs={8}>
+          <Col className="d-flex align-items-center justify-content-end" xs={8}>
             {amount} €
           </Col>
           <Col className="align-self-center" xs={4}>
@@ -39,7 +39,7 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
           <Col className="align-self-center" xs={4}>
             {monthButton}
           </Col>
-          <Col className="align-self-center" xs={8}>
+          <Col className="d-flex align-items-center justify-content-start" xs={8}>
             {amount} €
           </Col>
         </>

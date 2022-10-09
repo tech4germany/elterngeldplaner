@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { cloneDeep } from 'lodash';
+import checkEG from '../utils/checkEG';
 import constants from '../utils/constants.json';
 
 const useEGcalc = (handleWarning) => {
@@ -30,40 +32,40 @@ const useEGcalc = (handleWarning) => {
       throw new Error('parentid and monthid are required arguments');
     }
 
-    const currentMonth = egPlan[parentid].months[monthid];
+    try {
+      const newEgPlan = cloneDeep(egPlan);
 
-    const newVariant = variant === undefined ? currentMonth.variant : variant;
-    const newEgPlan = [...egPlan];
+      const currentMonth = newEgPlan[parentid].months[monthid];
 
-    newEgPlan[parentid].months[monthid] = {
-      monthid,
-      variant: newVariant,
-      amount: currentMonth.amount
-    };
+      const newVariant = variant === undefined ? currentMonth.variant : variant;
 
-    setEgPlan(newEgPlan);
+      newEgPlan[parentid].months[monthid] = {
+        monthid,
+        variant: newVariant,
+        amount: currentMonth.amount
+      };
+
+      checkEG(newEgPlan, parentid, monthid, variant); // TODO : Neuer Plan davor, diesen dann checken
+      setEgPlan(newEgPlan);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const updateMonthAmount = (parentid, monthid, amount) => {
-    const currentMonth = egPlan[parentid].months[monthid];
-    const newEgPlan = [...egPlan];
-    const newAmount =
-      amount === undefined ? currentMonth.amount : { ...currentMonth.amount, amount }; // TODO variant
-    newEgPlan[parentid].months[monthid] = {
-      monthid,
-      variant: currentMonth.variant,
-      amount: newAmount
-    };
-  };
-
-  //   const checkSelection = (parentid, monthid, variant) => {
-  //     if (variant === constants.basis.id && monthid > 14) {
-  //       return false;
-  //     }
-  //     return true;
+  //   const updateMonthAmount = (parentid, monthid, amount) => {
+  //     const currentMonth = egPlan[parentid].months[monthid];
+  //     const newEgPlan = [...egPlan];
+  //     const newAmount =
+  //       amount === undefined ? currentMonth.amount : { ...currentMonth.amount, amount }; // TODO variant
+  //     newEgPlan[parentid].months[monthid] = {
+  //       monthid,
+  //       variant: currentMonth.variant,
+  //       amount: newAmount
+  //     };
+  //     setEgPlan(newEgPlan);
   //   };
 
-  return [egPlan, { updateMonth, updateMonthAmount }];
+  return [egPlan, { updateMonth }];
 };
 
 export default useEGcalc;
