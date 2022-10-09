@@ -51,11 +51,12 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
                 ? '4px'
                 : '0px'
             }
-            margin="2px"
+            // margin="0.2px"
             // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
             borderColor="black"
-            // fontSize="14px"
+            fontSize="11pt"
             fontWeight="semibold"
+            width="20vw"
             value={value.id}
             onClick={(e) =>
               updateMonth(
@@ -89,20 +90,20 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
                     {constants.parents[monthSelected.parentid].name}
                   </strong>
                 </Row>
-                <Row>
-                  <Col className="d-flex align-items-left">
-                    <span style={{ marginRight: '10px', fontWeight: 'bold' }}>
-                      {monthSelected.monthid + 1}. Lebensmonat
-                    </span>
-                    <span>{getDateText(monthSelected.monthid)}</span>
-                  </Col>
-                  <div> </div>
-                  <div> </div>
-                </Row>
               </Container>
             </Toast.Header>
             <Toast.Body>
-              <ButtonToolbar className="d-flex-row justify-content-center">{buttons}</ButtonToolbar>
+              <Row className="pb-2">
+                <Col className="d-flex justify-content-left">
+                  <span style={{ marginRight: '10px', fontWeight: 'bold' }}>
+                    {monthSelected.monthid + 1}. Lebensmonat
+                  </span>
+                  <span>{getDateText(monthSelected.monthid)}</span>
+                </Col>
+              </Row>
+              <ButtonToolbar className="d-flex-row justify-content-between">
+                {buttons}
+              </ButtonToolbar>
             </Toast.Body>
           </>
         ) : (

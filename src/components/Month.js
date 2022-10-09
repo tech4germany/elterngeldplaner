@@ -16,7 +16,9 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
         // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
         borderColor="black"
         padding="5px"
-        size="sm"
+        width="15vw"
+        height="8vw"
+        margin="2px"
         onClick={() => {
           updateMonthSelection(parentId, monthid);
         }}>
@@ -29,19 +31,19 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
     <Row>
       {parentId === 0 ? (
         <>
-          <Col className="d-flex align-items-center justify-content-end" xs={8}>
+          <Col className="d-flex align-items-center justify-content-end" xs={6}>
             {amount} €
           </Col>
-          <Col className="align-self-center" xs={4}>
+          <Col className="d-flex align-self-center justify-content-center" xs={6}>
             {monthButton}
           </Col>
         </>
       ) : (
         <>
-          <Col className="align-self-center" xs={4}>
+          <Col className="d-flex align-self-center justify-content-center" xs={6}>
             {monthButton}
           </Col>
-          <Col className="d-flex align-items-center justify-content-start" xs={8}>
+          <Col className="d-flex align-items-center justify-content-start" xs={6}>
             {amount} €
           </Col>
         </>
