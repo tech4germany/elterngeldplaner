@@ -114,7 +114,7 @@ const Kontingent = ({ egPlan }) => {
       templateColumns="repeat(32, 1fr)"
       templateRows="repeat(3, 1fr)"
       gap={0.5}
-      h="40px">
+      h="45px">
       <GridItem rowSpan={1} colSpan={32} h="100%">
         <Grid templateColumns="repeat(3, 1fr)">
           <GridItem colSpan={1}>{kontingentDisplay.basis}</GridItem>
