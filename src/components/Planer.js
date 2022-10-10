@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Box, Grid, GridItem, Icon, IconButton, Button } from '@chakra-ui/react';
+import { AiFillDownCircle } from 'react-icons/ai';
+import { IconContext } from 'react-icons';
 import Month from './Month';
 import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
@@ -10,7 +12,7 @@ import Kontingent from './Kontingent';
 const Planer = () => {
   const [egPlan, { updateMonth }] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
-
+  const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
     // TODO unnötig
     // monthid: 0,
@@ -36,7 +38,7 @@ const Planer = () => {
 
   useEffect(() => {
     const newMonthComponents = [];
-    for (let i = 0; i < constants.numberMonths; i += 1) {
+    for (let i = 0; i < shownNrMonths; i += 1) {
       newMonthComponents.push(
         // TODO: column breite bei monat gleich machen wie bei überschrift
         <Grid key={i} templateColumns="repeat(22, 1fr)">
@@ -74,7 +76,7 @@ const Planer = () => {
     }
 
     setMonthComponents(newMonthComponents);
-  }, [egPlan, monthSelected]);
+  }, [egPlan, monthSelected, shownNrMonths]);
 
   return (
     <Container className="justify-content-center text-center">
@@ -84,7 +86,7 @@ const Planer = () => {
       </Row> */}
         <Row style={{ marginBottom: '15px', marginTop: '20px' }}>
           <div style={{ textAlign: 'left', fontWeight: 'bold', marginBottom: '5px' }}>
-            Euer Elterngeld-Kontingent:
+            Euer Kontingent an Elterngeld:
           </div>
           <Kontingent egPlan={egPlan} />
         </Row>
@@ -106,9 +108,43 @@ const Planer = () => {
       </Row>
 
       {monthComponents}
+      <Button
+        className="d-flex-row justify-content-center"
+        width="100%"
+        height="35px"
+        fontSize="11pt"
+        fontWeight="semibold"
+        textDecoration="underline"
+        color="gray.600" // TODO
+        backgroundColor="transparent"
+        marginTop="5px"
+        onClick={() => {
+          if (shownNrMonths === constants.numberMonths) {
+            setShownNrMonths(constants.numberMonthsCollapsed);
+          } else {
+            setShownNrMonths(constants.numberMonths);
+          }
+        }}>
+        {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
+        <AiFillDownCircle
+          style={{
+            marginRight: '5px',
+            transform: shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
+          }}
+        />
+        {shownNrMonths === constants.numberMonths
+          ? 'weniger Monate anzeigen'
+          : 'mehr Monate anzeigen'}
+        {/* </div> */}
+      </Button>
+
+      {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}>mehr Monate anzeigen</div>
+      <Icon as={AiFillDownCircle} w={6} h={6} color="gray" /> */}
+
       {/* <Box h="200px" bg="red" position="absolute" top={50} zIndex={2} /> */}
+
       <Row>
-        <Box height="180px" />
+        <Box height="170px" />
       </Row>
 
       <SelectionOverlay

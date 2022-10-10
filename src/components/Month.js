@@ -7,7 +7,6 @@ import colors from '../utils/theme';
 
 const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selected }) => {
   const [monthButton, setMonthButton] = useState();
-
   useEffect(() => {
     setMonthButton(
       <Button

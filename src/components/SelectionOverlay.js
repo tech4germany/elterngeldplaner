@@ -22,11 +22,11 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
     const dateTextStart = initialDate
       .plus({ months: monthid })
       .setLocale('ge')
-      .toFormat('d LLL yy');
+      .toFormat('d. LLL yy');
     const dateTextEnd = initialDate
       .plus({ months: monthid + 1 })
       .setLocale('ge')
-      .toFormat('d LLL yy');
+      .toFormat('d. LLL yy');
     return `${dateTextStart} - ${dateTextEnd}`;
   };
 
@@ -102,13 +102,7 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
         {show ? (
           <>
             <Toast.Header closeButton>
-              <Container>
-                <Row>
-                  <strong className="me-auto">
-                    {constants.parents[monthSelected.parentid].name}
-                  </strong>
-                </Row>
-              </Container>
+              <strong className="me-auto">{constants.parents[monthSelected.parentid].name}</strong>
             </Toast.Header>
             <Toast.Body>
               <Row className="pb-2">

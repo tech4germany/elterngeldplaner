@@ -55,7 +55,8 @@
     ],
 
    
-    "numberMonths": 24,
+    "numberMonths": 32,
+    "numberMonthsCollapsed": 24,
 
     "parent1": "Charlotte",
     "parent2" : "Pete"
