@@ -81,9 +81,9 @@ const Planer = () => {
   return (
     <Container className="justify-content-center text-center">
       <Row className="d-flex justify-content-center bg-light sticky-top">
-        <Row>
+        {/* <Row>
           <p>Elterngeld-Planer</p>
-        </Row>
+        </Row> */}
         <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
           <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
           <Kontingent egPlan={egPlan} />
