@@ -43,6 +43,17 @@ const useEGcalc = (handleWarning) => {
     // TODO: wenn fehler geworfen, dann handeln, nicht davor
     if (newVariant === constants.varianten.bonus.id) {
       // Bonus needs to be taken by both and min 2 months
+
+      let previousBonusKontingent = 0;
+
+      for (let i = 0; i < 2; i += 1) {
+        for (let j = 0; j < egPlan[i].months.length; j += 1) {
+          if (egPlan[i].months[j].variant === newVariant) {
+            previousBonusKontingent += 1;
+          }
+        }
+      }
+
       for (let i = 0; i < 2; i += 1) {
         newEgPlan[i].months[monthid].variant = newVariant;
       }
@@ -52,12 +63,13 @@ const useEGcalc = (handleWarning) => {
           newEgPlan[i].months[monthid + 1].variant = newVariant;
         }
       } else if (
-        newEgPlan[parentid].months[monthid - 1].variant !== newVariant &&
-        newEgPlan[parentid].months[monthid + 1].variant !== newVariant &&
-        monthid < constants.numberMonths - 1
+        // newEgPlan[parentid].months[monthid - 1].variant !== newVariant &&
+        // newEgPlan[parentid].months[monthid + 1].variant !== newVariant &&
+        monthid < constants.numberMonths - 1 &&
+        previousBonusKontingent === 0
       ) {
         for (let i = 0; i < 2; i += 1) {
-          newEgPlan[i].months[monthid + 1].variant = newVariant;
+          newEgPlan[i].months[monthid + 1].variant = newVariant; // both
         }
       }
     }
