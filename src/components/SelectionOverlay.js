@@ -7,7 +7,7 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
-import { Button } from '@chakra-ui/react';
+import { Button, Alert, AlertIcon, useToast } from '@chakra-ui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
@@ -15,6 +15,7 @@ import constants from '../utils/constants.json';
 const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => {
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
+  const toast = useToast();
 
   const getDateText = (monthid) => {
     const initialDate = DateTime.now();
@@ -37,14 +38,16 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
 
     if (isSelected) {
       Object.values(constants.varianten).forEach((value) => {
+        // const buttonColor = value.colorActivated;
+        // try {
+        //   updateMonth(monthSelected.parentid, monthSelected.monthid, value.id);
+        // } catch {
+        //   buttonColor = value.colorDeactivated;
+        // }
         newButtons.push(
           <Button
             key={value.id}
-            // variant={
-            //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-            //     ? value.buttonVariantSelected
-            //     : value.buttonVariantDefault
-            // }
+            // backgroundColor={buttonColor}
             colorScheme={value.colorScheme}
             border={
               egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
@@ -58,13 +61,22 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
             fontWeight="semibold"
             width="20vw"
             value={value.id}
-            onClick={(e) =>
-              updateMonth(
-                monthSelected.parentid,
-                monthSelected.monthid,
-                e.currentTarget.value // variant
-              )
-            }>
+            onClick={(e) => {
+              try {
+                updateMonth(
+                  monthSelected.parentid,
+                  monthSelected.monthid,
+                  e.currentTarget.value // variant
+                );
+              } catch (error) {
+                toast({
+                  title: error.message,
+                  variant: 'solid',
+                  isClosable: true,
+                  position: 'top'
+                });
+              }
+            }}>
             <div>
               {value.abbrvOverlay}
               <br />
@@ -104,6 +116,10 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
               <ButtonToolbar className="d-flex-row justify-content-between">
                 {buttons}
               </ButtonToolbar>
+              {/* <Alert status="warning">
+                <AlertIcon />
+                Seems your account is about expire, upgrade now
+              </Alert> */}
             </Toast.Body>
           </>
         ) : (

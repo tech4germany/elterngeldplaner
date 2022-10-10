@@ -5,6 +5,7 @@ const maxKontingent = 14; // partners can take 14 months basis maximum
 const minPartnerBasis = 2; // 2nd partner has to take min. 2 months to get 14 basis in total
 const maxMonthBasis = 14;
 const maxKontingentBonus = 8;
+const minKontingentBonus = 4;
 
 const BASIS = constants.varianten.basis.id;
 const PLUS = constants.varianten.plus.id;
@@ -60,7 +61,7 @@ const checkBasisAssignment = (newEgPlan) => {
   for (let i = 0; i < newEgPlan.length; i += 1) {
     for (let j = maxMonthBasis; j < constants.numberMonths; j += 1) {
       if (newEgPlan[i].months[j].variant === BASIS) {
-        throw new Error('Du kannst Basiselterngeld nur bis zum 14. Lebensmonat beziehen,');
+        throw new Error('Du kannst Basiselterngeld nur bis zum 14. Lebensmonat beziehen.');
       }
     }
   }
@@ -89,8 +90,28 @@ const checkKontingentBonus = (newEgPlan) => {
   }
   if (kontingentTaken > maxKontingentBonus) {
     throw new Error('Dein Kontingent für Partnerschaftsbonus ist aufgebraucht.');
+  } else if (kontingentTaken < minKontingentBonus) {
+    throw new Error(
+      'Ihr müsst beide mindestens 2 Monate Partnerschaftsbonus beziehen um ihn beanspruchen zu können.'
+    );
   }
 };
+
+const checkBonusConsecutiveMonths = (newEgPlan) => {
+  let lastAppearance;
+  for (let i = 0; i < newEgPlan[0].months.length; i += 1) {
+    if (newEgPlan[0].months[i].variant === BONUS) {
+      if (lastAppearance === undefined) {
+        lastAppearance = i;
+      } else if (i - lastAppearance > 1) {
+        throw new Error('Partnerschaftsbonus-Monate müssen am Stück genommen werden.');
+      }
+      lastAppearance = i;
+    }
+  }
+};
+
+// TODO: check bonus both partners
 
 const checkEG = (newEgPlan, parentid, monthid, variant) => {
   if (variant === BASIS) {
@@ -100,6 +121,9 @@ const checkEG = (newEgPlan, parentid, monthid, variant) => {
     checkKontingentPlus(newEgPlan);
   } else if (variant === BONUS) {
     checkKontingentBonus(newEgPlan);
+    checkBonusConsecutiveMonths(newEgPlan);
+  } else if (variant === NONE) {
+    checkBonusConsecutiveMonths(newEgPlan);
   }
 };
 

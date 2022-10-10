@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Box } from '@chakra-ui/react';
 import Month from './Month';
 import SelectionOverlay from './SelectionOverlay';
 import constants from '../utils/constants.json';
@@ -79,18 +80,27 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
-      <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
-      <Kontingent egPlan={egPlan} />
+      <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
+        <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
+        <Kontingent egPlan={egPlan} />
+      </Row>
+
       <Row>
         <Col className="align-self-center"> {constants.parents[0].name}</Col>
         <Col className="align-self-center" xs="auto">
-          Lebens
-          <br />
-          monat
+          <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+            Lebens
+            <br />
+            monat
+          </div>
         </Col>
         <Col className="align-self-center">{constants.parents[1].name}</Col>
       </Row>
       {monthComponents}
+      <Row>
+        <Box height="180px" />
+      </Row>
+
       <SelectionOverlay
         monthSelected={monthSelected}
         egPlan={egPlan}

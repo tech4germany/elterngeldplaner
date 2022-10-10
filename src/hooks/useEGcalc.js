@@ -32,24 +32,111 @@ const useEGcalc = (handleWarning) => {
       throw new Error('parentid and monthid are required arguments');
     }
 
-    try {
-      const newEgPlan = cloneDeep(egPlan);
+    const newEgPlan = cloneDeep(egPlan);
 
-      const currentMonth = newEgPlan[parentid].months[monthid];
+    const currentMonth = newEgPlan[parentid].months[monthid];
 
-      const newVariant = variant === undefined ? currentMonth.variant : variant;
+    const newVariant = variant === undefined ? currentMonth.variant : variant;
 
-      newEgPlan[parentid].months[monthid] = {
-        monthid,
-        variant: newVariant,
-        amount: currentMonth.amount
-      };
+    newEgPlan[parentid].months[monthid] = {
+      monthid,
+      variant: newVariant,
+      amount: currentMonth.amount
+    };
 
-      checkEG(newEgPlan, parentid, monthid, variant); // TODO : Neuer Plan davor, diesen dann checken
-      setEgPlan(newEgPlan);
-    } catch (e) {
-      console.log(e);
+    // TODO: wenn fehler geworfen, dann handeln, nicht davor
+    if (newVariant === constants.varianten.bonus.id) {
+      // Bonus needs to be taken by both and min 2 months
+      for (let i = 0; i < 2; i += 1) {
+        newEgPlan[i].months[monthid] = {
+          monthid,
+          variant: newVariant,
+          amount: currentMonth.amount
+        };
+      }
+
+      if (monthid === 0) {
+        for (let i = 0; i < 2; i += 1) {
+          newEgPlan[i].months[monthid + 1] = {
+            monthid: monthid + 1,
+            variant: newVariant,
+            amount: currentMonth.amount
+          };
+        }
+      } else if (
+        newEgPlan[parentid].months[monthid - 1].variant !== newVariant &&
+        newEgPlan[parentid].months[monthid + 1].variant !== newVariant &&
+        monthid < constants.numberMonths - 1
+      ) {
+        for (let i = 0; i < 2; i += 1) {
+          newEgPlan[i].months[monthid + 1] = {
+            monthid: monthid + 1,
+            variant: newVariant,
+            amount: currentMonth.amount
+          };
+        }
+      }
     }
+
+    if (
+      newVariant !== constants.varianten.bonus.id &&
+      egPlan[parentid].months[monthid].variant === constants.varianten.bonus.id
+    ) {
+      for (let i = 0; i < 2; i += 1) {
+        if (parentid !== i) {
+          newEgPlan[i].months[monthid] = {
+            monthid,
+            variant: constants.varianten.none.id,
+            amount: currentMonth.amount
+          };
+        }
+      }
+
+      // switch from bonus to none
+      // check if before and after are at least 2 months
+
+      let twoMonthsBefore = false;
+      let twoMonthsAfter = false;
+      if (monthid === 1) {
+        // TODO
+        twoMonthsBefore = false;
+      }
+      if (monthid >= 2) {
+        if (
+          egPlan[parentid].months[monthid - 1].variant === constants.varianten.bonus.id &&
+          egPlan[parentid].months[monthid - 2].variant === constants.varianten.bonus.id
+        ) {
+          twoMonthsBefore = true;
+        }
+      }
+
+      if (monthid < constants.numberMonths - 3) {
+        if (
+          egPlan[parentid].months[monthid + 1].variant === constants.varianten.bonus.id &&
+          egPlan[parentid].months[monthid + 2].variant === constants.varianten.bonus.id
+        ) {
+          twoMonthsAfter = true;
+        }
+      }
+      if (!twoMonthsAfter && !twoMonthsBefore) {
+        if (monthid >= 1) {
+          if (egPlan[parentid].months[monthid - 1].variant === constants.varianten.bonus.id) {
+            for (let i = 0; i < 2; i += 1) {
+              newEgPlan[i].months[monthid - 1].variant = constants.varianten.none.id;
+            }
+          }
+        }
+        if (monthid < constants.numberMonths - 3) {
+          if (egPlan[parentid].months[monthid + 1].variant === constants.varianten.bonus.id) {
+            for (let i = 0; i < 2; i += 1) {
+              newEgPlan[i].months[monthid + 1].variant = constants.varianten.none.id;
+            }
+          }
+        }
+      }
+    }
+    checkEG(newEgPlan, parentid, monthid, variant); // TODO : Neuer Plan davor, diesen dann checken
+    setEgPlan(newEgPlan);
   };
 
   //   const updateMonthAmount = (parentid, monthid, amount) => {

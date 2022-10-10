@@ -5,11 +5,20 @@ import constants from '../utils/constants.json';
 
 const Kontingent = ({ egPlan }) => {
   const [kontingentItems, setKontingentItems] = useState({ basis: [], plus: [], bonus: [] });
-  const [kontingentDisplay, setKontingentDisplay] = useState({});
+  const [kontingentDisplay, setKontingentDisplay] = useState({ basis: [], plus: [], bonus: [] });
   const maxKontingent = {
     basis: constants.varianten.basis.maxMonths - 0.5, // because 0.5 months left cannot be used for another basis month
     plus: constants.varianten.plus.maxMonths,
-    bonus: constants.varianten.bonus.maxMonths
+    bonus: constants.varianten.bonus.maxMonths / 2 - 0.5 // because PB can only be taken two months at a time
+  };
+
+  const circleStyle = {
+    display: 'flex',
+    width: '10px',
+    height: '10px',
+    backgroundColor: 'green',
+    borderRadius: '50%',
+    marginRight: '3px'
   };
 
   useEffect(() => {
@@ -32,7 +41,7 @@ const Kontingent = ({ egPlan }) => {
 
             break;
           case 'bonus':
-            availableKontingent.bonus -= 1;
+            availableKontingent.bonus -= 0.5;
             break;
           default:
             break;
@@ -45,14 +54,14 @@ const Kontingent = ({ egPlan }) => {
     Object.keys(kontingentItems).forEach((key) => {
       for (let i = 0; i < availableKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col xs="auto">
+          <Col xs="auto" key={key + i}>
             <KontingentItem variant={key} isAvailable />
           </Col>
         );
       }
       for (let i = availableKontingent[key]; i < maxKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col xs="auto">
+          <Col xs="auto" key={key + i}>
             <KontingentItem variant={key} isAvailable={false} />
           </Col>
         );
@@ -64,9 +73,15 @@ const Kontingent = ({ egPlan }) => {
     const newKontingentDisplay = { basis: [], plus: [], bonus: [] };
     Object.keys(newKontingentDisplay).forEach((key) => {
       newKontingentDisplay[key].push(
-        <Col>
-          {constants.varianten[key].abbrvOverlay} {Math.ceil(availableKontingent[key])}/
-          {Math.ceil(maxKontingent[key])}
+        <Col key={key} className="d-flex align-items-center">
+          <div
+            style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
+          />
+          {constants.varianten[key].abbrvOverlay}{' '}
+          {key === 'bonus'
+            ? Math.ceil(availableKontingent[key]) * 2
+            : Math.ceil(availableKontingent[key])}
+          /{key === 'bonus' ? Math.ceil(maxKontingent[key]) * 2 : Math.ceil(maxKontingent[key])}
         </Col>
       );
     });
@@ -81,7 +96,7 @@ const Kontingent = ({ egPlan }) => {
       </Row>
       <Row className="g-0 d-flex-row align-items-center justify-content-center">
         <Col xs="auto">
-          <Row className="g-0"> {kontingentItems.basis}</Row>
+          <Row className="g-0">{kontingentItems.basis}</Row>
           <Row className="g-0"> {kontingentItems.plus}</Row>
         </Col>
         <Col xs="auto">
