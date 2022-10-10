@@ -84,8 +84,8 @@ const Planer = () => {
         {/* <Row>
           <p>Elterngeld-Planer</p>
         </Row> */}
-        <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
-          <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
+        <Row style={{ marginBottom: '20px', marginTop: '20px' }}>
+          <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Euer Elterngeld-Kontingent</div>
           <Kontingent egPlan={egPlan} />
         </Row>
         <Row>
