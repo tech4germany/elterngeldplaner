@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Grid, GridItem } from '@chakra-ui/react';
 import KontingentItem from './KontingentItem';
 import constants from '../utils/constants.json';
 
@@ -54,16 +55,16 @@ const Kontingent = ({ egPlan }) => {
     Object.keys(kontingentItems).forEach((key) => {
       for (let i = 0; i < availableKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col xs="auto" key={key + i}>
-            <KontingentItem variant={key} isAvailable />
-          </Col>
+          //   <Col xs="auto" key={key + i}>
+          <KontingentItem variant={key} isAvailable key={key + i} />
+          //   </Col>
         );
       }
       for (let i = availableKontingent[key]; i < maxKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          <Col xs="auto" key={key + i}>
-            <KontingentItem variant={key} isAvailable={false} />
-          </Col>
+          //   <Col xs="auto" key={key + i}>
+          <KontingentItem variant={key} isAvailable={false} key={key + i} />
+          //   </Col>
         );
       }
     });
@@ -73,6 +74,7 @@ const Kontingent = ({ egPlan }) => {
     const newKontingentDisplay = { basis: [], plus: [], bonus: [] };
     Object.keys(newKontingentDisplay).forEach((key) => {
       newKontingentDisplay[key].push(
+        // TODO: Col nicht verwenden, da bootstrap nicht chakra
         <Col key={key} className="d-flex align-items-center justify-content-center p-0">
           <div
             style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
@@ -88,22 +90,54 @@ const Kontingent = ({ egPlan }) => {
     setKontingentDisplay(newKontingentDisplay);
   }, [egPlan]);
   return (
-    <Container fluid className="d-flex-row align-items-center justify-content-center">
-      <Row>
-        {kontingentDisplay.basis}
-        {kontingentDisplay.plus}
-        {kontingentDisplay.bonus}
-      </Row>
-      <Row className="g-0 d-flex-row align-items-center justify-content-center">
-        <Col xs="auto">
-          <Row className="g-0">{kontingentItems.basis}</Row>
-          <Row className="g-0"> {kontingentItems.plus}</Row>
-        </Col>
-        <Col xs="auto">
-          <Row className="g-0">{kontingentItems.bonus}</Row>
-        </Col>
-      </Row>
-    </Container>
+    // <Container fluid className="d-flex-row align-items-center justify-content-center">
+    //   <Row>
+    //     {kontingentDisplay.basis}
+    //     {kontingentDisplay.plus}
+    //     {kontingentDisplay.bonus}
+    //   </Row>
+    //   <Row
+    //     className="g-0 d-flex-row align-items-center justify-content-center"
+    //     style={{ width: '100%' }}>
+    //     <Col xs="auto">
+    //       <Row className="g-0">{kontingentItems.basis}</Row>
+    //       <Row className="g-0"> {kontingentItems.plus}</Row>
+    //     </Col>
+    //     <Col xs="auto">
+    //       <Row className="g-0">{kontingentItems.bonus}</Row>
+    //     </Col>
+    //   </Row>
+    // </Container>
+    <Grid
+      //   fluid
+      className="d-flex-row align-items-center justify-content-center"
+      templateColumns="repeat(32, 1fr)"
+      templateRows="repeat(3, 1fr)"
+      gap={0.5}
+      h="40px">
+      <GridItem rowSpan={1} colSpan={32} h="100%">
+        <Grid templateColumns="repeat(3, 1fr)">
+          <GridItem colSpan={1}>{kontingentDisplay.basis}</GridItem>
+          <GridItem colSpan={1}>{kontingentDisplay.plus}</GridItem>
+          <GridItem colSpan={1}>{kontingentDisplay.bonus}</GridItem>
+        </Grid>
+      </GridItem>
+      <GridItem rowSpan={1} colSpan={28} h="100%">
+        <Grid templateColumns="repeat(28, 1fr)" templateRows="repeat(1, 1fr)" h="100%" gap={0.5}>
+          {kontingentItems.basis}
+        </Grid>
+      </GridItem>
+      <GridItem rowSpan={2} colSpan={4} h="100%">
+        <Grid templateColumns="repeat(4, 1fr)" templateRows="repeat(2, 1fr)" h="100%" gap={0.5}>
+          {kontingentItems.bonus}
+        </Grid>
+      </GridItem>
+      <GridItem rowSpan={1} colSpan={28} h="100%">
+        <Grid templateColumns="repeat(28, 1fr)" templateRows="repeat(1, 1fr)" h="100%" gap={0.5}>
+          {kontingentItems.plus}
+        </Grid>
+      </GridItem>
+    </Grid>
   );
 };
 

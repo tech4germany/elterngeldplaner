@@ -54,7 +54,9 @@
         {"name": "Pete"}
     ],
 
-    "numberMonths": 32,
+   
+    "numberMonths": 24,
+
     "parent1": "Charlotte",
     "parent2" : "Pete"
 }
