@@ -73,7 +73,7 @@ const Kontingent = ({ egPlan }) => {
     const newKontingentDisplay = { basis: [], plus: [], bonus: [] };
     Object.keys(newKontingentDisplay).forEach((key) => {
       newKontingentDisplay[key].push(
-        <Col key={key} className="d-flex align-items-center">
+        <Col key={key} className="d-flex align-items-center justify-content-center p-0">
           <div
             style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
           />
