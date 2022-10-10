@@ -92,7 +92,10 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
 
   return (
     <ToastContainer position="bottom-center" containerPosition="fixed">
-      <Toast show={show} onClose={() => setShow(false)} style={{ minHeight: '150px' }}>
+      <Toast
+        show={show}
+        onClose={() => setShow(false)}
+        style={{ minHeight: '150px', backgroundColor: 'white' }}>
         {/* style={{ width: '200px', margin: '0px' }}> */}
         {show ? (
           <>
@@ -105,7 +108,7 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
                 </Row>
               </Container>
             </Toast.Header>
-            <Toast.Body style={{ backgroundColor: 'white' }}>
+            <Toast.Body>
               <Row className="pb-2">
                 <Col className="d-flex justify-content-left">
                   <span style={{ marginRight: '10px', fontWeight: 'bold' }}>
