@@ -59,7 +59,7 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
             borderColor="black"
             fontSize="11pt"
             fontWeight="semibold"
-            width="20vw"
+            width="19vw"
             value={value.id}
             onClick={(e) => {
               try {
