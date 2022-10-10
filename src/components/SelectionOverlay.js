@@ -7,7 +7,7 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
-import { Button, Alert, AlertIcon, useToast } from '@chakra-ui/react';
+import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
@@ -45,44 +45,46 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
         //   buttonColor = value.colorDeactivated;
         // }
         newButtons.push(
-          <Button
-            key={value.id}
-            // backgroundColor={buttonColor}
-            colorScheme={value.colorScheme}
-            border={
-              egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                ? '4px'
-                : '0px'
-            }
-            // margin="0.2px"
-            // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-            borderColor="black"
-            fontSize="11pt"
-            fontWeight="semibold"
-            width="19vw"
-            value={value.id}
-            onClick={(e) => {
-              try {
-                updateMonth(
-                  monthSelected.parentid,
-                  monthSelected.monthid,
-                  e.currentTarget.value // variant
-                );
-              } catch (error) {
-                toast({
-                  title: error.message,
-                  variant: 'solid',
-                  isClosable: true,
-                  position: 'top'
-                });
+          <GridItem colSpan={1} key={value.id}>
+            <Button
+              // backgroundColor={buttonColor}
+              colorScheme={value.colorScheme}
+              border={
+                egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+                  ? '4px'
+                  : '0px'
               }
-            }}>
-            <div>
-              {value.abbrvOverlay}
-              <br />
-              {egPlan[monthSelected.parentid].months[monthSelected.monthid].amount[value.id]} €
-            </div>
-          </Button>
+              // margin="0.2px"
+              // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+              borderColor="black"
+              fontSize="11pt"
+              fontWeight="semibold"
+              width="92%"
+              height="100%"
+              value={value.id}
+              onClick={(e) => {
+                try {
+                  updateMonth(
+                    monthSelected.parentid,
+                    monthSelected.monthid,
+                    e.currentTarget.value // variant
+                  );
+                } catch (error) {
+                  toast({
+                    title: error.message,
+                    variant: 'solid',
+                    isClosable: true,
+                    position: 'top'
+                  });
+                }
+              }}>
+              <div>
+                {value.abbrvOverlay}
+                <br />
+                {egPlan[monthSelected.parentid].months[monthSelected.monthid].amount[value.id]} €
+              </div>
+            </Button>
+          </GridItem>
         );
       });
     }
@@ -117,13 +119,10 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
                   <span>{getDateText(monthSelected.monthid)}</span>
                 </Col>
               </Row>
-              <ButtonToolbar className="d-flex-row justify-content-between">
+              {/* <ButtonToolbar className="d-flex-row justify-content-between">
                 {buttons}
-              </ButtonToolbar>
-              {/* <Alert status="warning">
-                <AlertIcon />
-                Seems your account is about expire, upgrade now
-              </Alert> */}
+              </ButtonToolbar> */}
+              <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
             </Toast.Body>
           </>
         ) : (

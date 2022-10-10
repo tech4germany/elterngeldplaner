@@ -40,7 +40,7 @@
             "id": "none",
             "fullname": "Kein Elterngeld",
             "abbrv": "+",
-            "abbrvOverlay": "Kein EG",
+            "abbrvOverlay": "Ohne",
             "buttonVariantDefault": "secondary",
             "buttonVariantSelected": "border border-secondary",
             "colorActivated": "#718096",
