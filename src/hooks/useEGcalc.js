@@ -38,30 +38,18 @@ const useEGcalc = (handleWarning) => {
 
     const newVariant = variant === undefined ? currentMonth.variant : variant;
 
-    newEgPlan[parentid].months[monthid] = {
-      monthid,
-      variant: newVariant,
-      amount: currentMonth.amount
-    };
+    newEgPlan[parentid].months[monthid].variant = newVariant;
 
     // TODO: wenn fehler geworfen, dann handeln, nicht davor
     if (newVariant === constants.varianten.bonus.id) {
       // Bonus needs to be taken by both and min 2 months
       for (let i = 0; i < 2; i += 1) {
-        newEgPlan[i].months[monthid] = {
-          monthid,
-          variant: newVariant,
-          amount: currentMonth.amount
-        };
+        newEgPlan[i].months[monthid].variant = newVariant;
       }
 
       if (monthid === 0) {
         for (let i = 0; i < 2; i += 1) {
-          newEgPlan[i].months[monthid + 1] = {
-            monthid: monthid + 1,
-            variant: newVariant,
-            amount: currentMonth.amount
-          };
+          newEgPlan[i].months[monthid + 1].variant = newVariant;
         }
       } else if (
         newEgPlan[parentid].months[monthid - 1].variant !== newVariant &&
@@ -69,11 +57,7 @@ const useEGcalc = (handleWarning) => {
         monthid < constants.numberMonths - 1
       ) {
         for (let i = 0; i < 2; i += 1) {
-          newEgPlan[i].months[monthid + 1] = {
-            monthid: monthid + 1,
-            variant: newVariant,
-            amount: currentMonth.amount
-          };
+          newEgPlan[i].months[monthid + 1].variant = newVariant;
         }
       }
     }
@@ -84,11 +68,7 @@ const useEGcalc = (handleWarning) => {
     ) {
       for (let i = 0; i < 2; i += 1) {
         if (parentid !== i) {
-          newEgPlan[i].months[monthid] = {
-            monthid,
-            variant: constants.varianten.none.id,
-            amount: currentMonth.amount
-          };
+          newEgPlan[i].months[monthid].variant = constants.varianten.none.id;
         }
       }
 
