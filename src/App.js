@@ -4,9 +4,9 @@ import Planer from './components/Planer';
 const App = () => {
   return (
     <>
-      <header className="App-header">
+      {/* <header className="App-header">
         <p>Elterngeld-Planer</p>
-      </header>
+      </header> */}
       <Planer />
     </>
   );

@@ -92,7 +92,7 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
 
   return (
     <ToastContainer position="bottom-center" containerPosition="fixed">
-      <Toast show={show} onClose={() => setShow(false)}>
+      <Toast show={show} onClose={() => setShow(false)} style={{ minHeight: '150px' }}>
         {/* style={{ width: '200px', margin: '0px' }}> */}
         {show ? (
           <>

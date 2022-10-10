@@ -80,22 +80,31 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
-      <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
+      <Row className="d-flex justify-content-center bg-light sticky-top">
+        <Row>
+          <p>Elterngeld-Planer</p>
+        </Row>
+        <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
+          <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
+          <Kontingent egPlan={egPlan} />
+        </Row>
+        <Row>
+          <Col className="align-self-center"> {constants.parents[0].name}</Col>
+          <Col className="align-self-center" xs="auto">
+            <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+              Lebens
+              <br />
+              monat
+            </div>
+          </Col>
+          <Col className="align-self-center">{constants.parents[1].name}</Col>
+        </Row>
+      </Row>
+      {/* <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
         <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
         <Kontingent egPlan={egPlan} />
-      </Row>
+      </Row> */}
 
-      <Row>
-        <Col className="align-self-center"> {constants.parents[0].name}</Col>
-        <Col className="align-self-center" xs="auto">
-          <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-            Lebens
-            <br />
-            monat
-          </div>
-        </Col>
-        <Col className="align-self-center">{constants.parents[1].name}</Col>
-      </Row>
       {monthComponents}
       <Row>
         <Box height="180px" />
