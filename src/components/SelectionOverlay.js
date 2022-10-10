@@ -105,7 +105,7 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
                 </Row>
               </Container>
             </Toast.Header>
-            <Toast.Body>
+            <Toast.Body style={{ backgroundColor: 'white' }}>
               <Row className="pb-2">
                 <Col className="d-flex justify-content-left">
                   <span style={{ marginRight: '10px', fontWeight: 'bold' }}>
