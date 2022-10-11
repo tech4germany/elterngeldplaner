@@ -1,5 +1,16 @@
 {
     "varianten":{
+        "none": {
+            "id": "none",
+            "fullname": "Kein Elterngeld",
+            "abbrv": "+",
+            "abbrvOverlay": "Ohne",
+            "buttonVariantDefault": "secondary",
+            "buttonVariantSelected": "border border-secondary",
+            "colorActivated": "#718096",
+            "colorDeactivated": "#EDF2F7",
+            "colorScheme": "gray"
+        },
         "basis": {
             "id": "basis",
             "fullname": "Basiselterngeld",
@@ -35,19 +46,8 @@
             "colorActivated": "#D53F8C",
             "colorDeactivated": "#FED7E2",
             "maxMonths": 8
-        },
-        "none": {
-            "id": "none",
-            "fullname": "Kein Elterngeld",
-            "abbrv": "+",
-            "abbrvOverlay": "Ohne",
-            "buttonVariantDefault": "secondary",
-            "buttonVariantSelected": "border border-secondary",
-            "colorActivated": "#718096",
-            "colorDeactivated": "#EDF2F7",
-            "colorScheme": "gray"
-        }}
-    ,
+        }
+    },
 
     "parents":[
         {"name": "Charlotte"},
@@ -56,8 +56,5 @@
 
    
     "numberMonths": 32,
-    "numberMonthsCollapsed": 24,
-
-    "parent1": "Charlotte",
-    "parent2" : "Pete"
+    "numberMonthsCollapsed": 18
 }
