@@ -32,7 +32,7 @@ const checkPartnermonate = (kontingentTaken) => {
   if (kontingentTaken[0] + kontingentTaken[1] > maxKontingent - 2) {
     if (kontingentTaken[1] < 2 || kontingentTaken[0] < 2) {
       throw new Error(
-        'Um die Partnermonate beanspruchen zu können, müssen beide Elternteile mindestens 2 Monate Basiselterngeld oder 4 Monate ElterngeldPlus beziehen'
+        'Um die Partnermonate beanspruchen zu können, müssen beide Elternteile mind. 2 Monate Basiselterngeld beziehen.'
       );
     }
   }
@@ -53,7 +53,7 @@ const checkKontingentBasis = (newEgPlan) => {
     );
   }
 
-  checkPartnermonate(newEgPlan, kontingentTaken);
+  checkPartnermonate(kontingentTaken);
 };
 
 // check if month is possible for Basis
@@ -65,6 +65,11 @@ const checkBasisAssignment = (newEgPlan) => {
       }
     }
   }
+};
+
+const checkBasis = (newEgPlan) => {
+  checkKontingentBasis(newEgPlan);
+  checkBasisAssignment(newEgPlan);
 };
 
 // <--- PLUS --->
@@ -79,51 +84,92 @@ const checkKontingentPlus = (newEgPlan) => {
   checkPartnermonate(newEgPlan, kontingentTaken);
 };
 
-const checkKontingentBonus = (newEgPlan) => {
-  let kontingentTaken = 0;
-  for (let i = 0; i < newEgPlan.length; i += 1) {
-    for (let j = 0; j < newEgPlan[i].months.length; j += 1) {
-      if (newEgPlan[i].months[j].variant === BONUS) {
-        kontingentTaken += 1;
-      }
-    }
-  }
-  if (kontingentTaken > maxKontingentBonus) {
+const checkPlus = (newEgPlan) => {
+  checkKontingentPlus(newEgPlan);
+};
+
+// <----BONUS---->
+
+// checks if kontingent for PB months is used up
+const checkKontingentBonus = (bonusMonths) => {
+  const kontingentBoth = bonusMonths[0].months.length + bonusMonths[1].months.length;
+  if (kontingentBoth > maxKontingentBonus) {
     throw new Error('Dein Kontingent für Partnerschaftsbonus ist aufgebraucht.');
-  } else if (kontingentTaken < minKontingentBonus) {
+  } else if (kontingentBoth < minKontingentBonus) {
     throw new Error(
       'Ihr müsst beide mindestens 2 Monate Partnerschaftsbonus beziehen um ihn beanspruchen zu können.'
     );
   }
 };
 
-const checkBonusConsecutiveMonths = (newEgPlan) => {
-  let lastAppearance;
-  for (let i = 0; i < newEgPlan[0].months.length; i += 1) {
-    if (newEgPlan[0].months[i].variant === BONUS) {
-      if (lastAppearance === undefined) {
-        lastAppearance = i;
-      } else if (i - lastAppearance > 1) {
+// checks if PB months are taken in consecutive months
+const checkBonusConsecutiveMonths = (bonusMonths) => {
+  for (let i = 0; i < bonusMonths[0].months.length; i += 1) {
+    if (i < bonusMonths[0].months.length - 1) {
+      if (bonusMonths[0].months[i + 1].monthid - bonusMonths[1].months[i].monthid > 1) {
         throw new Error('Partnerschaftsbonus-Monate müssen am Stück genommen werden.');
       }
-      lastAppearance = i;
+    }
+  }
+  // let lastAppearance;
+  // for (let i = 0; i < newEgPlan[0].months.length; i += 1) {
+  //   if (newEgPlan[0].months[i].variant === BONUS) {
+  //     if (lastAppearance === undefined) {
+  //       lastAppearance = i;
+  //     } else if (i - lastAppearance > 1) {
+  //       throw new Error('Partnerschaftsbonus-Monate müssen am Stück genommen werden.');
+  //     }
+  //     lastAppearance = i;
+  //   }
+  // }
+};
+
+// checks if PB is taken simulatenously by both partners
+const checkBonusBothPartners = (bonusMonths) => {
+  const errorMessage =
+    'Partnerschaftsbonus-Monate müssen immer von beiden Elternteilen gleichzeitig genommen werden.';
+
+  if (bonusMonths[0].months.length !== bonusMonths[1].months.length) {
+    // if both don't take the same amount of PB months
+    throw new Error(errorMessage);
+  }
+  for (let i = 0; i < bonusMonths[0].months.length; i += 1) {
+    // if both take PB months in different months
+    if (bonusMonths[1].months[i].monthid !== bonusMonths[0].months[i].monthid) {
+      throw new Error(errorMessage);
     }
   }
 };
 
-// TODO: check bonus both partners
+const checkBonus = (newEgPlan) => {
+  const bonusMonths = [];
+  for (let i = 0; i < newEgPlan.length; i += 1) {
+    bonusMonths.push({ parentid: i, months: [] });
+    for (let j = 0; j < newEgPlan[i].months.length; j += 1) {
+      if (newEgPlan[i].months[j].variant === BONUS) {
+        bonusMonths[i].months.push(newEgPlan[i].months[j]); // [[{monthid: ..., variant: ...,..}, {....}, ....], [{monthid: ..., variant: ...,..},...]]
+      }
+    }
+  }
+  checkKontingentBonus(bonusMonths);
+  checkBonusConsecutiveMonths(bonusMonths);
+  checkBonusBothPartners(bonusMonths);
+};
+
+// <----NONE---->
+const checkNone = (newEgPlan) => {
+  checkBonusConsecutiveMonths(newEgPlan);
+};
 
 const checkEG = (newEgPlan, parentid, monthid, variant) => {
   if (variant === BASIS) {
-    checkKontingentBasis(newEgPlan);
-    checkBasisAssignment(newEgPlan);
+    checkBasis(newEgPlan);
   } else if (variant === PLUS) {
-    checkKontingentPlus(newEgPlan);
+    checkPlus(newEgPlan);
   } else if (variant === BONUS) {
-    checkKontingentBonus(newEgPlan);
-    checkBonusConsecutiveMonths(newEgPlan);
+    checkBonus(newEgPlan);
   } else if (variant === NONE) {
-    checkBonusConsecutiveMonths(newEgPlan);
+    checkNone(newEgPlan);
   }
 };
 
