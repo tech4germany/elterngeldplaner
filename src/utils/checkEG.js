@@ -1,6 +1,7 @@
 import React from 'react';
 import constants from './constants.json';
 import errorStrings from './errorStrings.json';
+import warningStrings from './warningStrings.json';
 
 const maxKontingent = 14; // partners can take 14 months basis maximum
 const minPartnerBasis = 2; // 2nd partner has to take min. 2 months to get 14 basis in total
@@ -31,28 +32,33 @@ const calculateBasisPlusKontingent = (newEgPlan) => {
 const checkPartnermonate = (kontingentTaken) => {
   // if more than 12 months total
   if (kontingentTaken[0] + kontingentTaken[1] > maxKontingent - 2) {
-    if (kontingentTaken[1] < 2 || kontingentTaken[0] < 2) {
-      throw new Error(
-        'Um die Partnermonate beanspruchen zu können, müssen beide Elternteile mind. 2 Monate Basiselterngeld beziehen.'
-      );
+    if (kontingentTaken[1] > 12 || kontingentTaken[0] > 12) {
+      throw new Error(errorStrings.partnerMonths);
+    } else if (
+      (kontingentTaken[1] === 12 && kontingentTaken[0] === 1) ||
+      (kontingentTaken[0] === 12 && kontingentTaken[1] === 1)
+    ) {
+      throw new Error(warningStrings.partnerMonthsWarning);
     }
   }
 };
 
 // <--- BASIS --->
 // checks if kontingent for Basis is already used up
-const checkKontingentBasis = (newEgPlan) => {
+const checkKontingentBasisPlus = (newEgPlan) => {
   const kontingentTaken = calculateBasisPlusKontingent(newEgPlan);
   const totalKontingentTaken = kontingentTaken[0] + kontingentTaken[1];
 
-  if (totalKontingentTaken >= maxKontingent + 1) {
-    throw new Error('Dein Kontingent für Basiselterngeld und Elterngeldplus ist aufgebraucht.');
-  } else if (totalKontingentTaken === maxKontingent + 0.5) {
-    // if Kontingent is 13.5 user can still take one EG+ month
-    throw new Error(
-      'Dein Kontingent für Basiselterngeld ist aufgebraucht. Du kannst noch 1 Monat ElterngeldPlus beziehen.'
-    );
+  if (totalKontingentTaken >= maxKontingent + 0.5) {
+    throw new Error(errorStrings.basisPlusKontingent);
   }
+
+  // else if (totalKontingentTaken === maxKontingent + 0.5) {
+  //   // if Kontingent is 13.5 user can still take one EG+ month
+  //   throw new Error(
+  //     'Dein Kontingent für Basiselterngeld ist aufgebraucht. Du kannst noch 1 Monat ElterngeldPlus beziehen.'
+  //   );
+  // }
 
   checkPartnermonate(kontingentTaken);
 };
@@ -67,29 +73,6 @@ const checkBasisAssignment = (newEgPlan) => {
     }
   }
 };
-
-const checkBasis = (newEgPlan, oldEgPlan) => {
-  checkKontingentBasis(newEgPlan);
-  checkBasisAssignment(newEgPlan);
-};
-
-// <--- PLUS --->
-const checkKontingentPlus = (newEgPlan) => {
-  const kontingentTaken = calculateBasisPlusKontingent(newEgPlan);
-  const totalKontingentTaken = kontingentTaken[0] + kontingentTaken[1];
-
-  if (totalKontingentTaken >= maxKontingent + 0.5) {
-    throw new Error('Dein Kontingent für Basiselterngeld und Elterngeldplus ist aufgebraucht.');
-  }
-
-  checkPartnermonate(kontingentTaken);
-};
-
-const checkPlus = (newEgPlan, oldEgPlan) => {
-  checkKontingentPlus(newEgPlan);
-};
-
-// <----BONUS---->
 
 // checks if kontingent for PB months is used up
 const checkKontingentBonus = (bonusMonths) => {
@@ -128,7 +111,7 @@ const checkBonusBothPartners = (bonusMonths) => {
   }
 };
 
-const checkBonus = (newEgPlan, oldEgPlan) => {
+const checkBonus = (newEgPlan) => {
   const bonusMonths = [];
   for (let i = 0; i < newEgPlan.length; i += 1) {
     bonusMonths.push({ parentid: i, months: [] });
@@ -143,22 +126,10 @@ const checkBonus = (newEgPlan, oldEgPlan) => {
   checkKontingentBonus(bonusMonths);
 };
 
-// <----NONE---->
-const checkNone = (newEgPlan, oldEgPlan) => {
-  // TODO: check both partners
-  checkBonusConsecutiveMonths(newEgPlan);
-};
-
-const checkEG = (newEgPlan, oldEgPlan) => {
-  // if (variant === BASIS) {
-  checkBasis(newEgPlan, oldEgPlan);
-  // } else if (variant === PLUS) {
-  checkPlus(newEgPlan, oldEgPlan);
-  // } else if (variant === BONUS) {
-  checkBonus(newEgPlan, oldEgPlan);
-  // } else if (variant === NONE) {
-  checkNone(newEgPlan, oldEgPlan);
-  // }
+const checkEG = (newEgPlan, parentid, monthid, oldEgPlan) => {
+  checkKontingentBasisPlus(newEgPlan);
+  checkBasisAssignment(newEgPlan);
+  checkBonus(newEgPlan);
 };
 
 export default checkEG;

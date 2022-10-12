@@ -3,6 +3,7 @@ import { cloneDeep } from 'lodash';
 import checkEG from '../utils/checkEG';
 import constants from '../utils/constants.json';
 import errorStrings from '../utils/errorStrings.json';
+import warningStrings from '../utils/warningStrings.json';
 
 const useEGcalc = (handleWarning) => {
   const BASIS = constants.varianten.basis.id;
@@ -34,9 +35,10 @@ const useEGcalc = (handleWarning) => {
   const [egPlan, setEgPlan] = useState(initialPlan);
 
   // TODO: gibt es eine elegantere Lösung als nested try catch blocks?
-  const handleBonusError = (newEgPlan, parentid, monthid, variant, error) => {
+  const handleErrors = (newEgPlan, parentid, monthid, variant, error) => {
     const updatedEgPlan = cloneDeep(newEgPlan);
     const otherParent = parentid === 0 ? 1 : 0;
+    // TODO: wenn 13,5 ausgewählt und man möchte noch einen Basis wählen, hilfestellung "du kannst noch ein EG+ monat wählen"
     switch (error.message) {
       // if error is because not both partners have PB, select PB for both partners
       case errorStrings.bonusBothPartners:
@@ -66,6 +68,9 @@ const useEGcalc = (handleWarning) => {
         }
 
         break;
+      case warningStrings.partnerMonthsWarning:
+        setEgPlan(newEgPlan);
+        throw error;
 
       default:
         throw error;
@@ -76,14 +81,11 @@ const useEGcalc = (handleWarning) => {
 
   const updateEgPlan = (newEgPlan, parentid, monthid, variant) => {
     try {
-      checkEG(newEgPlan, variant); // TODO : Neuer Plan davor, diesen dann checken
+      checkEG(newEgPlan, parentid, monthid, variant); // TODO : Neuer Plan davor, diesen dann checken
       setEgPlan(newEgPlan);
     } catch (e) {
-      // if (variant === BONUS) {
-      // TODO: if variant was anderes, aber daneben bonus
-      const updatedEgPlan = handleBonusError(newEgPlan, parentid, monthid, variant, e);
+      const updatedEgPlan = handleErrors(newEgPlan, parentid, monthid, variant, e);
       updateEgPlan(updatedEgPlan, parentid, monthid, variant);
-      // }
     }
   };
 
@@ -95,98 +97,6 @@ const useEGcalc = (handleWarning) => {
     const newEgPlan = cloneDeep(egPlan);
 
     newEgPlan[parentid].months[monthid].variant = variant;
-
-    // if (variant === BONUS) {
-    //   handleBonusError(newEgPlan, parentid, monthid, error);
-    // }
-
-    // TODO: wenn fehler geworfen, dann handeln, nicht davor
-    // if (variant === constants.varianten.bonus.id) {
-    //   // Bonus needs to be taken by both and min 2 months
-
-    //   let previousBonusKontingent = 0;
-
-    //   for (let i = 0; i < 2; i += 1) {
-    //     for (let j = 0; j < egPlan[i].months.length; j += 1) {
-    //       if (egPlan[i].months[j].variant === variant) {
-    //         previousBonusKontingent += 1;
-    //       }
-    //     }
-    //   }
-
-    //   for (let i = 0; i < 2; i += 1) {
-    //     newEgPlan[i].months[monthid].variant = variant;
-    //   }
-
-    //   if (monthid === 0) {
-    //     for (let i = 0; i < 2; i += 1) {
-    //       newEgPlan[i].months[monthid + 1].variant = variant;
-    //     }
-    //   } else if (
-    //     // newEgPlan[parentid].months[monthid - 1].variant !== newVariant &&
-    //     // newEgPlan[parentid].months[monthid + 1].variant !== newVariant &&
-    //     monthid < constants.numberMonths - 1 &&
-    //     previousBonusKontingent === 0
-    //   ) {
-    //     for (let i = 0; i < 2; i += 1) {
-    //       newEgPlan[i].months[monthid + 1].variant = variant; // both
-    //     }
-    //   }
-    // }
-
-    // if (
-    //   variant !== constants.varianten.bonus.id &&
-    //   egPlan[parentid].months[monthid].variant === constants.varianten.bonus.id
-    // ) {
-    //   for (let i = 0; i < 2; i += 1) {
-    //     if (parentid !== i) {
-    //       newEgPlan[i].months[monthid].variant = constants.varianten.none.id;
-    //     }
-    //   }
-
-    //   // switch from bonus to none
-    //   // check if before and after are at least 2 months
-
-    //   let twoMonthsBefore = false;
-    //   let twoMonthsAfter = false;
-    //   if (monthid === 1) {
-    //     // TODO
-    //     twoMonthsBefore = false;
-    //   }
-    //   if (monthid >= 2) {
-    //     if (
-    //       egPlan[parentid].months[monthid - 1].variant === constants.varianten.bonus.id &&
-    //       egPlan[parentid].months[monthid - 2].variant === constants.varianten.bonus.id
-    //     ) {
-    //       twoMonthsBefore = true;
-    //     }
-    //   }
-
-    //   if (monthid < constants.numberMonths - 3) {
-    //     if (
-    //       egPlan[parentid].months[monthid + 1].variant === constants.varianten.bonus.id &&
-    //       egPlan[parentid].months[monthid + 2].variant === constants.varianten.bonus.id
-    //     ) {
-    //       twoMonthsAfter = true;
-    //     }
-    //   }
-    //   if (!twoMonthsAfter && !twoMonthsBefore) {
-    //     if (monthid >= 1) {
-    //       if (egPlan[parentid].months[monthid - 1].variant === constants.varianten.bonus.id) {
-    //         for (let i = 0; i < 2; i += 1) {
-    //           newEgPlan[i].months[monthid - 1].variant = constants.varianten.none.id;
-    //         }
-    //       }
-    //     }
-    //     if (monthid < constants.numberMonths - 3) {
-    //       if (egPlan[parentid].months[monthid + 1].variant === constants.varianten.bonus.id) {
-    //         for (let i = 0; i < 2; i += 1) {
-    //           newEgPlan[i].months[monthid + 1].variant = constants.varianten.none.id;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
     updateEgPlan(newEgPlan, parentid, monthid, variant);
   };
 
