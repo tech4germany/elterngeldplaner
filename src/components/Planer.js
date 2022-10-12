@@ -10,7 +10,7 @@ import useEGcalc from '../hooks/useEGcalc';
 import Kontingent from './Kontingent';
 
 const Planer = () => {
-  const [egPlan, { updateMonth }] = useEGcalc();
+  const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
   const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
@@ -143,6 +143,16 @@ const Planer = () => {
 
       {/* <Box h="200px" bg="red" position="absolute" top={50} zIndex={2} /> */}
 
+      <Button
+        color="gray"
+        variant="outline"
+        size="xs"
+        marginTop="20px"
+        onClick={() => {
+          resetPlan();
+        }}>
+        Auswahl zurücksetzen
+      </Button>
       <Row>
         <Box height="170px" />
       </Row>
@@ -153,6 +163,7 @@ const Planer = () => {
         egPlan={egPlan}
         {...selectionOverlayProps}
         updateMonth={updateMonth}
+        updateAdditionalIncome={updateAdditionalIncome}
       />
     </Container>
     // <Container className="justify-content-center text-center">

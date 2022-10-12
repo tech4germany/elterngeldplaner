@@ -26,7 +26,8 @@ const useEGcalc = (handleWarning) => {
       initialPlanOneParent.months.push({
         monthid: i,
         variant: constants.varianten.none.id, // default variant is "none"
-        amount: initialAmount // current amount
+        amount: initialAmount, // current amount,
+        additionalIncome: 0
       });
     }
     initialPlan.push(initialPlanOneParent);
@@ -89,7 +90,16 @@ const useEGcalc = (handleWarning) => {
     }
   };
 
+  const updateAdditionalIncome = (parentid, monthid, additionalIncome) => {
+    if (parentid === undefined || monthid === undefined || additionalIncome === undefined) {
+      throw new Error('missing required arguments'); // TODO
+    }
+    const newEgPlan = cloneDeep(egPlan);
+    newEgPlan[parentid].months[monthid].additionalIncome = additionalIncome;
+  };
+
   const updateMonth = (parentid, monthid, variant) => {
+    // todo change name to updateVariant
     if (parentid === undefined || monthid === undefined || variant === undefined) {
       throw new Error('missing required arguments in (updateMonth())'); // TODO
     }
@@ -113,7 +123,11 @@ const useEGcalc = (handleWarning) => {
   //     setEgPlan(newEgPlan);
   //   };
 
-  return [egPlan, { updateMonth }];
+  const resetPlan = () => {
+    setEgPlan(initialPlan);
+  };
+
+  return [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }];
 };
 
 export default useEGcalc;

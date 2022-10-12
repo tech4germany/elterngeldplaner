@@ -13,7 +13,14 @@ import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
 import IncomeInput from './IncomeInput';
 
-const Overlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, updateMonth }) => {
+const Overlay = ({
+  monthSelected,
+  setMonthSelected,
+  egPlan,
+  isVisible,
+  updateMonth,
+  updateAdditionalIncome
+}) => {
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
   const toast = useToast();
@@ -118,7 +125,11 @@ const Overlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, updateMon
                 <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
               </Row>
               <Row>
-                <IncomeInput />
+                <IncomeInput
+                  monthSelected={monthSelected}
+                  egPlan={egPlan}
+                  updateAdditionalIncome={updateAdditionalIncome}
+                />
               </Row>
             </Toast.Body>
           </>

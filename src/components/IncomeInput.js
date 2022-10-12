@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   //   FormControl,
   FormLabel,
@@ -11,8 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { Form } from 'react-bootstrap';
 
-const IncomeInput = () => {
+const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
+
+  // gTODO:
+  // useEffect(() => {
+  //   updateAdditionalIncome()
+  // }, [incomeChecked]);
   return (
     <Grid
       mt="20px"
