@@ -12,7 +12,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
 
-const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => {
+const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, updateMonth }) => {
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
   const toast = useToast();
@@ -97,8 +97,11 @@ const SelectionOverlay = ({ monthSelected, egPlan, isVisible, updateMonth }) => 
       <Toast
         show={show}
         className="shadow-lg"
-        onClose={() => setShow(false)}
-        style={{ minHeight: '150px', backgroundColor: 'white' }}>
+        onClose={() => {
+          setShow(false);
+          setMonthSelected(false);
+        }}
+        style={{ minHeight: '160px', backgroundColor: 'white' }}>
         {/* style={{ width: '200px', margin: '0px' }}> */}
         {show ? (
           <>

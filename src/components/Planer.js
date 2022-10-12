@@ -149,6 +149,7 @@ const Planer = () => {
 
       <SelectionOverlay
         monthSelected={monthSelected}
+        setMonthSelected={setMonthSelected}
         egPlan={egPlan}
         {...selectionOverlayProps}
         updateMonth={updateMonth}
