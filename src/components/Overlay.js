@@ -11,8 +11,9 @@ import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/r
 import { Fragment, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../utils/constants.json';
+import IncomeInput from './IncomeInput';
 
-const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, updateMonth }) => {
+const Overlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, updateMonth }) => {
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
   const toast = useToast();
@@ -47,15 +48,12 @@ const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, 
         newButtons.push(
           <GridItem colSpan={1} key={value.id}>
             <Button
-              // backgroundColor={buttonColor}
               colorScheme={value.colorScheme}
               border={
                 egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
                   ? '4px'
                   : '0px'
               }
-              // margin="0.2px"
-              // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
               borderColor="black"
               fontSize="11pt"
               fontWeight="semibold"
@@ -102,7 +100,6 @@ const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, 
           setMonthSelected(false);
         }}
         style={{ minHeight: '160px', backgroundColor: 'white' }}>
-        {/* style={{ width: '200px', margin: '0px' }}> */}
         {show ? (
           <>
             <Toast.Header closeButton>
@@ -117,10 +114,12 @@ const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, 
                   <span>{getDateText(monthSelected.monthid)}</span>
                 </Col>
               </Row>
-              {/* <ButtonToolbar className="d-flex-row justify-content-between">
-                {buttons}
-              </ButtonToolbar> */}
-              <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
+              <Row>
+                <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
+              </Row>
+              <Row>
+                <IncomeInput />
+              </Row>
             </Toast.Body>
           </>
         ) : (
@@ -131,4 +130,4 @@ const SelectionOverlay = ({ monthSelected, setMonthSelected, egPlan, isVisible, 
   );
 };
 
-export default SelectionOverlay;
+export default Overlay;

@@ -4,7 +4,7 @@ import { Box, Grid, GridItem, Icon, IconButton, Button } from '@chakra-ui/react'
 import { AiFillDownCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import Month from './Month';
-import SelectionOverlay from './SelectionOverlay';
+import Overlay from './Overlay';
 import constants from '../utils/constants.json';
 import useEGcalc from '../hooks/useEGcalc';
 import Kontingent from './Kontingent';
@@ -147,7 +147,7 @@ const Planer = () => {
         <Box height="170px" />
       </Row>
 
-      <SelectionOverlay
+      <Overlay
         monthSelected={monthSelected}
         setMonthSelected={setMonthSelected}
         egPlan={egPlan}
