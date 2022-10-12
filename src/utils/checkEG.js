@@ -1,5 +1,6 @@
 import React from 'react';
 import constants from './constants.json';
+import errorStrings from './errorStrings.json';
 
 const maxKontingent = 14; // partners can take 14 months basis maximum
 const minPartnerBasis = 2; // 2nd partner has to take min. 2 months to get 14 basis in total
@@ -67,7 +68,7 @@ const checkBasisAssignment = (newEgPlan) => {
   }
 };
 
-const checkBasis = (newEgPlan) => {
+const checkBasis = (newEgPlan, oldEgPlan) => {
   checkKontingentBasis(newEgPlan);
   checkBasisAssignment(newEgPlan);
 };
@@ -81,10 +82,10 @@ const checkKontingentPlus = (newEgPlan) => {
     throw new Error('Dein Kontingent für Basiselterngeld und Elterngeldplus ist aufgebraucht.');
   }
 
-  checkPartnermonate(newEgPlan, kontingentTaken);
+  checkPartnermonate(kontingentTaken);
 };
 
-const checkPlus = (newEgPlan) => {
+const checkPlus = (newEgPlan, oldEgPlan) => {
   checkKontingentPlus(newEgPlan);
 };
 
@@ -94,11 +95,9 @@ const checkPlus = (newEgPlan) => {
 const checkKontingentBonus = (bonusMonths) => {
   const kontingentBoth = bonusMonths[0].months.length + bonusMonths[1].months.length;
   if (kontingentBoth > maxKontingentBonus) {
-    throw new Error('Dein Kontingent für Partnerschaftsbonus ist aufgebraucht.');
-  } else if (kontingentBoth < minKontingentBonus) {
-    throw new Error(
-      'Ihr müsst beide mindestens 2 Monate Partnerschaftsbonus beziehen um ihn beanspruchen zu können.'
-    );
+    throw new Error(errorStrings.bonusKontingentMax);
+  } else if (kontingentBoth < minKontingentBonus && kontingentBoth > 0) {
+    throw new Error(errorStrings.bonusKontingentMin);
   }
 };
 
@@ -107,27 +106,15 @@ const checkBonusConsecutiveMonths = (bonusMonths) => {
   for (let i = 0; i < bonusMonths[0].months.length; i += 1) {
     if (i < bonusMonths[0].months.length - 1) {
       if (bonusMonths[0].months[i + 1].monthid - bonusMonths[1].months[i].monthid > 1) {
-        throw new Error('Partnerschaftsbonus-Monate müssen am Stück genommen werden.');
+        throw new Error(errorStrings.bonusConsecutiveMonths);
       }
     }
   }
-  // let lastAppearance;
-  // for (let i = 0; i < newEgPlan[0].months.length; i += 1) {
-  //   if (newEgPlan[0].months[i].variant === BONUS) {
-  //     if (lastAppearance === undefined) {
-  //       lastAppearance = i;
-  //     } else if (i - lastAppearance > 1) {
-  //       throw new Error('Partnerschaftsbonus-Monate müssen am Stück genommen werden.');
-  //     }
-  //     lastAppearance = i;
-  //   }
-  // }
 };
 
 // checks if PB is taken simulatenously by both partners
 const checkBonusBothPartners = (bonusMonths) => {
-  const errorMessage =
-    'Partnerschaftsbonus-Monate müssen immer von beiden Elternteilen gleichzeitig genommen werden.';
+  const errorMessage = errorStrings.bonusBothPartners;
 
   if (bonusMonths[0].months.length !== bonusMonths[1].months.length) {
     // if both don't take the same amount of PB months
@@ -141,7 +128,7 @@ const checkBonusBothPartners = (bonusMonths) => {
   }
 };
 
-const checkBonus = (newEgPlan) => {
+const checkBonus = (newEgPlan, oldEgPlan) => {
   const bonusMonths = [];
   for (let i = 0; i < newEgPlan.length; i += 1) {
     bonusMonths.push({ parentid: i, months: [] });
@@ -151,26 +138,27 @@ const checkBonus = (newEgPlan) => {
       }
     }
   }
-  checkKontingentBonus(bonusMonths);
-  checkBonusConsecutiveMonths(bonusMonths);
   checkBonusBothPartners(bonusMonths);
+  checkBonusConsecutiveMonths(bonusMonths);
+  checkKontingentBonus(bonusMonths);
 };
 
 // <----NONE---->
-const checkNone = (newEgPlan) => {
+const checkNone = (newEgPlan, oldEgPlan) => {
+  // TODO: check both partners
   checkBonusConsecutiveMonths(newEgPlan);
 };
 
-const checkEG = (newEgPlan, parentid, monthid, variant) => {
-  if (variant === BASIS) {
-    checkBasis(newEgPlan);
-  } else if (variant === PLUS) {
-    checkPlus(newEgPlan);
-  } else if (variant === BONUS) {
-    checkBonus(newEgPlan);
-  } else if (variant === NONE) {
-    checkNone(newEgPlan);
-  }
+const checkEG = (newEgPlan, oldEgPlan) => {
+  // if (variant === BASIS) {
+  checkBasis(newEgPlan, oldEgPlan);
+  // } else if (variant === PLUS) {
+  checkPlus(newEgPlan, oldEgPlan);
+  // } else if (variant === BONUS) {
+  checkBonus(newEgPlan, oldEgPlan);
+  // } else if (variant === NONE) {
+  checkNone(newEgPlan, oldEgPlan);
+  // }
 };
 
 export default checkEG;
