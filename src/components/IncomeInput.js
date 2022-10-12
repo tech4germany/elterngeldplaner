@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  FormControl,
+  //   FormControl,
   FormLabel,
   Switch,
   Editable,
@@ -12,11 +12,12 @@ import {
 import { Form } from 'react-bootstrap';
 
 const IncomeInput = () => {
+  const [incomeChecked, setIncomeChecked] = useState(false);
   return (
     <Grid
       mt="20px"
       mb="10px"
-      templateRows="repeat(3, 1fr)"
+      templateRows="repeat(1, 1fr)"
       templateColumns="repeat(2, auto)"
       alignItems="center"
       rowGap={2}>
@@ -26,17 +27,32 @@ const IncomeInput = () => {
         </FormLabel>
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
-        <Switch id="email-alerts" />
+        <Switch
+          onChange={() => {
+            setIncomeChecked(!incomeChecked);
+          }}
+          isChecked={incomeChecked}
+        />
       </GridItem>
-      <GridItem rowSpan={1} colSpan={2}>
-        <Form.Control className="d-flex" size="sm" type="text" placeholder="Bruttoeinkommen" />
-        {/* <div>Trage dein voraussichtliches Bruttoeinkommen im ausgewählten Lebensmonat ein.</div> */}
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={2} textAlign="left" lineHeight="1.15">
-        <Form.Text>
-          Trage dein voraussichtliches Bruttoeinkommen im ausgewählten Lebensmonat ein.
-        </Form.Text>
-      </GridItem>
+      {incomeChecked ? (
+        <Grid templateRows="repeat(1, 1fr)" rowGap={1}>
+          <GridItem rowSpan={1} colSpan={2}>
+            <Form.Control
+              className="d-flex"
+              size="sm"
+              type="number"
+              placeholder="Bruttoeinkommen"
+            />
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={2} textAlign="left" lineHeight="1.15">
+            <Form.Text>
+              Trage dein voraussichtliches Bruttoeinkommen im ausgewählten Lebensmonat ein.
+            </Form.Text>
+          </GridItem>
+        </Grid>
+      ) : (
+        <div />
+      )}
     </Grid>
   );
 };
