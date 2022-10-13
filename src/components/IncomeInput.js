@@ -14,7 +14,7 @@ import { Form } from 'react-bootstrap';
 const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
 
-  // gTODO:
+  // TODO:
   // useEffect(() => {
   //   updateAdditionalIncome()
   // }, [incomeChecked]);
