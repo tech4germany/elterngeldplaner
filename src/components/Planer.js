@@ -42,7 +42,7 @@ const Planer = () => {
     for (let i = 0; i < shownNrMonths; i += 1) {
       newMonthComponents.push(
         // TODO: column breite bei monat gleich machen wie bei überschrift
-        <Grid key={i} templateColumns="repeat(22, 1fr)">
+        <Grid key={i} templateColumns="repeat(22, 1fr)" marginBottom="8px">
           <GridItem colSpan={10}>
             <Month
               monthid={egPlan[0].months[i].monthid}
@@ -89,23 +89,20 @@ const Planer = () => {
           In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
           verteilen und die Zeit nach der Geburt partnerschaftlich planen.
         </div>
+        <div
+          style={{
+            textAlign: 'left',
+            fontWeight: 'bold',
+            fontSize: '11pt',
+            marginTop: '10px'
+          }}>
+          Euer Kontingent an Elterngeld:
+        </div>
       </Row>
       <Row
         className="d-flex bg-light sticky-top p-2"
         style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
-        {/* <Row>
-        <p>Elterngeld-Planer</p>
-      </Row> */}
-        <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
-          <div
-            style={{
-              textAlign: 'left',
-              fontWeight: 'bold',
-              marginBottom: '5px',
-              fontSize: '11pt'
-            }}>
-            Euer Kontingent an Elterngeld:
-          </div>
+        <Row style={{ marginBottom: '15px' }}>
           <Kontingent egPlan={egPlan} />
         </Row>
         <Row>
