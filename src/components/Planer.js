@@ -121,7 +121,7 @@ const Planer = () => {
 
         <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
           <div
-            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '16px', marginTop: '0px' }}>
+            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '20px', marginTop: '0px' }}>
             Eure gemeinsame Planung
           </div>
           <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
