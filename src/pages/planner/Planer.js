@@ -24,7 +24,8 @@ import constants from '../../utils/constants.json';
 import useEGcalc from '../../hooks/useEGcalc';
 import Kontingent from './Kontingent';
 import useSticky from '../../hooks/useSticky';
-import PageTitle from '../../components/styled/styledText';
+import { LargeTitle } from '../../components/styled/StyledText';
+import PageTemplate from '../../components/PageTemplate';
 
 const Planer = () => {
   const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
@@ -96,17 +97,11 @@ const Planer = () => {
   }, [egPlan, monthSelected, shownNrMonths]);
 
   return (
-    <Container>
-      <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-        {/* <div
-            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '20px', marginTop: '0px' }}> */}
-        <PageTitle>Eure gemeinsame Planung</PageTitle>
-
-        {/* </div> */}
-        <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
-          In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
-          nach der Geburt verteilen.
-        </div>
+    <PageTemplate
+      pageTitle="Eure gemeinsame Planung"
+      description="In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
+    nach der Geburt verteilen.">
+      <Row>
         <div
           style={{
             textAlign: 'left',
@@ -206,7 +201,7 @@ const Planer = () => {
         updateMonth={updateMonth}
         updateAdditionalIncome={updateAdditionalIncome}
       />
-    </Container>
+    </PageTemplate>
   );
 };
 
