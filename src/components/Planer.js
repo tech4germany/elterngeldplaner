@@ -86,8 +86,8 @@ const Planer = () => {
           Eure gemeinsame Planung
         </div>
         <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
-          In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld-Monaten verteilen und
-          die Zeit nach der Geburt partnerschaftlich planen.
+          In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
+          verteilen und die Zeit nach der Geburt partnerschaftlich planen.
         </div>
       </Row>
       <Row
