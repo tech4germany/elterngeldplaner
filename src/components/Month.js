@@ -16,7 +16,7 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
         borderColor="black"
         padding="5px"
         width="15vw"
-        height="8vw"
+        height="9vw"
         margin="2px"
         onClick={() => {
           updateMonthSelection(parentId, monthid);

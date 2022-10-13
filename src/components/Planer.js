@@ -42,7 +42,7 @@ const Planer = () => {
     for (let i = 0; i < shownNrMonths; i += 1) {
       newMonthComponents.push(
         // TODO: column breite bei monat gleich machen wie bei überschrift
-        <Grid key={i} templateColumns="repeat(22, 1fr)" marginBottom="8px">
+        <Grid key={i} templateColumns="repeat(22, 1fr)" marginBottom="5px">
           <GridItem colSpan={10}>
             <Month
               monthid={egPlan[0].months[i].monthid}
