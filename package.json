@@ -60,5 +60,8 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
