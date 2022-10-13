@@ -12,12 +12,30 @@ import {
 import { Form } from 'react-bootstrap';
 
 const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
-  const [incomeChecked, setIncomeChecked] = useState(false);
+  const [incomeChecked, setIncomeChecked] = useState();
+  const [additionalIncome, setAdditionalIncome] = useState();
 
-  // TODO:
   useEffect(() => {
-    // updateAdditionalIncome();
-  }, [incomeChecked, monthSelected]);
+    setIncomeChecked(egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked);
+  }, [egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked]);
+
+  useEffect(() => {
+    setAdditionalIncome(
+      egPlan[monthSelected.parentid].months[monthSelected.monthid].additionalIncome
+    );
+  }, [egPlan[monthSelected.parentid].months[monthSelected.monthid].additionalIncome]);
+
+  const switchIncomeChecked = () => {
+    const currentIncomeChecked =
+      egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked;
+    updateAdditionalIncome(
+      monthSelected.parentid,
+      monthSelected.monthid,
+      undefined,
+      !currentIncomeChecked
+    );
+  };
+
   return (
     <Grid
       mt="20px"
@@ -34,12 +52,12 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
       <GridItem rowSpan={1} colSpan={1}>
         <Switch
           onChange={() => {
-            setIncomeChecked(!incomeChecked);
+            switchIncomeChecked();
           }}
           isChecked={incomeChecked}
         />
       </GridItem>
-      {incomeChecked ? (
+      {egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked ? (
         <Grid templateRows="repeat(1, 1fr)" rowGap={1}>
           <GridItem rowSpan={1} colSpan={2}>
             <Form.Control
@@ -47,6 +65,15 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
               size="sm"
               type="number"
               placeholder="Bruttoeinkommen"
+              value={additionalIncome}
+              onChange={(e) => {
+                updateAdditionalIncome(
+                  monthSelected.parentid,
+                  monthSelected.monthid,
+                  e.currentTarget.value,
+                  undefined
+                );
+              }}
             />
           </GridItem>
           <GridItem rowSpan={1} colSpan={2} textAlign="left" lineHeight="1.15">
