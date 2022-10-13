@@ -10,7 +10,7 @@ import {
 import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
-import constants from '../utils/constants.json';
+import constants from '../../utils/constants.json';
 import IncomeInput from './IncomeInput';
 
 const Overlay = ({

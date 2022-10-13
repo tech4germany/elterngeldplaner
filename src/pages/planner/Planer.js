@@ -17,13 +17,14 @@ import {
 } from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
-import logo from '../images/fpo-logo.jpg';
+import logo from '../../images/fpo-logo.jpg';
 import Month from './Month';
 import Overlay from './Overlay';
-import constants from '../utils/constants.json';
-import useEGcalc from '../hooks/useEGcalc';
+import constants from '../../utils/constants.json';
+import useEGcalc from '../../hooks/useEGcalc';
 import Kontingent from './Kontingent';
-import useSticky from '../hooks/useSticky';
+import useSticky from '../../hooks/useSticky';
+import PageTitle from '../../components/ui/styledText';
 
 const Planer = () => {
   const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
@@ -120,10 +121,11 @@ const Planer = () => {
         </Row>
 
         <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-          <div
-            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '20px', marginTop: '0px' }}>
-            Eure gemeinsame Planung
-          </div>
+          {/* <div
+            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '20px', marginTop: '0px' }}> */}
+          <PageTitle>Eure gemeinsame Planung</PageTitle>
+
+          {/* </div> */}
           <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
             In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die
             Lebensmonate nach der Geburt verteilen.

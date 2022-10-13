@@ -2,8 +2,8 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import Overlay from './Overlay';
-import constants from '../utils/constants.json';
-import colors from '../utils/theme';
+import constants from '../../utils/constants.json';
+import colors from '../../utils/theme';
 
 const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selected }) => {
   const [monthButton, setMonthButton] = useState();

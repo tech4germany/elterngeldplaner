@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Grid, GridItem } from '@chakra-ui/react';
+import constants from '../../utils/constants.json';
 import KontingentItem from './KontingentItem';
-import constants from '../utils/constants.json';
 
 const Kontingent = ({ egPlan }) => {
   const [kontingentItems, setKontingentItems] = useState({ basis: [], plus: [], bonus: [] });

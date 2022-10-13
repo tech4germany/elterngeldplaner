@@ -1,5 +1,5 @@
 import './App.css';
-import Planer from './components/Planer';
+import Planer from './pages/planner/Planer';
 
 const App = () => {
   return (
