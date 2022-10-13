@@ -90,26 +90,7 @@ const Kontingent = ({ egPlan }) => {
     setKontingentDisplay(newKontingentDisplay);
   }, [egPlan]);
   return (
-    // <Container fluid className="d-flex-row align-items-center justify-content-center">
-    //   <Row>
-    //     {kontingentDisplay.basis}
-    //     {kontingentDisplay.plus}
-    //     {kontingentDisplay.bonus}
-    //   </Row>
-    //   <Row
-    //     className="g-0 d-flex-row align-items-center justify-content-center"
-    //     style={{ width: '100%' }}>
-    //     <Col xs="auto">
-    //       <Row className="g-0">{kontingentItems.basis}</Row>
-    //       <Row className="g-0"> {kontingentItems.plus}</Row>
-    //     </Col>
-    //     <Col xs="auto">
-    //       <Row className="g-0">{kontingentItems.bonus}</Row>
-    //     </Col>
-    //   </Row>
-    // </Container>
     <Grid
-      //   fluid
       className="d-flex-row align-items-center justify-content-center"
       templateColumns="repeat(32, 1fr)"
       templateRows="repeat(3, 1fr)"

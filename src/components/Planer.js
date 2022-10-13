@@ -1,8 +1,23 @@
 import { Fragment, useEffect, useState, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Box, Grid, GridItem, Icon, IconButton, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Grid,
+  GridItem,
+  Icon,
+  IconButton,
+  Button,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerContent,
+  DrawerBody
+} from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
-import { IconContext } from 'react-icons';
+import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
+import logo from '../images/fpo-logo.jpg';
 import Month from './Month';
 import Overlay from './Overlay';
 import constants from '../utils/constants.json';
@@ -21,6 +36,9 @@ const Planer = () => {
     // egPlan,
     isVisible: false
   });
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
 
   useEffect(() => {
     setSelectionOverlayProps({
@@ -80,107 +98,138 @@ const Planer = () => {
   }, [egPlan, monthSelected, shownNrMonths]);
 
   return (
-    <Container className="justify-content-center text-center">
-      <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-        <div style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '16px', marginTop: '20px' }}>
-          Eure gemeinsame Planung
-        </div>
-        <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
-          In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
-          nach der Geburt verteilen.
-        </div>
-        <div
-          style={{
-            textAlign: 'left',
-            fontWeight: 'bold',
-            fontSize: '11pt',
-            marginTop: '10px'
-          }}>
-          Euer Kontingent an Elterngeld:
-        </div>
-      </Row>
-      <Row
-        className="d-flex justify-content-center bg-white sticky-top p-0"
-        style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+    <>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menü</DrawerHeader>
+          <DrawerBody>Nothing to see yet...</DrawerBody>
+        </DrawerContent>
+      </Drawer>
+      <Container className="justify-content-center text-center">
+        <Row xs="auto" className="justify-content-between text-center align-items-center">
+          <Col>
+            <Button onClick={onOpen} variant="ghost" padding="0px">
+              <VscMenu style={{ width: '25px', height: 'auto' }} />
+            </Button>
+          </Col>
+          <Col>
+            <img src={logo} alt="Familienportal-Logo" width="70px" height="auto" />
+          </Col>
+        </Row>
+
+        <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <div
+            style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '16px', marginTop: '0px' }}>
+            Eure gemeinsame Planung
+          </div>
+          <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
+            In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die
+            Lebensmonate nach der Geburt verteilen.
+          </div>
+          <div
+            style={{
+              textAlign: 'left',
+              fontWeight: 'bold',
+              fontSize: '11pt',
+              marginTop: '10px'
+            }}>
+            Euer Kontingent an Elterngeld:
+          </div>
+        </Row>
         <Row
-          style={{
-            width: '100%',
-            borderBottom: '1px solid #C5C5C5',
-            paddingBottom: '15px',
-            paddingTop: '10px'
+          className="d-flex justify-content-center bg-white sticky-top p-0"
+          style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+          <Row
+            style={{
+              width: '100%',
+              borderBottom: '1px solid #C5C5C5',
+              paddingBottom: '15px',
+              paddingTop: '10px'
+            }}>
+            <Kontingent egPlan={egPlan} />
+          </Row>
+          <Row className="p-1">
+            <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
+              {constants.parents[0].name}
+            </Col>
+            <Col className="align-self-center" xs="auto">
+              <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+                Lebens
+                <br />
+                monat
+              </div>
+            </Col>
+            <Col className="align-self-center" style={{ fontWeight: 600 }}>
+              {constants.parents[1].name}
+            </Col>
+          </Row>
+        </Row>
+        <Row style={{ height: '20px' }} />
+        {monthComponents}
+        <Button
+          className="d-flex-row justify-content-center"
+          width="100%"
+          height="35px"
+          fontSize="11pt"
+          fontWeight="semibold"
+          textDecoration="underline"
+          color="gray.600" // TODO
+          backgroundColor="transparent"
+          marginTop="5px"
+          onClick={() => {
+            if (shownNrMonths === constants.numberMonths) {
+              setShownNrMonths(constants.numberMonthsCollapsed);
+            } else {
+              setShownNrMonths(constants.numberMonths);
+            }
           }}>
-          <Kontingent egPlan={egPlan} />
+          {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
+          <AiFillDownCircle
+            style={{
+              marginRight: '5px',
+              transform:
+                shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
+          />
+          {shownNrMonths === constants.numberMonths
+            ? 'weniger Monate anzeigen'
+            : 'alle Monate anzeigen'}
+        </Button>
+        <Row xs="auto" className="justify-content-center p-3">
+          <Button colorScheme="teal" size="sm">
+            Zur Zusammenfassung
+          </Button>
         </Row>
-        <Row className="p-1">
-          <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-            {constants.parents[0].name}
-          </Col>
-          <Col className="align-self-center" xs="auto">
-            <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-              Lebens
-              <br />
-              monat
-            </div>
-          </Col>
-          <Col className="align-self-center" style={{ fontWeight: 600 }}>
-            {constants.parents[1].name}
-          </Col>
+
+        <Row xs="auto" className="justify-content-center">
+          <Button
+            color="gray"
+            variant="ghost"
+            size="xs"
+            // marginTop="20px"
+            onClick={() => {
+              resetPlan();
+            }}>
+            <VscRefresh style={{ marginRight: '5px' }} />
+            Auswahl zurücksetzen
+          </Button>
         </Row>
-      </Row>
-      <Row style={{ height: '20px' }} />
-      {monthComponents}
-      <Button
-        className="d-flex-row justify-content-center"
-        width="100%"
-        height="35px"
-        fontSize="11pt"
-        fontWeight="semibold"
-        textDecoration="underline"
-        color="gray.600" // TODO
-        backgroundColor="transparent"
-        marginTop="5px"
-        onClick={() => {
-          if (shownNrMonths === constants.numberMonths) {
-            setShownNrMonths(constants.numberMonthsCollapsed);
-          } else {
-            setShownNrMonths(constants.numberMonths);
-          }
-        }}>
-        {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
-        <AiFillDownCircle
-          style={{
-            marginRight: '5px',
-            transform: shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
-          }}
+        <Row>
+          <Box height="170px" />
+        </Row>
+
+        <Overlay
+          monthSelected={monthSelected}
+          setMonthSelected={setMonthSelected}
+          egPlan={egPlan}
+          {...selectionOverlayProps}
+          updateMonth={updateMonth}
+          updateAdditionalIncome={updateAdditionalIncome}
         />
-        {shownNrMonths === constants.numberMonths
-          ? 'weniger Monate anzeigen'
-          : 'mehr Monate anzeigen'}
-      </Button>
-
-      <Button
-        color="gray"
-        variant="outline"
-        size="xs"
-        marginTop="20px"
-        onClick={() => {
-          resetPlan();
-        }}>
-        Auswahl zurücksetzen
-      </Button>
-      <Row>
-        <Box height="170px" />
-      </Row>
-
-      <Overlay
-        monthSelected={monthSelected}
-        setMonthSelected={setMonthSelected}
-        egPlan={egPlan}
-        {...selectionOverlayProps}
-        updateMonth={updateMonth}
-        updateAdditionalIncome={updateAdditionalIncome}
-      />
-    </Container>
+      </Container>
+    </>
   );
 };
 
