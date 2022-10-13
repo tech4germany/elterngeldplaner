@@ -90,12 +90,20 @@ const Planer = () => {
           die Zeit nach der Geburt partnerschaftlich planen.
         </div>
       </Row>
-      <Row className="d-flex bg-light sticky-top p-2">
+      <Row
+        className="d-flex bg-light sticky-top p-2"
+        style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
         {/* <Row>
         <p>Elterngeld-Planer</p>
       </Row> */}
         <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
-          <div style={{ textAlign: 'left', fontWeight: 'bold', marginBottom: '5px' }}>
+          <div
+            style={{
+              textAlign: 'left',
+              fontWeight: 'bold',
+              marginBottom: '5px',
+              fontSize: '11pt'
+            }}>
             Euer Kontingent an Elterngeld:
           </div>
           <Kontingent egPlan={egPlan} />
