@@ -198,7 +198,7 @@ const Planer = () => {
             : 'alle Monate anzeigen'}
         </Button>
         <Row xs="auto" className="justify-content-center p-3">
-          <Button colorScheme="teal" size="sm">
+          <Button colorScheme="teal" size="md">
             Zur Zusammenfassung
           </Button>
         </Row>
