@@ -15,9 +15,9 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
 
   // TODO:
-  // useEffect(() => {
-  //   updateAdditionalIncome()
-  // }, [incomeChecked]);
+  useEffect(() => {
+    // updateAdditionalIncome();
+  }, [incomeChecked, monthSelected]);
   return (
     <Grid
       mt="20px"

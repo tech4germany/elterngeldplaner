@@ -81,13 +81,13 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
-      <Row className="bg-white p-2">
+      <Row className="bg-white" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
         <div style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '16px', marginTop: '20px' }}>
           Eure gemeinsame Planung
         </div>
         <div style={{ textAlign: 'left', fontSize: '10pt', lineHeight: '1.5' }}>
           In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
-          verteilen und die Zeit nach der Geburt partnerschaftlich planen.
+          nach der Geburt verteilen.
         </div>
         <div
           style={{
@@ -100,12 +100,18 @@ const Planer = () => {
         </div>
       </Row>
       <Row
-        className="d-flex bg-white sticky-top p-2"
+        className="d-flex justify-content-center bg-white sticky-top p-0"
         style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
-        <Row style={{ marginBottom: '15px' }}>
+        <Row
+          style={{
+            width: '100%',
+            borderBottom: '1px solid #C5C5C5',
+            paddingBottom: '15px',
+            paddingTop: '10px'
+          }}>
           <Kontingent egPlan={egPlan} />
         </Row>
-        <Row>
+        <Row className="p-1">
           <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
             {constants.parents[0].name}
           </Col>
@@ -150,13 +156,7 @@ const Planer = () => {
         {shownNrMonths === constants.numberMonths
           ? 'weniger Monate anzeigen'
           : 'mehr Monate anzeigen'}
-        {/* </div> */}
       </Button>
-
-      {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}>mehr Monate anzeigen</div>
-      <Icon as={AiFillDownCircle} w={6} h={6} color="gray" /> */}
-
-      {/* <Box h="200px" bg="red" position="absolute" top={50} zIndex={2} /> */}
 
       <Button
         color="gray"
@@ -181,51 +181,6 @@ const Planer = () => {
         updateAdditionalIncome={updateAdditionalIncome}
       />
     </Container>
-    // <Container className="justify-content-center text-center">
-    //   <Row className="d-flex justify-content-center bg-light sticky-top">
-    //     {/* <Row>
-    //       <p>Elterngeld-Planer</p>
-    //     </Row> */}
-    //     <Row style={{ marginBottom: '15px', marginTop: '20px' }}>
-    //       <div style={{ textAlign: 'left', fontWeight: 'bold', marginBottom: '5px' }}>
-    //         Euer Elterngeld-Kontingent:
-    //       </div>
-    //       <Kontingent egPlan={egPlan} />
-    //     </Row>
-    //     <Row>
-    //       <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-    //         {constants.parents[0].name}
-    //       </Col>
-    //       <Col className="align-self-center" xs="auto">
-    //         <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-    //           Lebens
-    //           <br />
-    //           monat
-    //         </div>
-    //       </Col>
-    //       <Col className="align-self-center" style={{ fontWeight: 600 }}>
-    //         {constants.parents[1].name}
-    //       </Col>
-    //     </Row>
-    //   </Row>
-    //   {/* <Row style={{ marginBottom: '15px', marginTop: '10px' }}>
-    //     <div style={{ textAlign: 'left' }}>Euer Elterngeld-Kontingent</div>
-    //     <Kontingent egPlan={egPlan} />
-    //   </Row> */}
-
-    //   {monthComponents}
-    //   {/* <Box h="200px" bg="red" position="absolute" top={50} zIndex={2} /> */}
-    //   <Row>
-    //     <Box height="180px" />
-    //   </Row>
-
-    //   <SelectionOverlay
-    //     monthSelected={monthSelected}
-    //     egPlan={egPlan}
-    //     {...selectionOverlayProps}
-    //     updateMonth={updateMonth}
-    //   />
-    // </Container>
   );
 };
 
