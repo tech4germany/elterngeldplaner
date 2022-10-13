@@ -81,7 +81,7 @@ const Planer = () => {
 
   return (
     <Container className="justify-content-center text-center">
-      <Row className="bg-light p-2">
+      <Row className="bg-white p-2">
         <div style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '16px', marginTop: '20px' }}>
           Eure gemeinsame Planung
         </div>
@@ -100,7 +100,7 @@ const Planer = () => {
         </div>
       </Row>
       <Row
-        className="d-flex bg-light sticky-top p-2"
+        className="d-flex bg-white sticky-top p-2"
         style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
         <Row style={{ marginBottom: '15px' }}>
           <Kontingent egPlan={egPlan} />
