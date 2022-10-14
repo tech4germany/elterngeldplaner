@@ -4,14 +4,17 @@ import { LargeTitle, TextNormal } from './styled/StyledText';
 
 const PageTemplate = ({ pageTitle, description, children }) => {
   return (
-    <Container style={{ paddingLeft: '18px', paddingRight: '18px' }}>
-      <Row className="bg-white">
+    <Container
+      fluid
+      className="justify-content-center"
+      style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+      <Row className="d-flex bg-white">
         <LargeTitle>{pageTitle}</LargeTitle>
       </Row>
-      <Row>
+      <Row className="d-flex bg-white">
         <TextNormal> {description}</TextNormal>
       </Row>
-      <Row>{children}</Row>
+      <Row className="d-flex">{children}</Row>
     </Container>
   );
 };

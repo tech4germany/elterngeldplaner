@@ -102,106 +102,110 @@ const Planer = () => {
       pageTitle="Eure gemeinsame Planung"
       description="In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
     nach der Geburt verteilen.">
-      <Row>
-        <div
-          style={{
-            textAlign: 'left',
-            fontWeight: 'bold',
-            fontSize: '11pt',
-            marginTop: '10px'
-          }}>
-          Euer Kontingent an Elterngeld:
-        </div>
-      </Row>
-      <Row
-        className="d-flex justify-content-center bg-white sticky-top p-0"
-        style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+      <Container>
+        <Row>
+          <div
+            style={{
+              textAlign: 'left',
+              fontWeight: 'bold',
+              fontSize: '11pt',
+              marginTop: '10px'
+            }}>
+            Euer Kontingent an Elterngeld:
+          </div>
+        </Row>
+
         <Row
-          style={{
-            width: '100%',
-            borderBottom: '1px solid #C5C5C5',
-            paddingBottom: '15px',
-            paddingTop: '10px'
-          }}>
-          <Kontingent egPlan={egPlan} />
+          className="d-flex justify-content-center bg-white sticky-top p-0"
+          style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+          <Row
+            style={{
+              // width: '100%',
+              borderBottom: '1px solid #C5C5C5',
+              paddingBottom: '15px',
+              paddingTop: '10px'
+            }}>
+            <Kontingent egPlan={egPlan} />
+          </Row>
+          <Row className="p-1 text-center">
+            <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
+              {constants.parents[0].name}
+            </Col>
+            <Col className="align-self-center" xs="auto">
+              <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+                Lebens
+                <br />
+                monat
+              </div>
+            </Col>
+            <Col className="align-self-center" style={{ fontWeight: 600 }}>
+              {constants.parents[1].name}
+            </Col>
+          </Row>
         </Row>
-        <Row className="p-1 text-center">
-          <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-            {constants.parents[0].name}
-          </Col>
-          <Col className="align-self-center" xs="auto">
-            <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-              Lebens
-              <br />
-              monat
-            </div>
-          </Col>
-          <Col className="align-self-center" style={{ fontWeight: 600 }}>
-            {constants.parents[1].name}
-          </Col>
-        </Row>
-      </Row>
-      <Row style={{ height: '20px' }} />
-      {monthComponents}
-      <Button
-        className="d-flex-row justify-content-center"
-        width="100%"
-        height="35px"
-        fontSize="11pt"
-        fontWeight="semibold"
-        textDecoration="underline"
-        color="gray.600" // TODO
-        backgroundColor="transparent"
-        marginTop="5px"
-        onClick={() => {
-          if (shownNrMonths === constants.numberMonths) {
-            setShownNrMonths(constants.numberMonthsCollapsed);
-          } else {
-            setShownNrMonths(constants.numberMonths);
-          }
-        }}>
-        {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
-        <AiFillDownCircle
-          style={{
-            marginRight: '5px',
-            transform: shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
-          }}
-        />
-        {shownNrMonths === constants.numberMonths
-          ? 'weniger Monate anzeigen'
-          : 'alle Monate anzeigen'}
-      </Button>
-      <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
-        <NextButton
-          buttonTitle="Zur Zusammmenfassung"
-          // onClick="window.location.href='https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom';"
-        />
-      </a>
-
-      <Row xs="auto" className="justify-content-center">
+        <Row style={{ height: '20px' }} />
+        {monthComponents}
         <Button
-          color="gray"
-          variant="ghost"
-          size="xs"
+          className="d-flex-row justify-content-center"
+          width="100%"
+          height="35px"
+          fontSize="11pt"
+          fontWeight="semibold"
+          textDecoration="underline"
+          color="gray.600" // TODO
+          backgroundColor="transparent"
+          marginTop="5px"
           onClick={() => {
-            resetPlan();
+            if (shownNrMonths === constants.numberMonths) {
+              setShownNrMonths(constants.numberMonthsCollapsed);
+            } else {
+              setShownNrMonths(constants.numberMonths);
+            }
           }}>
-          <VscRefresh style={{ marginRight: '5px' }} />
-          Auswahl zurücksetzen
+          {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
+          <AiFillDownCircle
+            style={{
+              marginRight: '5px',
+              transform:
+                shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
+          />
+          {shownNrMonths === constants.numberMonths
+            ? 'weniger Monate anzeigen'
+            : 'alle Monate anzeigen'}
         </Button>
-      </Row>
-      <Row>
-        <Box height="170px" />
-      </Row>
+        <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
+          <NextButton
+            buttonTitle="Zur Zusammmenfassung"
+            // onClick="window.location.href='https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom';"
+          />
+        </a>
 
-      <Overlay
-        monthSelected={monthSelected}
-        setMonthSelected={setMonthSelected}
-        egPlan={egPlan}
-        {...selectionOverlayProps}
-        updateMonth={updateMonth}
-        updateAdditionalIncome={updateAdditionalIncome}
-      />
+        <Row xs="auto" className="justify-content-center">
+          <Button
+            color="gray"
+            variant="ghost"
+            size="xs"
+            onClick={() => {
+              resetPlan();
+            }}>
+            <VscRefresh style={{ marginRight: '5px' }} />
+            Auswahl zurücksetzen
+          </Button>
+        </Row>
+        <Row>
+          <Box height="170px" />
+        </Row>
+
+        <Overlay
+          monthSelected={monthSelected}
+          setMonthSelected={setMonthSelected}
+          egPlan={egPlan}
+          {...selectionOverlayProps}
+          updateMonth={updateMonth}
+          updateAdditionalIncome={updateAdditionalIncome}
+        />
+      </Container>
     </PageTemplate>
   );
 };
