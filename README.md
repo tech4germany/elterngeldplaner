@@ -1,3 +1,10 @@
+This is a prototype for the Elterngeldplaner of the BMFSFJ.
+It's designed for mobile-use only at the moment.
+
+You can test the prototype via this link:
+
+https://elterngeldplaner-cce40.web.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
