@@ -24,7 +24,7 @@ import constants from '../../utils/constants.json';
 import useEGcalc from '../../hooks/useEGcalc';
 import Kontingent from './Kontingent';
 import useSticky from '../../hooks/useSticky';
-import { LargeTitle } from '../../components/styled/StyledText';
+// import { LargeTitle } from '../../components/styled/StyledText';
 import PageTemplate from '../../components/PageTemplate';
 import NextButton from '../../components/ui/NextButton';
 

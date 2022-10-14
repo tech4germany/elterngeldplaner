@@ -26,13 +26,15 @@ const Overlay = ({
   const toast = useToast();
 
   const getDateText = (monthid) => {
-    const initialDate = DateTime.now();
+    // const initialDate = DateTime.now();
+    const initialDate = DateTime.local(2022, 5, 31);
     const dateTextStart = initialDate
       .plus({ months: monthid })
       .setLocale('ge')
       .toFormat('d. LLL yy');
     const dateTextEnd = initialDate
       .plus({ months: monthid + 1 })
+      .minus({ days: 1 })
       .setLocale('ge')
       .toFormat('d. LLL yy');
     return `${dateTextStart} - ${dateTextEnd}`;
