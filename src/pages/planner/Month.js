@@ -12,7 +12,6 @@ const Month = ({ monthid, variant, amount, updateMonthSelection, parentId, selec
       <Button
         colorScheme={constants.varianten[variant].colorScheme}
         border={selected ? '4px' : '0px'}
-        // transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
         borderColor="black"
         padding="5px"
         width="15vw"

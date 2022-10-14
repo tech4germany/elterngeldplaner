@@ -9,7 +9,7 @@ export const LargeTitle = styled.h1`
 `;
 
 export const TextNormal = styled.div`
-  font-size: 10pt;
+  font-size: 11pt;
   text-align: left;
   line-height: 1.5;
 `;

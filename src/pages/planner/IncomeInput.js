@@ -58,7 +58,7 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
         />
       </GridItem>
       {egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked ? (
-        <Grid templateRows="repeat(1, 1fr)" rowGap={1}>
+        <Grid templateRows="repeat(1, 1fr)" templateCols="repeat(2, 1fr)" rowGap={1}>
           <GridItem rowSpan={1} colSpan={2}>
             <Form.Control
               className="d-flex"

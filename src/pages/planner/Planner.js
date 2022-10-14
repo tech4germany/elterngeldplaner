@@ -26,6 +26,7 @@ import Kontingent from './Kontingent';
 import useSticky from '../../hooks/useSticky';
 import { LargeTitle } from '../../components/styled/StyledText';
 import PageTemplate from '../../components/PageTemplate';
+import NextButton from '../../components/ui/NextButton';
 
 const Planer = () => {
   const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
@@ -170,18 +171,18 @@ const Planer = () => {
           ? 'weniger Monate anzeigen'
           : 'alle Monate anzeigen'}
       </Button>
-      <Row xs="auto" className="justify-content-center p-3">
-        <Button colorScheme="teal" size="md">
-          Zur Zusammenfassung
-        </Button>
-      </Row>
+      <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
+        <NextButton
+          buttonTitle="Zur Zusammmenfassung"
+          // onClick="window.location.href='https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom';"
+        />
+      </a>
 
       <Row xs="auto" className="justify-content-center">
         <Button
           color="gray"
           variant="ghost"
           size="xs"
-          // marginTop="20px"
           onClick={() => {
             resetPlan();
           }}>
