@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PageTemplate from '../../components/PageTemplate';
-import { LargeTitle, TextNormal } from '../../components/styled/StyledText';
+import { TextNormal } from '../../components/styled/StyledText';
 import NextButton from '../../components/ui/NextButton';
 // import { FormContext } from '../../App';
 
