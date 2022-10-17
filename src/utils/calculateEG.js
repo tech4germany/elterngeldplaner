@@ -9,7 +9,7 @@ const calculateEG = (income, variant, additionalIncome) => {
   let elterngeld;
   switch (variant) {
     case BASIS:
-      elterngeld = Math.round(income * 0.67);
+      elterngeld = Math.round(income * 0.65);
       if (elterngeld > 1800) {
         elterngeld = 1800;
       } else if (elterngeld < 300) {

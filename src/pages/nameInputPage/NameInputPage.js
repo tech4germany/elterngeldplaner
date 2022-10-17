@@ -11,9 +11,9 @@ const NameInputPage = () => {
 
   const formik = useFormik({
     initialValues: {
-      vornamen_elternteil: {
-        0: formData.vornamen_elternteil ? formData.vornamen_elternteil['0'] : 'Elternteil 1',
-        1: formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 2'
+      names_parent: {
+        0: formData.names_parent ? formData.names_parent['0'] : 'Elternteil 1',
+        1: formData.names_parent ? formData.names_parent['1'] : 'Elternteil 2'
       }
     },
     onSubmit: (values) => {
@@ -36,10 +36,10 @@ const NameInputPage = () => {
 
             <Form.Control
               // value={formik.values.vornamen_elternteil['0']}
-              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['0'] : ''}
+              defaultValue={formData.names_parent ? formData.names_parent['0'] : ''}
               type="text"
-              id="vornamen_elternteil['0']"
-              name="vornamen_elternteil['0']"
+              id="names_parent['0']"
+              name="names_parent['0']"
               placeholder="Vorname"
               onChange={formik.handleChange}
               // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
@@ -52,10 +52,10 @@ const NameInputPage = () => {
             </Form.Label>
             <Form.Control
               // value={formik.values.vornamen_elternteil['1']}
-              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
+              defaultValue={formData.names_parent ? formData.names_parent['1'] : ''}
               type="text"
-              id="vornamen_elternteil['1']"
-              name="vornamen_elternteil['1']"
+              id="names_parent['1']"
+              name="names_parent['1']"
               placeholder="Vorname"
               onChange={formik.handleChange}
               // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}

@@ -30,9 +30,9 @@ const IncomePage = () => {
         <>
           <p>Die Höhe eures Elterngelds richtet sich nach eurem individuellen Einkommen. </p>{' '}
           <p style={{ marginTop: '10px' }}>
-            Gebt euer durchschnittliches monatliches Bruttoeinkommen aus den letzten 12 Monaten vor
+            Gebt euer durchschnittliches monatliches Nettoeinkommen aus den letzten 12 Monaten vor
             der Geburt (bei nicht-selbstständiger Arbeit) bzw. aus dem letzten Kalenderjahr (bei
-            selbständiger Arbeit) an.
+            selbstständiger Arbeit) an.
           </p>
         </>
       }>
@@ -40,7 +40,7 @@ const IncomePage = () => {
         <Form onSubmit={formik.handleSubmit}>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextBold>Einkommen von {formData.vornamen_elternteil['0']}</TextBold>
+              <TextBold>Einkommen von {formData.names_parent['0']}</TextBold>
               {/* <TextNormal>Durchschnittliches Bruttoeinkommen pro Monat</TextNormal> */}
             </Form.Label>
 
@@ -50,7 +50,7 @@ const IncomePage = () => {
               type="number"
               id="income_parent['0']"
               name="income_parent['0']"
-              placeholder="Monatl. Bruttoeinkommen in €"
+              placeholder="Monatl. Nettoeinkommen in €"
               onChange={formik.handleChange}
               // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
               // value={formik.values.vornamen_elternteil['1']} // TODO: standardmäßig elternteil 1 /2
@@ -58,7 +58,7 @@ const IncomePage = () => {
           </Row>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextBold>Einkommen von {formData.vornamen_elternteil['1']}</TextBold>
+              <TextBold>Einkommen von {formData.names_parent['1']}</TextBold>
             </Form.Label>
             <Form.Control
               // value={formik.values.income_parent['1']}
@@ -66,7 +66,7 @@ const IncomePage = () => {
               type="number"
               id="income_parent['1']"
               name="income_parent['1']"
-              placeholder="Monatl. Bruttoeinkommen in €"
+              placeholder="Monatl. Nettoeinkommen in €"
               onChange={formik.handleChange}
               // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
               // value={formik.values.vornamen_elternteil['2']} // TODO: formData vornamen (wenn vorher schon eingegeben und dann auf zurück geklickt wird)

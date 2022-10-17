@@ -13,6 +13,13 @@ export const TextNormal = styled.div`
   line-height: 1.5;
 `;
 
+export const TextExtraSmall = styled.div`
+  font-size: 9pt;
+  text-align: left;
+  line-height: 1.5;
+  color: gray;
+`;
+
 export const TextBold = styled.div`
   font-size: 10.5pt;
   text-align: left;

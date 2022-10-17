@@ -8,6 +8,7 @@ import StartPage from './pages/startPage/StartPage';
 import FormContext from './context/FormContext';
 import BirthDatePage from './pages/birthDatePage/BirthDatePage';
 import IncomePage from './pages/incomePage/IncomePage';
+import EGOverviewPage from './pages/egOverview/EGOverviewPage';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(<StartPage />);
@@ -35,6 +36,9 @@ const App = () => {
         setCurrentPage(<IncomePage />);
         break;
       case 4:
+        setCurrentPage(<EGOverviewPage />);
+        break;
+      case 5:
         setCurrentPage(<Planner />);
         break;
       default:
