@@ -6,10 +6,19 @@ import Header from './components/ui/Header';
 import NameInputPage from './pages/nameInputPage/NameInputPage';
 import StartPage from './pages/startPage/StartPage';
 import FormContext from './context/FormContext';
+import BirthDatePage from './pages/birthDatePage/BirthDatePage';
+import IncomePage from './pages/incomePage/IncomePage';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(<StartPage />);
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const pageNames = [
+    'Start',
+    'Wie heißt ihr?',
+    'Geburtsdatum eures Kindes',
+    'Euer Einkommen',
+    'Planer'
+  ];
 
   useEffect(() => {
     switch (activeStepIndex) {
@@ -20,6 +29,12 @@ const App = () => {
         setCurrentPage(<NameInputPage />);
         break;
       case 2:
+        setCurrentPage(<BirthDatePage />);
+        break;
+      case 3:
+        setCurrentPage(<IncomePage />);
+        break;
+      case 4:
         setCurrentPage(<Planner />);
         break;
       default:
@@ -30,7 +45,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header pageNames={pageNames} />
       {/* <Planer /> */}
       {/* <IntroductionPage /> */}
       {currentPage}

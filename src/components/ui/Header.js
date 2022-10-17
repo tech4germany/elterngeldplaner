@@ -14,7 +14,7 @@ import { VscMenu } from 'react-icons/vsc';
 import logo from '../../images/fpo-logo.jpg';
 import MenuDrawer from './MenuDrawer';
 
-const Header = () => {
+const Header = ({ pageNames }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -22,7 +22,7 @@ const Header = () => {
     <Container className="justify-content-center text-center">
       <Row xs="auto" className="justify-content-between text-center align-items-center">
         <Col>
-          <MenuDrawer />
+          <MenuDrawer pageNames={pageNames} />
         </Col>
         <Col>
           <img src={logo} alt="Familienportal-Logo" width="70px" height="auto" />

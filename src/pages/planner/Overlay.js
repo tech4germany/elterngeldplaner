@@ -8,10 +8,11 @@ import {
   Col
 } from 'react-bootstrap';
 import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../../utils/constants.json';
 import IncomeInput from './IncomeInput';
+import FormContext from '../../context/FormContext';
 
 const Overlay = ({
   monthSelected,
@@ -24,10 +25,12 @@ const Overlay = ({
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
   const toast = useToast();
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const getDateText = (monthid) => {
+    console.log(formData.birthDate);
     // const initialDate = DateTime.now();
-    const initialDate = DateTime.local(2022, 5, 31);
+    const initialDate = DateTime.fromISO(formData.birthDate);
     const dateTextStart = initialDate
       .plus({ months: monthid })
       .setLocale('ge')

@@ -1,20 +1,18 @@
 import { useContext } from 'react';
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
+import { DateTime } from 'luxon';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
 import { TextNormal } from '../../components/styled/StyledText';
 
-const NameInputPage = () => {
+const BirthDatePage = () => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const formik = useFormik({
     initialValues: {
-      vornamen_elternteil: {
-        0: 'Elternteil 1',
-        1: 'Elternteil 2'
-      }
+      birthDate: DateTime.now().toISODate()
     },
     onSubmit: (values) => {
       const data = { ...formData, ...values };
@@ -25,41 +23,26 @@ const NameInputPage = () => {
 
   return (
     <PageTemplate
-      pageTitle="Wie heißt ihr?"
-      description="Tragt hier eure Vornamen oder Pseudonyme ein.">
+      pageTitle="Wann wird euer Kind voraussichtlich geboren?"
+      description="Tragt hier den voraussichtlichen Geburtstermin eures Kindes ein.">
       <Container>
         <Form onSubmit={formik.handleSubmit}>
           <Row style={{ marginTop: '10px' }}>
-            <Form.Label>
-              <TextNormal>Elternteil 1</TextNormal>
-            </Form.Label>
+            {/* <Form.Label>
+              <TextNormal>Voraussichtliches Geburtsdatum</TextNormal>
+            </Form.Label> */}
 
             <Form.Control
-              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['0'] : ''}
-              type="text"
-              id="vornamen_elternteil['0']"
-              name="vornamen_elternteil['0']"
-              placeholder="Vorname"
+              defaultValue={formData.birthDate ? formData.birthDate : ''}
+              type="date"
+              id="birthDate"
+              name="birthDate"
               onChange={formik.handleChange}
               // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
               // value={formik.values.vornamen_elternteil['1']} // TODO: standardmäßig elternteil 1 /2
             />
           </Row>
-          <Row style={{ marginTop: '10px' }}>
-            <Form.Label>
-              <TextNormal>Elternteil 2</TextNormal>
-            </Form.Label>
-            <Form.Control
-              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
-              type="text"
-              id="vornamen_elternteil['1']"
-              name="vornamen_elternteil['1']"
-              placeholder="Vorname"
-              onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
-              // value={formik.values.vornamen_elternteil['2']} // TODO: formData vornamen (wenn vorher schon eingegeben und dann auf zurück geklickt wird)
-            />
-          </Row>
+
           <Row className="d-flex justify-content-between">
             <Col>
               <NavigationButton // TODO: submit?
@@ -78,4 +61,4 @@ const NameInputPage = () => {
   );
 };
 
-export default NameInputPage;
+export default BirthDatePage;

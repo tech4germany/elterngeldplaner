@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { cloneDeep } from 'lodash';
 import checkEG from '../utils/checkEG';
 import constants from '../utils/constants.json';
 import errorStrings from '../utils/errorStrings.json';
 import warningStrings from '../utils/warningStrings.json';
+import calculateEG from '../utils/calculateEG';
+import FormContext from '../context/FormContext';
+
+const BASIS = constants.varianten.basis.id;
+const PLUS = constants.varianten.plus.id;
+const BONUS = constants.varianten.bonus.id;
+const NONE = constants.varianten.none.id;
 
 const useEGcalc = (handleWarning) => {
-  const BASIS = constants.varianten.basis.id;
-  const PLUS = constants.varianten.plus.id;
-  const BONUS = constants.varianten.bonus.id;
-  const NONE = constants.varianten.none.id;
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   // TODO handle warning
   const initialPlan = []; // PATTERN: [{parentid: 1, months: [{monthid: 1, variant: xx, amount: {basis:xx, plus:xx, bonus:xx, none:xx}, selected: false},{...}}]
@@ -18,10 +22,15 @@ const useEGcalc = (handleWarning) => {
     // TODO: verschieben in constants?
     const initialPlanOneParent = { parentid: j, months: [] };
     for (let i = 0; i < constants.numberMonths; i += 1) {
-      const initialAmount =
-        j === 0
-          ? { basis: 1268, plus: 634, bonus: 634, none: 0 }
-          : { basis: 745, plus: 372, bonus: 372, none: 0 }; // TODO constants verwenden für IDs?
+      const initialAmount = {
+        [BASIS]: calculateEG(formData.income_parent[j], BASIS),
+        [PLUS]: calculateEG(formData.income_parent[j], PLUS),
+        [BONUS]: calculateEG(formData.income_parent[j], BONUS),
+        [NONE]: 0
+      };
+      // j === 0
+      //   ? { basis: 1268, plus: 634, bonus: 634, none: 0 }
+      //   : { basis: 745, plus: 372, bonus: 372, none: 0 }; // TODO constants verwenden für IDs?
 
       initialPlanOneParent.months.push({
         monthid: i,

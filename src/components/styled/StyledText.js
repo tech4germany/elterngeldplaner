@@ -8,7 +8,14 @@ export const LargeTitle = styled.h1`
 `;
 
 export const TextNormal = styled.div`
-  font-size: 11pt;
+  font-size: 10.5pt;
   text-align: left;
   line-height: 1.5;
+`;
+
+export const TextBold = styled.div`
+  font-size: 10.5pt;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: bold;
 `;

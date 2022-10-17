@@ -13,7 +13,7 @@ import { VscMenu } from 'react-icons/vsc';
 import { ListGroup } from 'react-bootstrap';
 import FormContext from '../../context/FormContext';
 
-const MenuDrawer = () => {
+const MenuDrawer = ({ pageNames }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
@@ -23,9 +23,7 @@ const MenuDrawer = () => {
     2: false,
     3: false,
     4: false
-  });
-
-  const pageNames = ['Start', 'Wie heißt ihr?', 'Planer'];
+  }); // TODO: dynamisch machen
 
   useEffect(() => {
     setVisitedPages({ ...visitedPages, [activeStepIndex]: true });
@@ -33,7 +31,7 @@ const MenuDrawer = () => {
 
   const getListGroupItems = () => {
     const listItems = [];
-    for (let i = 0; i <= 2; i += 1) {
+    for (let i = 0; i <= 4; i += 1) {
       listItems.push(
         <ListGroup.Item
           key={`listItem${i}`}
@@ -58,7 +56,7 @@ const MenuDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Menü</DrawerHeader>
+          <DrawerHeader>Navigation</DrawerHeader>
           <DrawerBody>{getListGroupItems()} </DrawerBody>
         </DrawerContent>
       </Drawer>
