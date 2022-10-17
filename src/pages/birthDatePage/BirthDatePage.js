@@ -12,7 +12,7 @@ const BirthDatePage = () => {
 
   const formik = useFormik({
     initialValues: {
-      birthDate: DateTime.now().toISODate()
+      birthDate: formData.birthDate || DateTime.now().toISODate()
     },
     onSubmit: (values) => {
       const data = { ...formData, ...values };
