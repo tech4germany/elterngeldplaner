@@ -131,8 +131,9 @@ const Planer = () => {
         </Row>
         <Row className="p-1 text-center">
           <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-            {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'}
+            {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'} */}
             {/* TODO: doppelt zu nameinputpage */}
+            {formData.vornamen_elternteil['1']}
           </Col>
           <Col className="align-self-center" xs="auto">
             <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
@@ -142,7 +143,8 @@ const Planer = () => {
             </div>
           </Col>
           <Col className="align-self-center" style={{ fontWeight: 600 }}>
-            {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'}
+            {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'} */}
+            {formData.vornamen_elternteil['2']}
           </Col>
         </Row>
       </Row>

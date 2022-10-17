@@ -35,7 +35,7 @@ const NameInputPage = () => {
             </Form.Label>
 
             <Form.Control
-              // defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
+              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
               type="text"
               id="vornamen_elternteil['1']"
               name="vornamen_elternteil['1']"
@@ -50,7 +50,7 @@ const NameInputPage = () => {
               <TextNormal>Elternteil 2</TextNormal>
             </Form.Label>
             <Form.Control
-              // defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
+              defaultValue={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
               type="text"
               id="vornamen_elternteil['2']"
               name="vornamen_elternteil['2']"
