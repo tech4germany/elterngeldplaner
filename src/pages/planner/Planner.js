@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from 'react';
+import { Fragment, useEffect, useState, useRef, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {
   Box,
@@ -26,11 +26,14 @@ import Kontingent from './Kontingent';
 import useSticky from '../../hooks/useSticky';
 // import { LargeTitle } from '../../components/styled/StyledText';
 import PageTemplate from '../../components/PageTemplate';
-import NextButton from '../../components/ui/NextButton';
+import FormContext from '../../context/FormContext';
+import NavigationButton from '../../components/ui/NavigationButton';
 
 const Planer = () => {
   const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+
   const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
     // TODO unnötig
@@ -102,110 +105,119 @@ const Planer = () => {
       pageTitle="Eure gemeinsame Planung"
       description="In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
     nach der Geburt verteilen.">
-      <Container>
-        <Row>
-          <div
-            style={{
-              textAlign: 'left',
-              fontWeight: 'bold',
-              fontSize: '11pt',
-              marginTop: '10px'
-            }}>
-            Euer Kontingent an Elterngeld:
-          </div>
-        </Row>
-
-        <Row
-          className="d-flex justify-content-center bg-white sticky-top p-0"
-          style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
-          <Row
-            style={{
-              // width: '100%',
-              borderBottom: '1px solid #C5C5C5',
-              paddingBottom: '15px',
-              paddingTop: '10px'
-            }}>
-            <Kontingent egPlan={egPlan} />
-          </Row>
-          <Row className="p-1 text-center">
-            <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-              {constants.parents[0].name}
-            </Col>
-            <Col className="align-self-center" xs="auto">
-              <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-                Lebens
-                <br />
-                monat
-              </div>
-            </Col>
-            <Col className="align-self-center" style={{ fontWeight: 600 }}>
-              {constants.parents[1].name}
-            </Col>
-          </Row>
-        </Row>
-        <Row style={{ height: '20px' }} />
-        {monthComponents}
-        <Button
-          className="d-flex-row justify-content-center"
-          width="100%"
-          height="35px"
-          fontSize="11pt"
-          fontWeight="semibold"
-          textDecoration="underline"
-          color="gray.600" // TODO
-          backgroundColor="transparent"
-          marginTop="5px"
-          onClick={() => {
-            if (shownNrMonths === constants.numberMonths) {
-              setShownNrMonths(constants.numberMonthsCollapsed);
-            } else {
-              setShownNrMonths(constants.numberMonths);
-            }
+      <Row>
+        <div
+          style={{
+            textAlign: 'left',
+            fontWeight: 'bold',
+            fontSize: '11pt',
+            marginTop: '10px'
           }}>
-          {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
-          <AiFillDownCircle
-            style={{
-              marginRight: '5px',
-              transform:
-                shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
-            }}
-          />
-          {shownNrMonths === constants.numberMonths
-            ? 'weniger Monate anzeigen'
-            : 'alle Monate anzeigen'}
-        </Button>
-        <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
-          <NextButton
-            buttonTitle="Zur Zusammmenfassung"
-            // onClick="window.location.href='https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom';"
-          />
-        </a>
+          Euer Kontingent an Elterngeld:
+        </div>
+      </Row>
 
-        <Row xs="auto" className="justify-content-center">
-          <Button
-            color="gray"
-            variant="ghost"
-            size="xs"
-            onClick={() => {
-              resetPlan();
-            }}>
-            <VscRefresh style={{ marginRight: '5px' }} />
-            Auswahl zurücksetzen
-          </Button>
+      <Row
+        className="d-flex justify-content-center bg-white sticky-top p-0"
+        style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+        <Row
+          style={{
+            // width: '100%',
+            borderBottom: '1px solid #C5C5C5',
+            paddingBottom: '15px',
+            paddingTop: '10px'
+          }}>
+          <Kontingent egPlan={egPlan} />
         </Row>
-        <Row>
-          <Box height="170px" />
+        <Row className="p-1 text-center">
+          <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
+            {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'}
+            {/* TODO: doppelt zu nameinputpage */}
+          </Col>
+          <Col className="align-self-center" xs="auto">
+            <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+              Lebens
+              <br />
+              monat
+            </div>
+          </Col>
+          <Col className="align-self-center" style={{ fontWeight: 600 }}>
+            {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'}
+          </Col>
         </Row>
-
-        <Overlay
-          monthSelected={monthSelected}
-          setMonthSelected={setMonthSelected}
-          egPlan={egPlan}
-          {...selectionOverlayProps}
-          updateMonth={updateMonth}
-          updateAdditionalIncome={updateAdditionalIncome}
+      </Row>
+      <Row style={{ height: '20px' }} />
+      {monthComponents}
+      <Button
+        className="d-flex-row justify-content-center"
+        width="100%"
+        height="35px"
+        fontSize="11pt"
+        fontWeight="semibold"
+        textDecoration="underline"
+        color="gray.600" // TODO
+        backgroundColor="transparent"
+        marginTop="5px"
+        onClick={() => {
+          if (shownNrMonths === constants.numberMonths) {
+            setShownNrMonths(constants.numberMonthsCollapsed);
+          } else {
+            setShownNrMonths(constants.numberMonths);
+          }
+        }}>
+        {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
+        <AiFillDownCircle
+          style={{
+            marginRight: '5px',
+            transform: shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
+          }}
         />
-      </Container>
+        {shownNrMonths === constants.numberMonths
+          ? 'weniger Monate anzeigen'
+          : 'alle Monate anzeigen'}
+      </Button>
+
+      <Row xs="auto" className="justify-content-center">
+        <Button
+          color="gray"
+          variant="ghost"
+          size="xs"
+          style={{ marginBottom: '15px', marginTop: '10px' }}
+          onClick={() => {
+            resetPlan();
+          }}>
+          <VscRefresh style={{ marginRight: '5px' }} />
+          Auswahl zurücksetzen
+        </Button>
+      </Row>
+
+      <Row className="d-flex justify-content-between">
+        <Col>
+          <NavigationButton
+            buttonTitle="Zurück"
+            nextPage={activeStepIndex - 1}
+            buttonVariant="outline"
+          />
+        </Col>
+        <Col>
+          <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
+            <NavigationButton buttonTitle="Zur Zusammmenfassung" />
+          </a>
+        </Col>
+      </Row>
+
+      <Row>
+        <Box height="220px" />
+      </Row>
+
+      <Overlay
+        monthSelected={monthSelected}
+        setMonthSelected={setMonthSelected}
+        egPlan={egPlan}
+        {...selectionOverlayProps}
+        updateMonth={updateMonth}
+        updateAdditionalIncome={updateAdditionalIncome}
+      />
     </PageTemplate>
   );
 };

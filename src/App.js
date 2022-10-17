@@ -1,17 +1,15 @@
 import './App.css';
 import { FormikContext } from 'formik';
-import { useState, createContext, useMemo, useEffect } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 import Planner from './pages/planner/Planner';
 import Header from './components/ui/Header';
 import NameInputPage from './pages/nameInputPage/NameInputPage';
 import StartPage from './pages/startPage/StartPage';
-
-export const FormContext = createContext();
+import FormContext from './context/FormContext';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(<StartPage />);
-  const [activeStepIndex, setActiveStepIndex] = useState(2);
-  const [formData, setFormData] = useState({});
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   useEffect(() => {
     switch (activeStepIndex) {
@@ -30,23 +28,13 @@ const App = () => {
     }
   }, [activeStepIndex]);
 
-  const formContextValue = useMemo(
-    () => ({
-      activeStepIndex,
-      setActiveStepIndex,
-      formData,
-      setFormData
-    }),
-    [activeStepIndex, setActiveStepIndex, formData, setFormData]
-  );
-
   return (
-    <FormContext.Provider value={formContextValue}>
+    <>
       <Header />
       {/* <Planer /> */}
       {/* <IntroductionPage /> */}
       {currentPage}
-    </FormContext.Provider>
+    </>
   );
 };
 

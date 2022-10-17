@@ -1,22 +1,24 @@
 import React, { useContext } from 'react';
 import PageTemplate from '../../components/PageTemplate';
 import { TextNormal } from '../../components/styled/StyledText';
-import NextButton from '../../components/ui/NextButton';
-// import { FormContext } from '../../App';
+import NavigationButton from '../../components/ui/NavigationButton';
+import FormContext from '../../context/FormContext';
 
-const IntroductionPage = () => {
-  // const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+const StartPage = () => {
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
   return (
     <PageTemplate pageTitle="Der Elterngeldplaner">
       <TextNormal>
-        Mit dem Elterngeldplaner könnt ihr unverbindlich euer Elterngeld berechnen und planen.
+        Mit dem Elterngeldplaner könnt ihr unverbindlich euer Elterngeld berechnen und planen, wann
+        ihr welche Elterngeld-Variante bekommen möchtet.
         <br />
-        Er hilft euch bei der Planung der Elterngeldmonate und der Kombination von Elterngeld,
-        ElterngeldPlus und dem Partnerschaftsbonus.
+        Ihr könnt ausprobieren, wie sich Basiselterngeld, ElterngeldPlus und Partnerschaftsbonus für
+        euch am sinnvollsten kombinieren lässt und wie hoch die Beträge voraussichtlich sein werden.
       </TextNormal>
-      <NextButton buttonTitle="Weiter" />
+
+      <NavigationButton buttonTitle="Weiter" nextPage={activeStepIndex + 1} />
     </PageTemplate>
   );
 };
 
-export default IntroductionPage;
+export default StartPage;

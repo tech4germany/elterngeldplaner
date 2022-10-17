@@ -14,7 +14,9 @@ const PageTemplate = ({ pageTitle, description, children }) => {
       <Row className="d-flex bg-white">
         <TextNormal> {description}</TextNormal>
       </Row>
-      <Row className="d-flex">{children}</Row>
+      <Row className="d-flex">
+        <Container>{children}</Container>
+      </Row>
     </Container>
   );
 };

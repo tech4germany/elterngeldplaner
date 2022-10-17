@@ -5,13 +5,16 @@ import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FormContextWrapper } from './context/FormContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    <FormContextWrapper>
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
+    </FormContextWrapper>
   </React.StrictMode>
 );
 
