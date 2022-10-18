@@ -14,7 +14,7 @@ const BonusDescription = () => {
               <TextBold> Zusammenfassung </TextBold>
             </Card.Title>
             <TextNormal>
-              <UnorderedList>
+              <UnorderedList spacing={2}>
                 <ListItem>
                   Ihr könnt jeweils bis zu 4 zusätzliche ElterngeldPlus-Monate bekommen, wenn beide
                   Elternteile während dieser Zeit in Teilzeit arbeiten.

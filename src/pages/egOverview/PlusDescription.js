@@ -14,7 +14,7 @@ const PlusDescription = () => {
               <TextBold> Zusammenfassung </TextBold>
             </Card.Title>
             <TextNormal>
-              <UnorderedList>
+              <UnorderedList spacing={2}>
                 <ListItem>
                   Ein Basiselterngeldmonat kann in zwei ElterngeldPlus-Monate umgewandelt werden
                 </ListItem>

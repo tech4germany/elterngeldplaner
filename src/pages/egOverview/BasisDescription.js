@@ -14,7 +14,7 @@ const BasisDescription = () => {
               <TextBold> Zusammenfassung </TextBold>
             </Card.Title>
             <TextNormal>
-              <UnorderedList>
+              <UnorderedList spacing={2}>
                 <ListItem>Euch stehen gemeinsam bis zu 14 Monate Basiselterngeld zu</ListItem>
                 <ListItem>
                   Ein Elternteil kann mind. 2 Monate und max. 12 Monate in Anspruch nehmen
