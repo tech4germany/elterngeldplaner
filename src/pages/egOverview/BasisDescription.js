@@ -2,12 +2,13 @@ import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
 import { UnorderedList, ListItem } from '@chakra-ui/react';
 import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
+import constants from '../../utils/constants.json';
 
 const BasisDescription = () => {
   return (
     <Container className="p-2">
       <Row style={{ marginBottom: '20px' }}>
-        <Card>
+        <Card style={{ backgroundColor: constants.varianten.basis.colorDeactivated }} border="0">
           <Card.Body>
             <Card.Title>
               <TextBold> Zusammenfassung </TextBold>
