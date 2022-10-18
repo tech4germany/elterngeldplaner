@@ -7,6 +7,29 @@ export const LargeTitle = styled.h1`
   margin-bottom: 10px;
 `;
 
+export const LargeTitleBasis = styled.span`
+  font-size: 14pt;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #38a169;
+`;
+
+export const LargeTitlePlus = styled.span`
+  font-size: 14pt;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #805ad5;
+`;
+export const LargeTitleBonus = styled.span`
+  font-size: 14pt;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #d53f8c;
+`;
+
 export const TextNormal = styled.div`
   font-size: 10.5pt;
   text-align: left;
@@ -20,9 +43,33 @@ export const TextExtraSmall = styled.div`
   color: gray;
 `;
 
-export const TextBold = styled.div`
+export const TextBold = styled.span`
   font-size: 10.5pt;
   text-align: left;
   line-height: 1.5;
   font-weight: bold;
+`;
+
+export const TextBasis = styled.span`
+  font-size: 10.5pt;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: bold;
+  color: #38a169;
+`;
+
+export const TextPlus = styled.span`
+  font-size: 10.5pt;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: bold;
+  color: #805ad5;
+`;
+
+export const TextBonus = styled.span`
+  font-size: 10.5pt;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: bold;
+  color: #d53f8c;
 `;

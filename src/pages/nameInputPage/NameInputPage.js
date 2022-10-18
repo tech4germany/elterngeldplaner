@@ -48,7 +48,7 @@ const NameInputPage = () => {
           </Row>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextNormal>Elternteil 2</TextNormal>
+              <TextNormal>Name von Elternteil 2</TextNormal>
             </Form.Label>
             <Form.Control
               // value={formik.values.vornamen_elternteil['1']}
