@@ -52,11 +52,11 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
     <Grid
       mt="20px"
       mb="10px"
-      templateRows="repeat(2, 1fr)"
+      // templateRows="repeat(2, 1fr)"
       templateColumns="repeat(2, 1fr)"
       alignItems="center"
       rowGap={1}>
-      <GridItem colSpan={2} rowSpan={1}>
+      <GridItem colSpan={2}>
         <Flex>
           <FormLabel mb="0" fontSize="10pt" lineHeight="1.15">
             Ich habe in diesem Monat ein Einkommen
@@ -73,7 +73,7 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
       {egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked ? (
         // <Grid templateRows="repeat(1, 1fr)" templateCols="repeat(2, 1fr)" rowGap={1}>
         <>
-          <GridItem rowSpan={1} colSpan={2}>
+          <GridItem colSpan={2}>
             <Form.Control
               className="d-flex"
               size="sm"
@@ -83,7 +83,7 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
               onChange={(e) => handleIncomeInputChange(e)}
             />
           </GridItem>
-          <GridItem rowSpan={1} colSpan={2} textAlign="left" lineHeight="1.15">
+          <GridItem colSpan={2} textAlign="left" lineHeight="1.15">
             <Form.Text>
               Trage dein voraussichtliches Nettoeinkommen im ausgewählten Lebensmonat ein.
             </Form.Text>
