@@ -18,6 +18,7 @@ const App = () => {
     'Wie heißt ihr?',
     'Geburtsdatum eures Kindes',
     'Euer Einkommen',
+    'Berechnetes Elterngeld',
     'Planer'
   ];
 

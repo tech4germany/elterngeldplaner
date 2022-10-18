@@ -31,7 +31,7 @@ const EGCard = ({ variant }) => {
         </Row>
         <Row>
           <Col className="p-0">
-            <LargeTitle>{calculateEG(formData.income_parent[parentid], variant)} €</LargeTitle>
+            <LargeTitle>{calculateEG(formData.income_parent[parentid], variant, 0)} €</LargeTitle>
           </Col>
           <Col className="p-0 align-items-center">
             <TextExtraSmall>monatl.</TextExtraSmall>

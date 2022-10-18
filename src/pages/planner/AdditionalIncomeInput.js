@@ -3,17 +3,20 @@ import {
   //   FormControl,
   FormLabel,
   Switch,
+  Flex,
+  Box,
   Editable,
   EditablePreview,
   EditableInput,
   Grid,
+  Spacer,
   GridItem
 } from '@chakra-ui/react';
 import { Form } from 'react-bootstrap';
 
-const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
-  const [incomeChecked, setIncomeChecked] = useState();
-  const [additionalIncome, setAdditionalIncome] = useState();
+const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
+  const [incomeChecked, setIncomeChecked] = useState(false);
+  const [additionalIncome, setAdditionalIncome] = useState(0);
 
   useEffect(() => {
     setIncomeChecked(egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked);
@@ -31,8 +34,17 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
     updateAdditionalIncome(
       monthSelected.parentid,
       monthSelected.monthid,
-      undefined,
+      additionalIncome, // TODO:
       !currentIncomeChecked
+    );
+  };
+
+  const handleIncomeInputChange = (e) => {
+    updateAdditionalIncome(
+      monthSelected.parentid,
+      monthSelected.monthid,
+      parseInt(e.currentTarget.value === '' ? 0 : e.currentTarget.value, 10),
+      incomeChecked // TODO:
     );
   };
 
@@ -40,53 +52,48 @@ const IncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
     <Grid
       mt="20px"
       mb="10px"
-      templateRows="repeat(1, 1fr)"
-      templateColumns="repeat(2, auto)"
+      templateRows="repeat(2, 1fr)"
+      templateColumns="repeat(2, 1fr)"
       alignItems="center"
-      rowGap={2}>
-      <GridItem rowSpan={1} colSpan={1}>
-        <FormLabel mb="0" fontSize="10pt" lineHeight="1.15">
-          Ich habe in diesem Monat ein Einkommen
-        </FormLabel>
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <Switch
-          onChange={() => {
-            switchIncomeChecked();
-          }}
-          isChecked={incomeChecked}
-        />
+      rowGap={1}>
+      <GridItem colSpan={2} rowSpan={1}>
+        <Flex>
+          <FormLabel mb="0" fontSize="10pt" lineHeight="1.15">
+            Ich habe in diesem Monat ein Einkommen
+          </FormLabel>
+          <Spacer />
+          <Switch
+            onChange={() => {
+              switchIncomeChecked();
+            }}
+            isChecked={incomeChecked}
+          />
+        </Flex>
       </GridItem>
       {egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked ? (
-        <Grid templateRows="repeat(1, 1fr)" templateCols="repeat(2, 1fr)" rowGap={1}>
+        // <Grid templateRows="repeat(1, 1fr)" templateCols="repeat(2, 1fr)" rowGap={1}>
+        <>
           <GridItem rowSpan={1} colSpan={2}>
             <Form.Control
               className="d-flex"
               size="sm"
               type="number"
-              placeholder="Bruttoeinkommen"
-              value={additionalIncome}
-              onChange={(e) => {
-                updateAdditionalIncome(
-                  monthSelected.parentid,
-                  monthSelected.monthid,
-                  e.currentTarget.value,
-                  undefined
-                );
-              }}
+              placeholder="Nettoeinkommen"
+              value={additionalIncome === 0 ? '' : additionalIncome}
+              onChange={(e) => handleIncomeInputChange(e)}
             />
           </GridItem>
           <GridItem rowSpan={1} colSpan={2} textAlign="left" lineHeight="1.15">
             <Form.Text>
-              Trage dein voraussichtliches Bruttoeinkommen im ausgewählten Lebensmonat ein.
+              Trage dein voraussichtliches Nettoeinkommen im ausgewählten Lebensmonat ein.
             </Form.Text>
           </GridItem>
-        </Grid>
+        </>
       ) : (
-        <div />
+        []
       )}
     </Grid>
   );
 };
 
-export default IncomeInput;
+export default AdditionalIncomeInput;

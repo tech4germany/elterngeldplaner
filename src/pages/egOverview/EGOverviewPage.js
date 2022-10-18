@@ -13,11 +13,12 @@ const EGOverviewPage = () => {
 
   return (
     <PageTemplate
-      pageTitle="Das könnt ihr an Elterngeld bekommen"
+      // pageTitle="Das könnt ihr an Elterngeld bekommen"
+      pageTitle="Euer voraussichtliches Elterngeld"
       description={
         <div>
           Diese Übersicht zeigt euch wieviel Elterngeld ihr pro Monat bekommen könnt. Das Elterngeld
-          gibt es in drei Varianten, welche ihr individuell miteinander kombinieren.
+          gibt es in drei Varianten, welche ihr individuell miteinander kombinieren könnt.
           {/* Diese Übersicht zeigt euch wieviel Elterngeld ihr basierend auf euren vorherigen Eingaben
           erhalten könnt. In jedem Monat könnt ihr individuell entscheiden, welche der drei
           untenstehenden Elterngeld-Varianten ihr nutzen möchtet. */}

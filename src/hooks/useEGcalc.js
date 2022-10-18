@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { cloneDeep } from 'lodash';
 import checkEG from '../utils/checkEG';
 import constants from '../utils/constants.json';
@@ -12,7 +12,7 @@ const PLUS = constants.varianten.plus.id;
 const BONUS = constants.varianten.bonus.id;
 const NONE = constants.varianten.none.id;
 
-const useEGcalc = (handleWarning) => {
+const useEGcalc = () => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   // TODO handle warning
@@ -23,9 +23,9 @@ const useEGcalc = (handleWarning) => {
     const initialPlanOneParent = { parentid: j, months: [] };
     for (let i = 0; i < constants.numberMonths; i += 1) {
       const initialAmount = {
-        [BASIS]: calculateEG(formData.income_parent[j], BASIS),
-        [PLUS]: calculateEG(formData.income_parent[j], PLUS),
-        [BONUS]: calculateEG(formData.income_parent[j], BONUS),
+        [BASIS]: calculateEG(formData.income_parent[j], BASIS, 0),
+        [PLUS]: calculateEG(formData.income_parent[j], PLUS, 0),
+        [BONUS]: calculateEG(formData.income_parent[j], BONUS, 0),
         [NONE]: 0
       };
       // j === 0
@@ -36,7 +36,7 @@ const useEGcalc = (handleWarning) => {
         monthid: i,
         variant: constants.varianten.none.id, // default variant is "none"
         amount: initialAmount, // current amount,
-        additionalIncome: undefined,
+        additionalIncome: 0,
         incomeChecked: false
       });
     }
@@ -92,7 +92,7 @@ const useEGcalc = (handleWarning) => {
 
   const updateEgPlan = (newEgPlan, parentid, monthid, variant) => {
     try {
-      checkEG(newEgPlan, parentid, monthid, variant); // TODO : Neuer Plan davor, diesen dann checken
+      checkEG(newEgPlan, parentid, monthid, variant);
       setEgPlan(newEgPlan);
     } catch (e) {
       const updatedEgPlan = handleErrors(newEgPlan, parentid, monthid, variant, e);
@@ -101,15 +101,70 @@ const useEGcalc = (handleWarning) => {
   };
 
   const updateAdditionalIncome = (parentid, monthid, additionalIncome, incomeChecked) => {
-    const newEgPlan = cloneDeep(egPlan);
-    if (additionalIncome !== undefined) {
-      newEgPlan[parentid].months[monthid].additionalIncome = additionalIncome;
-    }
+    const newEgPlan = [...egPlan];
+
     if (incomeChecked !== undefined) {
       newEgPlan[parentid].months[monthid].incomeChecked = incomeChecked;
     }
 
+    if (additionalIncome !== undefined) {
+      newEgPlan[parentid].months[monthid].additionalIncome = additionalIncome;
+
+      const newAmount = {
+        [BASIS]: calculateEG(
+          formData.income_parent[parentid],
+          BASIS,
+          incomeChecked,
+          additionalIncome
+        ),
+        [PLUS]: calculateEG(
+          formData.income_parent[parentid],
+          PLUS,
+          incomeChecked,
+          additionalIncome
+        ),
+        [BONUS]: calculateEG(
+          formData.income_parent[parentid],
+          BONUS,
+          incomeChecked,
+          additionalIncome
+        ),
+        [NONE]: 0
+      };
+      newEgPlan[parentid].months[monthid].amount = newAmount;
+    }
+
+    // amount === undefined ? currentMonth.amount : { ...currentMonth.amount, amount }; // TODO variant
+
     setEgPlan(newEgPlan);
+
+    // const newEgPlan = cloneDeep(egPlan);
+    // if (additionalIncome !== undefined) {
+    //   newEgPlan[parentid].months[monthid].additionalIncome = additionalIncome;
+
+    //   newEgPlan[parentid].months[monthid].amount[BASIS] = calculateEG(
+    //     formData.income_parent[parentid],
+    //     BASIS,
+    //     additionalIncome
+    //   );
+
+    //   newEgPlan[parentid].months[monthid].amount[PLUS] = calculateEG(
+    //     formData.income_parent[parentid],
+    //     PLUS,
+    //     additionalIncome
+    //   );
+
+    //   newEgPlan[parentid].months[monthid].amount[BONUS] = calculateEG(
+    //     formData.income_parent[parentid],
+    //     BONUS,
+    //     additionalIncome
+    //   );
+    // }
+    // if (incomeChecked !== undefined) {
+    //   newEgPlan[parentid].months[monthid].incomeChecked = incomeChecked;
+    // }
+
+    // setEgPlan(newEgPlan);
   };
 
   const updateMonth = (parentid, monthid, variant) => {
@@ -124,18 +179,27 @@ const useEGcalc = (handleWarning) => {
     updateEgPlan(newEgPlan, parentid, monthid, variant);
   };
 
-  //   const updateMonthAmount = (parentid, monthid, amount) => {
-  //     const currentMonth = egPlan[parentid].months[monthid];
-  //     const newEgPlan = [...egPlan];
-  //     const newAmount =
-  //       amount === undefined ? currentMonth.amount : { ...currentMonth.amount, amount }; // TODO variant
-  //     newEgPlan[parentid].months[monthid] = {
-  //       monthid,
-  //       variant: currentMonth.variant,
-  //       amount: newAmount
-  //     };
-  //     setEgPlan(newEgPlan);
+  // const updateMonthAmounts = (parentid, monthid, incomeChecked, additionalIncome) => {
+  //   const newEgPlan = [...egPlan];
+  //   const newAmount = {
+  //     [BASIS]: calculateEG(
+  //       formData.income_parent[parentid],
+  //       BASIS,
+  //       incomeChecked,
+  //       additionalIncome
+  //     ),
+  //     [PLUS]: calculateEG(formData.income_parent[parentid], PLUS, incomeChecked, additionalIncome),
+  //     [BONUS]: calculateEG(
+  //       formData.income_parent[parentid],
+  //       BONUS,
+  //       incomeChecked,
+  //       additionalIncome
+  //     ),
+  //     [NONE]: 0
   //   };
+  //   newEgPlan[parentid].months[monthid].amount = newAmount;
+  //   setEgPlan(newEgPlan);
+  // };
 
   const resetPlan = () => {
     setEgPlan(initialPlan);

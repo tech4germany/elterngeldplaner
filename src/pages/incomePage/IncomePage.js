@@ -12,8 +12,8 @@ const IncomePage = () => {
   const formik = useFormik({
     initialValues: {
       income_parent: {
-        0: formData.income_parent ? formData.income_parent['0'] : '0',
-        1: formData.income_parent ? formData.income_parent['1'] : '0'
+        0: formData.income_parent ? formData.income_parent['0'] : 0,
+        1: formData.income_parent ? formData.income_parent['1'] : 0
       }
     },
     onSubmit: (values) => {

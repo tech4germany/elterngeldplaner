@@ -1,23 +1,8 @@
 import { Fragment, useEffect, useState, useRef, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import {
-  Box,
-  Grid,
-  GridItem,
-  Icon,
-  IconButton,
-  Button,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerContent,
-  DrawerBody
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Button } from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
-import logo from '../../images/fpo-logo.jpg';
 import Month from './Month';
 import Overlay from './Overlay';
 import constants from '../../utils/constants.json';
@@ -69,6 +54,7 @@ const Planer = () => {
               monthid={egPlan[0].months[i].monthid}
               variant={egPlan[0].months[i].variant}
               amount={egPlan[0].months[i].amount[egPlan[0].months[i].variant]}
+              additionalIncomeSelected={egPlan[0].months[i].incomeChecked}
               updateMonthSelection={updateMonthSelection}
               parentId={0}
               selected={
@@ -85,6 +71,7 @@ const Planer = () => {
               monthid={egPlan[1].months[i].monthid}
               variant={egPlan[1].months[i].variant}
               amount={egPlan[1].months[i].amount[egPlan[1].months[i].variant]}
+              additionalIncomeSelected={egPlan[1].months[i].incomeChecked}
               updateMonthSelection={updateMonthSelection}
               parentId={1}
               selected={
@@ -208,7 +195,7 @@ const Planer = () => {
       </Row>
 
       <Row>
-        <Box height="220px" />
+        <Box height="240px" />
       </Row>
 
       <Overlay

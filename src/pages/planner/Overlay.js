@@ -11,7 +11,7 @@ import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/r
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../../utils/constants.json';
-import IncomeInput from './IncomeInput';
+import AdditionalIncomeInput from './AdditionalIncomeInput';
 import FormContext from '../../context/FormContext';
 
 const Overlay = ({
@@ -28,7 +28,6 @@ const Overlay = ({
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const getDateText = (monthid) => {
-    console.log(formData.birthDate);
     // const initialDate = DateTime.now();
     const initialDate = DateTime.fromISO(formData.birthDate);
     const dateTextStart = initialDate
@@ -115,7 +114,7 @@ const Overlay = ({
         {show ? (
           <>
             <Toast.Header closeButton>
-              <strong className="me-auto">{constants.parents[monthSelected.parentid].name}</strong>
+              <strong className="me-auto">{formData.names_parent[monthSelected.parentid]}</strong>
             </Toast.Header>
             <Toast.Body>
               <Row className="pb-2">
@@ -130,7 +129,7 @@ const Overlay = ({
                 <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
               </Row>
               <Row>
-                <IncomeInput
+                <AdditionalIncomeInput
                   monthSelected={monthSelected}
                   egPlan={egPlan}
                   updateAdditionalIncome={updateAdditionalIncome}
