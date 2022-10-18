@@ -25,7 +25,9 @@ const PlusDescription = () => {
                   Die Höhe von ElterngeldPlus entspricht der Hälfte eines Basiselterngeldmonats ohne
                   zusätzlichem Einkommen
                 </ListItem>
-                <ListItem>Ihr könnt, müsst aber nicht, in Teilzeit arbeiten.</ListItem>
+                <ListItem>
+                  Ihr könnt, müsst aber nicht, in Teilzeit arbeiten (max. 32 Std.).
+                </ListItem>
                 <ListItem>
                   <TextBold>
                     Nach dem 14. Lebensmonat könnt ihr Elterngeld nur noch ohne gemeinsame

@@ -15,7 +15,7 @@ import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
 
 const Planer = () => {
-  const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
+  const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan, getSumParent }] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
@@ -164,7 +164,10 @@ const Planer = () => {
           ? 'weniger Monate anzeigen'
           : 'alle Monate anzeigen'}
       </Button>
-
+      {/* <Row>
+        <Col>{getSumParent(0)} €</Col>
+        <Col>{getSumParent(1)} €</Col>
+      </Row> */}
       <Row xs="auto" className="justify-content-center">
         <Button
           color="gray"
@@ -188,9 +191,14 @@ const Planer = () => {
           />
         </Col>
         <Col>
-          <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
+          {/* <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
             <NavigationButton buttonTitle="Zur Zusammmenfassung" />
-          </a>
+          </a> */}
+          <NavigationButton
+            buttonTitle="Zur Zusammmenfassung"
+            nextPage={activeStepIndex + 1}
+            buttonVariant="solid"
+          />
         </Col>
       </Row>
 

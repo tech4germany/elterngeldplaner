@@ -28,6 +28,8 @@ const calculateEG = (income, variant, incomeChecked, additionalIncome) => {
       } else if (elterngeld < 150) {
         elterngeld = 150;
       }
+
+      // if ()
       // if (elterngeld + currentAdditionalIncome > income) {
       //   elterngeld = Math.max(income - currentAdditionalIncome, 150);
       // }

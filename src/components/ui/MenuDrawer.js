@@ -23,7 +23,8 @@ const MenuDrawer = ({ pageNames }) => {
     2: false,
     3: false,
     4: false,
-    5: false
+    5: false,
+    6: false
   }); // TODO: dynamisch machen
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const MenuDrawer = ({ pageNames }) => {
 
   const getListGroupItems = () => {
     const listItems = [];
-    for (let i = 0; i <= 5; i += 1) {
+    for (let i = 0; i <= 6; i += 1) {
       listItems.push(
         <ListGroup.Item
           key={`listItem${i}`}

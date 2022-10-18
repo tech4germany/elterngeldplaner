@@ -9,6 +9,7 @@ import FormContext from './context/FormContext';
 import BirthDatePage from './pages/birthDatePage/BirthDatePage';
 import IncomePage from './pages/incomePage/IncomePage';
 import EGOverviewPage from './pages/egOverview/EGOverviewPage';
+import FinalSummeryPage from './pages/finalSummeryPage/FinalSummeryPage';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(<StartPage />);
@@ -19,7 +20,8 @@ const App = () => {
     'Geburtsdatum eures Kindes',
     'Euer Einkommen',
     'Berechnetes Elterngeld',
-    'Planer'
+    'Planer',
+    'Zusammenfassung eurer Planung'
   ];
 
   useEffect(() => {
@@ -41,6 +43,9 @@ const App = () => {
         break;
       case 5:
         setCurrentPage(<Planner />);
+        break;
+      case 6:
+        setCurrentPage(<FinalSummeryPage />);
         break;
       default:
         setCurrentPage(<StartPage />);

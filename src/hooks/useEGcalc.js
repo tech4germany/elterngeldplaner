@@ -205,7 +205,15 @@ const useEGcalc = () => {
     setEgPlan(initialPlan);
   };
 
-  return [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }];
+  const getSumParent = (parentid) => {
+    let sum = 0;
+    for (let i = 0; i < egPlan[parentid].months.length; i += 1) {
+      sum += egPlan[parentid].months[i].amount[egPlan[parentid].months[i].variant];
+    }
+    return sum;
+  };
+
+  return [egPlan, { updateMonth, updateAdditionalIncome, resetPlan, getSumParent }];
 };
 
 export default useEGcalc;

@@ -26,7 +26,7 @@
         "plus": {
             "id": "plus",
             "fullname": "ElterngeldPlus",
-            "abbrv": "EG+",
+            "abbrv": "E+",
             "abbrvOverlay": "Plus",
             "buttonVariantDefault": "warning",
             "buttonVariantSelected": "border border-warning",
