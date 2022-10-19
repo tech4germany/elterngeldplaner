@@ -29,7 +29,7 @@ const StartPage = () => {
         </p>
       </TextNormal>
 
-      <NavigationButton buttonTitle="Start" nextPage={activeStepIndex + 1} />
+      <NavigationButton buttonTitle="Start" type="submit" nextPage={activeStepIndex + 1} />
     </PageTemplate>
   );
 };
