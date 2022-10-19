@@ -7,8 +7,9 @@
             "abbrvOverlay": "Ohne",
             "buttonVariantDefault": "secondary",
             "buttonVariantSelected": "border border-secondary",
-            "colorActivated": "#718096",
+            "colorActivated": "#EDF2F7",
             "colorDeactivated": "#EDF2F7",
+            "textColor": "black",
             "colorScheme": "gray"
         },
         "basis": {
@@ -19,20 +20,22 @@
             "buttonVariantDefault": "success",
             "buttonVariantSelected": "border border-success",
             "colorScheme": "green",
-            "colorActivated": "#38A169",
-            "colorDeactivated": "#C6F6D5",
+            "colorActivated": "#4465DB",
+            "colorDeactivated": "#DAE0F8",
+            "textColor": "white",
             "maxMonths": 14
         },
         "plus": {
             "id": "plus",
             "fullname": "ElterngeldPlus",
-            "abbrv": "EG+",
+            "abbrv": "E+",
             "abbrvOverlay": "Plus",
             "buttonVariantDefault": "warning",
             "buttonVariantSelected": "border border-warning",
             "colorScheme": "purple",
-            "colorActivated": "#805AD5",
-            "colorDeactivated": "#E9D8FD",
+            "colorActivated": "#3C7D60",
+            "colorDeactivated": "#E2EBE7",
+            "textColor": "white",
             "maxMonths": 28
         },
         "bonus": {
@@ -43,8 +46,9 @@
             "buttonVariantDefault": "danger",
             "buttonVariantSelected": "border border-danger",
             "colorScheme": "pink",
-            "colorActivated": "#D53F8C",
-            "colorDeactivated": "#FED7E2",
+            "colorActivated": "#9A44CE",
+            "colorDeactivated": "#F0E3F8",
+            "textColor": "white",
             "maxMonths": 8
         }
     },
@@ -54,6 +58,7 @@
         {"name": "Pete"}
     ],
 
+    "navigationButtonColor": "#2026AF",
    
     "numberMonths": 32,
     "numberMonthsCollapsed": 18

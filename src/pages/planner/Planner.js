@@ -1,8 +1,11 @@
 import { Fragment, useEffect, useState, useRef, useContext } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Box, Grid, GridItem, Button } from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
+import { IoIosArrowDown } from 'react-icons/io';
+import { useFormik } from 'formik';
+import { RiArrowGoBackLine } from 'react-icons/ri';
 import Month from './Month';
 import Overlay from './Overlay';
 import constants from '../../utils/constants.json';
@@ -13,9 +16,21 @@ import useSticky from '../../hooks/useSticky';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
+import {
+  TextBold,
+  TextNormal,
+  LargeTextBold,
+  TextExtraSmall,
+  TextSmall,
+  TextSmallGray,
+  TextNormalSpan
+} from '../../components/styled/StyledText';
 
 const Planer = () => {
-  const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan }] = useEGcalc();
+  const [
+    egPlan,
+    { updateMonth, updateAdditionalIncome, resetPlan, getSumParent, getTotalMonthsParent }
+  ] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
@@ -43,6 +58,17 @@ const Planer = () => {
     setMonthSelected({ parentid, monthid });
   };
 
+  const formik = useFormik({
+    initialValues: {
+      egPlan
+    },
+    onSubmit: () => {
+      const data = { ...formData, egPlan };
+      setFormData(data);
+      // setActiveStepIndex(activeStepIndex + 1);
+    }
+  });
+
   useEffect(() => {
     const newMonthComponents = [];
     for (let i = 0; i < shownNrMonths; i += 1) {
@@ -64,7 +90,7 @@ const Planer = () => {
             />
           </GridItem>
           <GridItem colSpan={2} className="d-flex align-items-center justify-content-center">
-            {i + 1}
+            <TextSmallGray>{i + 1}</TextSmallGray>
           </GridItem>
           <GridItem colSpan={10}>
             <Month
@@ -88,125 +114,203 @@ const Planer = () => {
   }, [egPlan, monthSelected, shownNrMonths]);
 
   return (
-    <PageTemplate
-      pageTitle="Eure gemeinsame Planung"
-      description="In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
-    nach der Geburt verteilen.">
-      <Row>
-        <div
-          style={{
-            textAlign: 'left',
-            fontWeight: 'bold',
-            fontSize: '11pt',
-            marginTop: '10px'
-          }}>
-          Euer Kontingent an Elterngeld:
-        </div>
-      </Row>
-
-      <Row
-        className="d-flex justify-content-center bg-white sticky-top p-0"
-        style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+    <Form onSubmit={formik.handleSubmit}>
+      <PageTemplate
+        pageTitle="Eure gemeinsame Planung"
+        description={
+          <>
+            <TextNormal>
+              In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die
+              Lebensmonate nach der Geburt verteilen.
+            </TextNormal>
+            <TextNormal style={{ marginTop: '10px' }}>
+              Die drei Varianten{' '}
+              <TextNormalSpan
+                color={constants.varianten.basis.colorActivated}
+                style={{ fontWeight: 'bold' }}>
+                Basis
+              </TextNormalSpan>
+              elterngeld, Elterngeld
+              <TextNormalSpan
+                color={constants.varianten.plus.colorActivated}
+                style={{ fontWeight: 'bold' }}>
+                Plus
+              </TextNormalSpan>{' '}
+              und Partnerschafts
+              <TextNormalSpan
+                color={constants.varianten.bonus.colorActivated}
+                style={{ fontWeight: 'bold' }}>
+                bonus
+              </TextNormalSpan>{' '}
+              könnt ihr dabei miteinander kombinieren.
+            </TextNormal>
+          </>
+        }>
+        <Row style={{ marginTop: '18px' }}>
+          <LargeTextBold>Euer Kontingent an Elterngeld:</LargeTextBold>
+        </Row>
         <Row
-          style={{
-            // width: '100%',
-            borderBottom: '1px solid #C5C5C5',
-            paddingBottom: '15px',
-            paddingTop: '10px'
-          }}>
-          <Kontingent egPlan={egPlan} />
+          className="d-flex justify-content-center bg-white sticky-top p-0"
+          style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
+          <Row
+            style={{
+              // width: '100%',
+              borderBottom: '1px solid #C5C5C5',
+              paddingBottom: '20px',
+              paddingTop: '10px'
+            }}>
+            <Kontingent egPlan={egPlan} />
+          </Row>
+          <Row className="p-1 text-center">
+            <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
+              {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'} */}
+              <TextBold>{formData.names_parent['0']}</TextBold>
+            </Col>
+            <Col className="align-self-center" xs="auto">
+              <TextSmallGray style={{ lineHeight: '1.0', fontWeight: 'normal' }}>
+                Lebens-
+                <br />
+                monat
+              </TextSmallGray>
+              {/* <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
+                Lebens
+                <br />
+                monat
+              </div> */}
+            </Col>
+            <Col className="align-self-center" style={{ fontWeight: 600 }}>
+              {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'} */}
+              <TextBold>{formData.names_parent['1']}</TextBold>
+            </Col>
+          </Row>
         </Row>
-        <Row className="p-1 text-center">
-          <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-            {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'} */}
-            {formData.names_parent['0']}
-          </Col>
-          <Col className="align-self-center" xs="auto">
-            <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-              Lebens
-              <br />
-              monat
-            </div>
-          </Col>
-          <Col className="align-self-center" style={{ fontWeight: 600 }}>
-            {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'} */}
-            {formData.names_parent['1']}
-          </Col>
-        </Row>
-      </Row>
-      <Row style={{ height: '20px' }} />
-      {monthComponents}
-      <Button
-        className="d-flex-row justify-content-center"
-        width="100%"
-        height="35px"
-        fontSize="11pt"
-        fontWeight="semibold"
-        textDecoration="underline"
-        color="gray.600" // TODO
-        backgroundColor="transparent"
-        marginTop="5px"
-        onClick={() => {
-          if (shownNrMonths === constants.numberMonths) {
-            setShownNrMonths(constants.numberMonthsCollapsed);
-          } else {
-            setShownNrMonths(constants.numberMonths);
-          }
-        }}>
-        {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
-        <AiFillDownCircle
-          style={{
-            marginRight: '5px',
-            transform: shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
-          }}
-        />
-        {shownNrMonths === constants.numberMonths
-          ? 'weniger Monate anzeigen'
-          : 'alle Monate anzeigen'}
-      </Button>
-
-      <Row xs="auto" className="justify-content-center">
+        <Row style={{ height: '20px' }} />
+        {monthComponents}
         <Button
-          color="gray"
-          variant="ghost"
-          size="xs"
-          style={{ marginBottom: '15px', marginTop: '10px' }}
+          className="d-flex-row justify-content-center"
+          width="100%"
+          height="40px"
+          _active={{
+            bg: 'transparent'
+          }}
+          backgroundColor="transparent"
           onClick={() => {
-            resetPlan();
+            if (shownNrMonths === constants.numberMonths) {
+              setShownNrMonths(constants.numberMonthsCollapsed);
+            } else {
+              setShownNrMonths(constants.numberMonths);
+            }
           }}>
-          <VscRefresh style={{ marginRight: '5px' }} />
-          Auswahl zurücksetzen
-        </Button>
-      </Row>
-
-      <Row className="d-flex justify-content-between">
-        <Col>
-          <NavigationButton
-            buttonTitle="Zurück"
-            nextPage={activeStepIndex - 1}
-            buttonVariant="outline"
+          {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
+          <IoIosArrowDown
+            style={{
+              width: '20px',
+              height: 'auto',
+              marginRight: '5px',
+              color: constants.navigationButtonColor,
+              transform:
+                shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
           />
-        </Col>
-        <Col>
-          <a href="https://www.figma.com/proto/QUIZHKR0ymzKn9jSNqDYMT/EGR_MoodTracker_221004?page-id=860%3A65726&node-id=1048%3A70780&viewport=526%2C467%2C0.38&scaling=min-zoom">
-            <NavigationButton buttonTitle="Zur Zusammmenfassung" />
-          </a>
-        </Col>
-      </Row>
+          <TextBold style={{ color: constants.navigationButtonColor }}>
+            {shownNrMonths === constants.numberMonths
+              ? 'weniger Monate anzeigen'
+              : 'alle Monate anzeigen'}
+          </TextBold>
+        </Button>
+        <Row style={{ marginLeft: '-20px', marginRight: '-20px', marginTop: '10px' }}>
+          <Box
+            bg={constants.varianten.none.colorDeactivated}
+            w="100%"
+            style={{
+              paddingTop: '10px',
+              paddingBottom: '10px',
+              paddingLeft: '20px',
+              paddingRight: '20px'
+            }}>
+            <Container>
+              <Row style={{ paddingBottom: '10px' }}>
+                <LargeTextBold style={{ padding: 0 }}>Gesamtsumme</LargeTextBold>
+              </Row>
+              <Row className="d-flex justify-content-around">
+                <Col>
+                  <Row>
+                    <TextSmall style={{ padding: 0, fontWeight: 'bold' }}>
+                      {formData.names_parent[0]}
+                    </TextSmall>
+                  </Row>
+                  <Row className="text-left align-items-center">
+                    <Col xs={5} style={{ padding: 0 }}>
+                      <TextBold>{getSumParent(0)} €</TextBold>
+                    </Col>
+                    <Col xs={7} style={{ padding: 0 }}>
+                      <TextSmallGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
+                        {getTotalMonthsParent(0)} Monate
+                      </TextSmallGray>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row>
+                    <TextSmall style={{ padding: 0, fontWeight: 'bold' }}>
+                      {formData.names_parent[1]}
+                    </TextSmall>
+                  </Row>
+                  <Row className="text-left align-items-center">
+                    <Col xs={5} style={{ padding: 0 }}>
+                      <TextBold>{getSumParent(1)} €</TextBold>
+                    </Col>
+                    <Col xs={7} style={{ padding: 0 }}>
+                      <TextSmallGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
+                        {getTotalMonthsParent(1)} Monate
+                      </TextSmallGray>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </Box>
+        </Row>
+        <Row xs="auto" className="justify-content-center">
+          <Button
+            // color="gray"
+            variant="ghost"
+            size="xs"
+            color={constants.navigationButtonColor}
+            style={{ marginBottom: '15px', marginTop: '15px' }}
+            onClick={() => {
+              resetPlan();
+            }}>
+            <RiArrowGoBackLine style={{ marginRight: '5px', width: '15px', height: 'auto' }} />
+            <TextBold style={{ color: constants.navigationButtonColor }}>
+              Auswahl zurücksetzen
+            </TextBold>
+          </Button>
+        </Row>
 
-      <Row>
-        <Box height="240px" />
-      </Row>
+        <Row className="d-flex justify-content-between">
+          <Col>
+            <NavigationButton buttonTitle="Zurück" nextPage={activeStepIndex - 1} isSecondary />
+          </Col>
+          <Col>
+            <NavigationButton buttonTitle="Zur Zusammmenfassung" nextPage={activeStepIndex + 1} />
+          </Col>
+        </Row>
 
-      <Overlay
-        monthSelected={monthSelected}
-        setMonthSelected={setMonthSelected}
-        egPlan={egPlan}
-        {...selectionOverlayProps}
-        updateMonth={updateMonth}
-        updateAdditionalIncome={updateAdditionalIncome}
-      />
-    </PageTemplate>
+        <Row>
+          <Box height="240px" />
+        </Row>
+
+        <Overlay
+          monthSelected={monthSelected}
+          setMonthSelected={setMonthSelected}
+          egPlan={egPlan}
+          {...selectionOverlayProps}
+          updateMonth={updateMonth}
+          updateAdditionalIncome={updateAdditionalIncome}
+        />
+      </PageTemplate>
+    </Form>
   );
 };
 

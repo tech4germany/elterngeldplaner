@@ -77,7 +77,8 @@ const IncomePage = () => {
               <NavigationButton // TODO: submit?
                 buttonTitle="Zurück"
                 nextPage={activeStepIndex - 1}
-                buttonVariant="outline"
+                // buttonVariant="outline"
+                isSecondary
               />
             </Col>
             <Col>

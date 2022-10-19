@@ -13,6 +13,7 @@ import { DateTime } from 'luxon';
 import constants from '../../utils/constants.json';
 import AdditionalIncomeInput from './AdditionalIncomeInput';
 import FormContext from '../../context/FormContext';
+import { TextBold } from '../../components/styled/StyledText';
 
 const Overlay = ({
   monthSelected,
@@ -50,22 +51,26 @@ const Overlay = ({
 
     if (isSelected) {
       Object.values(constants.varianten).forEach((value) => {
-        // const buttonColor = value.colorActivated;
-        // try {
-        //   updateMonth(monthSelected.parentid, monthSelected.monthid, value.id);
-        // } catch {
-        //   buttonColor = value.colorDeactivated;
-        // }
         newButtons.push(
           <GridItem colSpan={1} key={value.id}>
             <Button
-              colorScheme={value.colorScheme}
+              backgroundColor={value.colorActivated}
+              color={value.textColor}
+              // colorScheme={value.colorScheme}
               border={
                 egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
                   ? '4px'
                   : '0px'
               }
               borderColor="black"
+              // borderColor={constants.navigationButtonColor}
+              _active={{
+                bg: value.colorActivated
+              }}
+              _focus={{
+                bg: value.colorActivated
+              }}
+              _hover={{ bg: value.colorActivated }}
               fontSize="11pt"
               fontWeight="semibold"
               width="92%"
@@ -114,7 +119,9 @@ const Overlay = ({
         {show ? (
           <>
             <Toast.Header closeButton>
-              <strong className="me-auto">{formData.names_parent[monthSelected.parentid]}</strong>
+              <TextBold className="me-auto">
+                {formData.names_parent[monthSelected.parentid]}
+              </TextBold>
             </Toast.Header>
             <Toast.Body>
               <Row className="pb-2">
@@ -125,7 +132,7 @@ const Overlay = ({
                   <span>{getDateText(monthSelected.monthid)}</span>
                 </Col>
               </Row>
-              <Row>
+              <Row style={{ marginTop: '5px' }}>
                 <Grid templateColumns="repeat(4, 25%)">{buttons}</Grid>
               </Row>
               <Row>

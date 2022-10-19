@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { LargeTitle, TextNormal } from './styled/StyledText';
 
 const PageTemplate = ({ pageTitle, description, children }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
+    // TODO: save padding as constant
     <Container
       fluid
       className="justify-content-center"

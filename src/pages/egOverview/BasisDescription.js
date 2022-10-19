@@ -2,18 +2,19 @@ import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
 import { UnorderedList, ListItem } from '@chakra-ui/react';
 import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
+import constants from '../../utils/constants.json';
 
 const BasisDescription = () => {
   return (
     <Container className="p-2">
       <Row style={{ marginBottom: '20px' }}>
-        <Card>
+        <Card style={{ backgroundColor: constants.varianten.basis.colorDeactivated }} border="0">
           <Card.Body>
             <Card.Title>
               <TextBold> Zusammenfassung </TextBold>
             </Card.Title>
             <TextNormal>
-              <UnorderedList>
+              <UnorderedList spacing={2}>
                 <ListItem>Euch stehen gemeinsam bis zu 14 Monate Basiselterngeld zu</ListItem>
                 <ListItem>
                   Ein Elternteil kann mind. 2 Monate und max. 12 Monate in Anspruch nehmen
@@ -30,7 +31,7 @@ const BasisDescription = () => {
           </Card.Body>
         </Card>
       </Row>
-      <Row style={{ marginBottom: '20px' }}>
+      {/* <Row style={{ marginBottom: '20px' }}>
         <TextBold>Bezugsdauer und -zeitpunkt</TextBold>
         <TextNormal>
           Wenn beide Elternteile mind. 2 Monate Elterngeld beziehen, bekommt ihr ein gemeinsames
@@ -42,7 +43,7 @@ const BasisDescription = () => {
       <Row style={{ marginBottom: '20px' }}>
         <TextBold>Berechnung</TextBold>
         <TextNormal>tbd</TextNormal>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

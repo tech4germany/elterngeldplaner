@@ -7,14 +7,15 @@ import {
   LargeTitle,
   TextBold,
   TextNormal,
-  TextExtraSmall
+  TextExtraSmall,
+  LargeTextBold
 } from '../../components/styled/StyledText';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
 import calculateEG from '../../utils/calculateEG';
 import DescriptionDrawer from './DescriptionDrawer';
 
-const EGCard = ({ variant }) => {
+const EGCard = ({ variant, title }) => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const getHeaderColor = () => {
@@ -30,11 +31,13 @@ const EGCard = ({ variant }) => {
           </Col>
         </Row>
         <Row>
-          <Col className="p-0">
-            <LargeTitle>{calculateEG(formData.income_parent[parentid], variant, 0)} €</LargeTitle>
+          <Col className="p-0" xs={5}>
+            <LargeTextBold>
+              {calculateEG(formData.income_parent[parentid], variant, 0)} €
+            </LargeTextBold>
           </Col>
-          <Col className="p-0 align-items-center">
-            <TextExtraSmall>monatl.</TextExtraSmall>
+          <Col className="p-0 align-items-center" xs={7}>
+            <TextExtraSmall>pro Monat</TextExtraSmall>
           </Col>
         </Row>
       </Col>
@@ -42,24 +45,17 @@ const EGCard = ({ variant }) => {
   };
   return (
     <Card style={{ padding: 0, marginTop: 15 }}>
-      <Card.Header style={{ backgroundColor: getHeaderColor() }}>
+      <Card.Header
+        style={{
+          backgroundColor: getHeaderColor(),
+          paddingLeft: '15px',
+          paddingTop: '5px',
+          paddingBottom: '5px'
+        }}>
         <Container className="p-0">
           <Row className="d-flex align-items-center justify-content-between">
-            <Col xs="auto">
-              <TextBold>{constants.varianten[variant].fullname}</TextBold>
-            </Col>
-            <Col xs="auto" className="p-0">
-              {/* <Button
-                height="20px"
-                color="gray.600" // TODO
-                backgroundColor="transparent" onClick={}>
-                <AiFillDownCircle
-                  style={{
-                    marginRight: '5px',
-                    transform: 'rotate(-90deg)'
-                  }}
-                />
-              </Button> */}
+            <Col xs={11}>{title}</Col>
+            <Col xs={1} className="d-flex justify-content-center">
               <DescriptionDrawer variant={variant} />
             </Col>
           </Row>
