@@ -11,7 +11,7 @@ const PageTemplate = ({ pageTitle, description, children }) => {
     <Container
       fluid
       className="justify-content-center"
-      style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+      style={{ paddingLeft: '18px', paddingRight: '18px' }}>
       <Row className="d-flex bg-white">
         <LargeTitle>{pageTitle}</LargeTitle>
       </Row>

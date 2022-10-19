@@ -25,7 +25,7 @@ const StartPage = () => {
           <TextPlus>Plus </TextPlus>
           und <TextBold>Partnerschafts</TextBold>
           <TextBonus>bonus</TextBonus> für euch am sinnvollsten kombinieren lässt und wie hoch die
-          Beträge voraussichtlich sein werden.
+          jeweiligen Beträge voraussichtlich sein werden.
         </p>
       </TextNormal>
 

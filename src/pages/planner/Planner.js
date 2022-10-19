@@ -26,7 +26,7 @@ import {
   TextNormalSpan
 } from '../../components/styled/StyledText';
 
-const Planer = () => {
+const Planner = () => {
   const [
     egPlan,
     { updateMonth, updateAdditionalIncome, resetPlan, getSumParent, getTotalMonthsParent }
@@ -146,7 +146,7 @@ const Planer = () => {
             </TextNormal>
           </>
         }>
-        <Row style={{ marginTop: '18px' }}>
+        <Row style={{ marginTop: '17px' }}>
           <LargeTextBold>Euer Kontingent an Elterngeld:</LargeTextBold>
         </Row>
         <Row
@@ -154,16 +154,14 @@ const Planer = () => {
           style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
           <Row
             style={{
-              // width: '100%',
               borderBottom: '1px solid #C5C5C5',
-              paddingBottom: '20px',
-              paddingTop: '10px'
+              paddingBottom: '17px',
+              paddingTop: '11px'
             }}>
             <Kontingent egPlan={egPlan} />
           </Row>
-          <Row className="p-1 text-center">
+          <Row className="text-center" style={{ paddingTop: '4px', paddingBottom: '4px' }}>
             <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-              {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : 'Elternteil 1'} */}
               <TextBold>{formData.names_parent['0']}</TextBold>
             </Col>
             <Col className="align-self-center" xs="auto">
@@ -172,14 +170,8 @@ const Planer = () => {
                 <br />
                 monat
               </TextSmallGray>
-              {/* <div style={{ fontSize: '10pt', lineHeight: '1.0' }}>
-                Lebens
-                <br />
-                monat
-              </div> */}
             </Col>
             <Col className="align-self-center" style={{ fontWeight: 600 }}>
-              {/* {formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : 'Elternteil 2'} */}
               <TextBold>{formData.names_parent['1']}</TextBold>
             </Col>
           </Row>
@@ -314,4 +306,4 @@ const Planer = () => {
   );
 };
 
-export default Planer;
+export default Planner;

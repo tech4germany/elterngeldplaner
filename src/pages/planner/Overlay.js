@@ -52,7 +52,7 @@ const Overlay = ({
     if (isSelected) {
       Object.values(constants.varianten).forEach((value) => {
         newButtons.push(
-          <GridItem colSpan={1} key={value.id}>
+          <GridItem colSpan={1} key={value.id} className="d-flex justify-content-center">
             <Button
               backgroundColor={value.colorActivated}
               color={value.textColor}
