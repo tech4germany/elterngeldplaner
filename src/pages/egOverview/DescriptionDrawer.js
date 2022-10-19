@@ -7,19 +7,11 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  useDisclosure,
-  UnorderedList,
-  ListItem
+  useDisclosure
 } from '@chakra-ui/react';
-import { AiFillDownCircle } from 'react-icons/ai';
 import { Card } from 'react-bootstrap';
 import { IoIosArrowForward } from 'react-icons/io';
-import {
-  LargeTitle,
-  LargeTitleSpan,
-  TextBold,
-  TextNormal
-} from '../../components/styled/StyledText';
+import { LargeTitleSpan } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 import BasisDescription from './BasisDescription';
 import PlusDescription from './PlusDescription';
@@ -76,15 +68,12 @@ const DescriptionDrawer = ({ variant }) => {
   return (
     <>
       <Button
-        // height="20px"
         style={{ padding: '0px' }}
         color="gray.600" // TODO
         backgroundColor="transparent"
         onClick={() => handleClick()}>
         <IoIosArrowForward
           style={{
-            // marginRight: '5px',
-            // transform: 'rotate(-90deg)',
             width: '20px',
             height: 'auto'
           }}
@@ -94,42 +83,8 @@ const DescriptionDrawer = ({ variant }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>
-            {getVariantTitle()}
-            {/* <LargeTitle>{constants.varianten[variant].fullname}</LargeTitle> */}
-          </DrawerHeader>
-          <DrawerBody>
-            {getVariantDescription()}
-            {/* <Card style={{ marginBottom: '20px' }}>
-              <Card.Body>
-                <Card.Title>
-                  <TextBold> Zusammenfassung </TextBold>
-                </Card.Title>
-                <Card.Text>
-                  <TextNormal>
-                    <UnorderedList>
-                      <ListItem>Euch stehen gemeinsam bis zu 14 Monate Basiselterngeld zu</ListItem>
-                      <ListItem>
-                        Ein Elternteil kann mind. 2 Monate und max. 12 Monate in Anspruch nehmen
-                      </ListItem>
-                      <ListItem>
-                        Basiselterngeld kann nur bis zum 14. Lebensmonat genutzt werden
-                      </ListItem>
-                    </UnorderedList>
-                  </TextNormal>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <TextBold>Bezugsdauer und -zeitpunkt</TextBold>
-            <TextNormal>
-              Wenn beide Elternteile mind. 2 Monate Elterngeld beziehen, bekommt ihr ein gemeinsames
-              Kontingent an 14 Monaten Basiselterngeld, andernfalls sind es 12 Monate.
-              Basiselterngeld kann nur in den ersten 14 Lebensmonaten bezogen werden, danach ist nur
-              noch ElterngeldPlus und PartnerschaftsBonus möglich.
-            </TextNormal>
-            <TextBold>Berechnung</TextBold>
-            <TextNormal>tbd</TextNormal> */}
-          </DrawerBody>
+          <DrawerHeader>{getVariantTitle()}</DrawerHeader>
+          <DrawerBody>{getVariantDescription()}</DrawerBody>
         </DrawerContent>
       </Drawer>
     </>

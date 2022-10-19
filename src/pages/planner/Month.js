@@ -29,6 +29,9 @@ const Month = ({
         _focus={{
           bg: constants.varianten[variant].colorActivated
         }}
+        _hover={{
+          bg: constants.varianten[variant].colorActivated
+        }}
         border={selected ? '4px' : '0px'}
         borderColor="black"
         padding="5px"

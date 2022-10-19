@@ -26,6 +26,9 @@ const NavigationButton = ({
           _focus={{
             bg: isSecondary ? 'white' : constants.navigationButtonColor
           }}
+          _hover={{
+            bg: isSecondary ? 'white' : constants.navigationButtonColor
+          }}
           border="2px"
           borderColor={constants.navigationButtonColor}
           size="sm"

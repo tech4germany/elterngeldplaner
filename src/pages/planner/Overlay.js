@@ -51,12 +51,6 @@ const Overlay = ({
 
     if (isSelected) {
       Object.values(constants.varianten).forEach((value) => {
-        // const buttonColor = value.colorActivated;
-        // try {
-        //   updateMonth(monthSelected.parentid, monthSelected.monthid, value.id);
-        // } catch {
-        //   buttonColor = value.colorDeactivated;
-        // }
         newButtons.push(
           <GridItem colSpan={1} key={value.id}>
             <Button
