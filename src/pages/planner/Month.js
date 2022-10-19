@@ -19,14 +19,23 @@ const Month = ({
   useEffect(() => {
     setMonthButton(
       <Button
-        colorScheme={constants.varianten[variant].colorScheme}
+        // colorScheme={constants.varianten[variant].colorScheme}
+        backgroundColor={constants.varianten[variant].colorActivated}
+        color={constants.varianten[variant].textColor}
+        // colorScheme={value.colorScheme}
+        _active={{
+          bg: constants.varianten[variant].colorActivated
+        }}
+        _focus={{
+          bg: constants.varianten[variant].colorActivated
+        }}
         border={selected ? '4px' : '0px'}
         borderColor="black"
         padding="5px"
         width="15vw"
         height="9vw"
-        marginTop="2px"
-        marginBottom="2px"
+        marginTop="3px"
+        marginBottom="3px"
         onClick={() => {
           updateMonthSelection(parentId, monthid);
         }}>
@@ -42,7 +51,12 @@ const Month = ({
           {/* <Col className="align-self-center p-0" xs={1}>
             {additionalIncomeSelected ? <BiCoinStack color="LightSlateGray" /> : []}
           </Col> */}
-          <Col className="d-flex align-items-center justify-content-end p-0" xs={6}>
+          <Col
+            className="d-flex align-items-center justify-content-end p-0"
+            xs={6}
+            style={{
+              color: variant !== constants.varianten.none.id ? '#000000' : '#707070'
+            }}>
             {additionalIncomeSelected ? (
               <BiCoinStack color="LightSlateGray" style={{ marginRight: '10px' }} />
             ) : (
@@ -59,7 +73,12 @@ const Month = ({
           <Col className="d-flex align-self-center justify-content-center" xs={6}>
             {monthButton}
           </Col>
-          <Col className="d-flex align-items-center justify-content-start p-0" xs={6}>
+          <Col
+            className="d-flex align-items-center justify-content-start p-0"
+            xs={6}
+            style={{
+              color: variant !== constants.varianten.none.id ? '#000000' : '#707070'
+            }}>
             {amount} €
             {additionalIncomeSelected ? (
               <BiCoinStack color="LightSlateGray" style={{ marginLeft: '10px' }} />

@@ -63,7 +63,7 @@ const MenuDrawer = ({ pageNames }) => {
         </DrawerContent>
       </Drawer>
       <Button onClick={onOpen} variant="ghost" padding="0px">
-        <VscMenu style={{ width: '25px', height: 'auto' }} />
+        <VscMenu style={{ width: '22px', height: 'auto' }} />
       </Button>
     </>
   );

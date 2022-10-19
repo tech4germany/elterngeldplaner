@@ -30,7 +30,7 @@ const EGOverviewPage = () => {
             variant={constants.varianten.basis.id}
             title={
               <>
-                <TextBasis>Basis</TextBasis>
+                <TextBold color={constants.varianten.basis.colorActivated}>Basis</TextBold>
                 <TextBold>elterngeld</TextBold>
                 <div>
                   <TextSmall style={{ marginTop: '2px' }}>
@@ -45,7 +45,7 @@ const EGOverviewPage = () => {
             title={
               <>
                 <TextBold>Elterngeld</TextBold>
-                <TextPlus>Plus</TextPlus>
+                <TextBold color={constants.varianten.plus.colorActivated}>Plus</TextBold>
                 <div>
                   <TextSmall style={{ marginTop: '2px' }}>
                     2 Monate ElterngeldPlus im Tausch gegen einen Monat Basiselterngeld.
@@ -59,7 +59,7 @@ const EGOverviewPage = () => {
             title={
               <>
                 <TextBold>Partnerschafts</TextBold>
-                <TextBonus>Bonus</TextBonus>
+                <TextBold color={constants.varianten.bonus.colorActivated}>bonus</TextBold>
                 <div>
                   <TextSmall style={{ marginTop: '2px' }}>
                     2, 3 oder 4 zusätzliche ElterngeldPlus-Monate für jedes Elternteil.
@@ -75,7 +75,8 @@ const EGOverviewPage = () => {
             <NavigationButton // TODO: submit?
               buttonTitle="Zurück"
               nextPage={activeStepIndex - 1}
-              buttonVariant="outline"
+              // buttonVariant="outline"
+              isSecondary
             />
           </Col>
           <Col>

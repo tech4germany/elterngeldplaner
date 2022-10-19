@@ -13,6 +13,7 @@ import {
   GridItem
 } from '@chakra-ui/react';
 import { Form } from 'react-bootstrap';
+import { TextNormal } from '../../components/styled/StyledText';
 
 const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
@@ -56,13 +57,16 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
       templateColumns="repeat(2, 1fr)"
       alignItems="center"
       rowGap={1}>
-      <GridItem colSpan={2}>
+      <GridItem colSpan={2} marginBottom="5px" marginTop="5px">
         <Flex>
-          <FormLabel mb="0" fontSize="10pt" lineHeight="1.15">
-            Ich habe in diesem Monat ein Einkommen
+          <FormLabel mb="0">
+            <TextNormal style={{ lineHeight: '1.25' }}>
+              Ich habe in diesem Monat ein Einkommen
+            </TextNormal>
           </FormLabel>
           <Spacer />
           <Switch
+            size="md"
             onChange={() => {
               switchIncomeChecked();
             }}

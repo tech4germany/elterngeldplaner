@@ -40,14 +40,14 @@ const PlusDescription = () => {
           </Card.Body>
         </Card>
       </Row>
-      <Row style={{ marginBottom: '20px' }}>
+      {/* <Row style={{ marginBottom: '20px' }}>
         <TextBold>Bezugsdauer und -zeitpunkt</TextBold>
         <TextNormal>tbd</TextNormal>
       </Row>
       <Row style={{ marginBottom: '20px' }}>
         <TextBold>Berechnung</TextBold>
         <TextNormal>tbd</TextNormal>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

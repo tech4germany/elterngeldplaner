@@ -14,7 +14,12 @@ import {
 import { AiFillDownCircle } from 'react-icons/ai';
 import { Card } from 'react-bootstrap';
 import { IoIosArrowForward } from 'react-icons/io';
-import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
+import {
+  LargeTitle,
+  LargeTitleSpan,
+  TextBold,
+  TextNormal
+} from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 import BasisDescription from './BasisDescription';
 import PlusDescription from './PlusDescription';
@@ -35,6 +40,34 @@ const DescriptionDrawer = ({ variant }) => {
         return <PlusDescription />;
       case constants.varianten.bonus.id:
         return <BonusDescription />;
+      default:
+        return [];
+    }
+  };
+
+  const getVariantTitle = () => {
+    switch (variant) {
+      case constants.varianten.basis.id:
+        return (
+          <>
+            <LargeTitleSpan color={constants.varianten.basis.colorActivated}>Basis</LargeTitleSpan>
+            <LargeTitleSpan>elterngeld</LargeTitleSpan>
+          </>
+        );
+      case constants.varianten.plus.id:
+        return (
+          <>
+            <LargeTitleSpan>Elterngeld</LargeTitleSpan>
+            <LargeTitleSpan color={constants.varianten.plus.colorActivated}>Plus</LargeTitleSpan>
+          </>
+        );
+      case constants.varianten.bonus.id:
+        return (
+          <>
+            <LargeTitleSpan>Partnerschafts</LargeTitleSpan>
+            <LargeTitleSpan color={constants.varianten.bonus.colorActivated}>bonus</LargeTitleSpan>
+          </>
+        );
       default:
         return [];
     }
@@ -62,7 +95,8 @@ const DescriptionDrawer = ({ variant }) => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>
-            <LargeTitle>{constants.varianten[variant].fullname}</LargeTitle>
+            {getVariantTitle()}
+            {/* <LargeTitle>{constants.varianten[variant].fullname}</LargeTitle> */}
           </DrawerHeader>
           <DrawerBody>
             {getVariantDescription()}

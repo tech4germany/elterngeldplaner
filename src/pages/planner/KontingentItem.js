@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, GridItem } from '@chakra-ui/react';
+import constants from '../../utils/constants.json';
 
 const KontingentItem = ({ variant, isAvailable }) => {
   const styles = {
@@ -7,7 +8,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       available: {
         w: '100%',
         // h: '100%',
-        bg: '#38A169',
+        bg: constants.varianten.basis.colorActivated,
         rowSpan: 1,
         colSpan: 2
         // height: '10px',
@@ -18,7 +19,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       used: {
         w: '100%',
         // h: '100%',
-        bg: '#C6F6D5',
+        bg: constants.varianten.basis.colorDeactivated,
         rowSpan: 1,
         colSpan: 2
         // height: '10px',
@@ -30,7 +31,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       available: {
         w: '100%',
         // h: '100%',
-        bg: '#805AD5',
+        bg: constants.varianten.plus.colorActivated,
         rowSpan: 1,
         colSpan: 1
         // height: '10px',
@@ -40,7 +41,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       used: {
         w: '100%',
         // h: '100%',
-        bg: '#E9D8FD',
+        bg: constants.varianten.plus.colorDeactivated,
         rowSpan: 1,
         colSpan: 1
         // height: '10px',
@@ -52,7 +53,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       available: {
         w: '100%',
         // h: '100%',
-        bg: '#D53F8C',
+        bg: constants.varianten.bonus.colorActivated,
         rowSpan: 2,
         colSpan: 1
         // height: '20px',
@@ -62,7 +63,7 @@ const KontingentItem = ({ variant, isAvailable }) => {
       used: {
         w: '100%',
         // h: '100%',
-        bg: '#FED7E2',
+        bg: constants.varianten.bonus.colorDeactivated,
         rowSpan: 2,
         colSpan: 1
         // height: '20px',

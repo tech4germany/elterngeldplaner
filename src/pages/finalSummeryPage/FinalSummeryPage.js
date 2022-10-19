@@ -159,7 +159,8 @@ const FinalSummeryPage = () => {
       <NavigationButton
         buttonTitle="Zurück zur Planung"
         nextPage={activeStepIndex - 1}
-        buttonVariant="outline"
+        // buttonVariant="outline"
+        isSecondary
       />
     </PageTemplate>
   );

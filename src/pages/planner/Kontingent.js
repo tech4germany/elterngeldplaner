@@ -17,7 +17,7 @@ const Kontingent = ({ egPlan }) => {
     display: 'flex',
     width: '10px',
     height: '10px',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     borderRadius: '50%',
     marginRight: '3px'
   };
@@ -79,7 +79,14 @@ const Kontingent = ({ egPlan }) => {
           <div
             style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
           />
-          {constants.varianten[key].abbrvOverlay}{' '}
+          <span
+            style={{
+              marginRight: '4px'
+              // color: constants.varianten[key].colorActivated,
+              // fontWeight: 'bold'
+            }}>
+            {constants.varianten[key].abbrvOverlay}
+          </span>
           {key === 'bonus'
             ? Math.ceil(availableKontingent[key]) * 2
             : Math.ceil(availableKontingent[key])}
@@ -95,6 +102,7 @@ const Kontingent = ({ egPlan }) => {
       templateColumns="repeat(32, 1fr)"
       templateRows="repeat(3, 1fr)"
       gap={0.5}
+      p={0}
       h="45px">
       <GridItem rowSpan={1} colSpan={32} h="100%">
         <Grid templateColumns="repeat(3, 1fr)">

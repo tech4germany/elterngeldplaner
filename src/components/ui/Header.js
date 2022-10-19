@@ -25,7 +25,7 @@ const Header = ({ pageNames }) => {
           <MenuDrawer pageNames={pageNames} />
         </Col>
         <Col>
-          <img src={logo} alt="Familienportal-Logo" width="70px" height="auto" />
+          <img src={logo} alt="Familienportal-Logo" width="65px" height="auto" />
         </Col>
       </Row>
     </Container>

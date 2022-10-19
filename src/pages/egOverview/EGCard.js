@@ -7,7 +7,8 @@ import {
   LargeTitle,
   TextBold,
   TextNormal,
-  TextExtraSmall
+  TextExtraSmall,
+  LargeTextBold
 } from '../../components/styled/StyledText';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
@@ -30,11 +31,13 @@ const EGCard = ({ variant, title }) => {
           </Col>
         </Row>
         <Row>
-          <Col className="p-0">
-            <LargeTitle>{calculateEG(formData.income_parent[parentid], variant, 0)} €</LargeTitle>
+          <Col className="p-0" xs={5}>
+            <LargeTextBold>
+              {calculateEG(formData.income_parent[parentid], variant, 0)} €
+            </LargeTextBold>
           </Col>
-          <Col className="p-0 align-items-center">
-            <TextExtraSmall>monatl.</TextExtraSmall>
+          <Col className="p-0 align-items-center" xs={7}>
+            <TextExtraSmall>pro Monat</TextExtraSmall>
           </Col>
         </Row>
       </Col>
@@ -53,17 +56,6 @@ const EGCard = ({ variant, title }) => {
           <Row className="d-flex align-items-center justify-content-between">
             <Col xs={11}>{title}</Col>
             <Col xs={1} className="d-flex justify-content-center">
-              {/* <Button
-                height="20px"
-                color="gray.600" // TODO
-                backgroundColor="transparent" onClick={}>
-                <AiFillDownCircle
-                  style={{
-                    marginRight: '5px',
-                    transform: 'rotate(-90deg)'
-                  }}
-                />
-              </Button> */}
               <DescriptionDrawer variant={variant} />
             </Col>
           </Row>
