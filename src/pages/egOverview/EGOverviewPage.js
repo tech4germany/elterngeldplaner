@@ -4,7 +4,14 @@ import { useFormik } from 'formik';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
-import { TextBold, TextNormal } from '../../components/styled/StyledText';
+import {
+  TextBasis,
+  TextBold,
+  TextPlus,
+  TextNormal,
+  TextBonus,
+  TextSmall
+} from '../../components/styled/StyledText';
 import EGCard from './EGCard';
 import constants from '../../utils/constants.json';
 
@@ -15,20 +22,46 @@ const EGOverviewPage = () => {
     <PageTemplate
       // pageTitle="Das könnt ihr an Elterngeld bekommen"
       pageTitle="Euer voraussichtliches Elterngeld"
-      description={
-        <div>
-          Diese Übersicht zeigt euch wieviel Elterngeld ihr pro Monat bekommen könnt. Das Elterngeld
-          gibt es in drei Varianten, welche ihr individuell miteinander kombinieren könnt.
-          {/* Diese Übersicht zeigt euch wieviel Elterngeld ihr basierend auf euren vorherigen Eingaben
-          erhalten könnt. In jedem Monat könnt ihr individuell entscheiden, welche der drei
-          untenstehenden Elterngeld-Varianten ihr nutzen möchtet. */}
-        </div>
-      }>
+      description="Diese Übersicht zeigt euch wieviel Elterngeld ihr pro Monat bekommen könnt. Das Elterngeld
+          gibt es in drei Varianten, welche ihr individuell miteinander kombinieren könnt.">
       <Container>
         <Row>
-          <EGCard variant={constants.varianten.basis.id} />
-          <EGCard variant={constants.varianten.plus.id} />
-          <EGCard variant={constants.varianten.bonus.id} />
+          <EGCard
+            variant={constants.varianten.basis.id}
+            title={
+              <>
+                <TextBasis>Basis</TextBasis>
+                <TextBold>elterngeld</TextBold>
+                <TextSmall style={{ marginTop: '2px' }}>
+                  Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
+                </TextSmall>
+              </>
+            }
+          />
+          <EGCard
+            variant={constants.varianten.plus.id}
+            title={
+              <>
+                <TextBold>Elterngeld</TextBold>
+                <TextPlus>Plus</TextPlus>
+                <TextSmall style={{ marginTop: '2px' }}>
+                  2 Monate ElterngeldPlus im Tausch gegen einen Monat Basiselterngeld.
+                </TextSmall>
+              </>
+            }
+          />
+          <EGCard
+            variant={constants.varianten.bonus.id}
+            title={
+              <>
+                <TextBold>Partnerschafts</TextBold>
+                <TextBonus>Bonus</TextBonus>
+                <TextSmall style={{ marginTop: '2px' }}>
+                  2, 3 oder 4 zusätzliche ElterngeldPlus-Monate für jedes Elternteil.
+                </TextSmall>
+              </>
+            }
+          />
         </Row>
 
         <Row className="d-flex justify-content-between">

@@ -15,7 +15,7 @@ const NavigationButton = ({ buttonTitle, nextPage, buttonVariant = 'solid' }) =>
           type="submit"
           width="100%"
           variant={buttonVariant}
-          style={{ marginTop: '15px' }}
+          style={{ marginTop: '15px', marginBottom: '20px' }}
           onClick={() => {
             setActiveStepIndex(nextPage);
           }}>

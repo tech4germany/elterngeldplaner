@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { Card } from 'react-bootstrap';
+import { IoIosArrowForward } from 'react-icons/io';
 import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 import BasisDescription from './BasisDescription';
@@ -42,14 +43,17 @@ const DescriptionDrawer = ({ variant }) => {
   return (
     <>
       <Button
-        height="20px"
+        // height="20px"
+        style={{ padding: '0px' }}
         color="gray.600" // TODO
         backgroundColor="transparent"
         onClick={() => handleClick()}>
-        <AiFillDownCircle
+        <IoIosArrowForward
           style={{
-            marginRight: '5px',
-            transform: 'rotate(-90deg)'
+            // marginRight: '5px',
+            // transform: 'rotate(-90deg)',
+            width: '20px',
+            height: 'auto'
           }}
         />
       </Button>

@@ -14,6 +14,7 @@ import useSticky from '../../hooks/useSticky';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
+import { TextBold } from '../../components/styled/StyledText';
 
 const Planer = () => {
   const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan, getSumParent }] = useEGcalc();
@@ -105,18 +106,9 @@ const Planer = () => {
         pageTitle="Eure gemeinsame Planung"
         description="In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die Lebensmonate
     nach der Geburt verteilen.">
-        <Row>
-          <div
-            style={{
-              textAlign: 'left',
-              fontWeight: 'bold',
-              fontSize: '11pt',
-              marginTop: '10px'
-            }}>
-            Euer Kontingent an Elterngeld:
-          </div>
+        <Row style={{ marginTop: '10px' }}>
+          <TextBold>Euer Kontingent an Elterngeld:</TextBold>
         </Row>
-
         <Row
           className="d-flex justify-content-center bg-white sticky-top p-0"
           style={{ boxShadow: '0px 5px 5px -5px #808080' }}>
@@ -178,6 +170,9 @@ const Planer = () => {
             ? 'weniger Monate anzeigen'
             : 'alle Monate anzeigen'}
         </Button>
+        <Box bg="tomato" w="100%" p={4} color="white">
+          This is the Box
+        </Box>
         {/* <Row>
         <Col>{getSumParent(0)} €</Col>
         <Col>{getSumParent(1)} €</Col>

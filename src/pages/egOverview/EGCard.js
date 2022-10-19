@@ -14,7 +14,7 @@ import constants from '../../utils/constants.json';
 import calculateEG from '../../utils/calculateEG';
 import DescriptionDrawer from './DescriptionDrawer';
 
-const EGCard = ({ variant }) => {
+const EGCard = ({ variant, title }) => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const getHeaderColor = () => {
@@ -42,13 +42,17 @@ const EGCard = ({ variant }) => {
   };
   return (
     <Card style={{ padding: 0, marginTop: 15 }}>
-      <Card.Header style={{ backgroundColor: getHeaderColor() }}>
+      <Card.Header
+        style={{
+          backgroundColor: getHeaderColor(),
+          paddingLeft: '15px',
+          paddingTop: '5px',
+          paddingBottom: '5px'
+        }}>
         <Container className="p-0">
           <Row className="d-flex align-items-center justify-content-between">
-            <Col xs="auto">
-              <TextBold>{constants.varianten[variant].fullname}</TextBold>
-            </Col>
-            <Col xs="auto" className="p-0">
+            <Col xs={11}>{title}</Col>
+            <Col xs={1} className="d-flex justify-content-center">
               {/* <Button
                 height="20px"
                 color="gray.600" // TODO

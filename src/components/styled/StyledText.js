@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
 export const LargeTitle = styled.h1`
@@ -36,6 +37,12 @@ export const TextNormal = styled.div`
   line-height: 1.5;
 `;
 
+export const TextSmall = styled.div`
+  font-size: 10pt;
+  text-align: left;
+  line-height: 1.25;
+`;
+
 export const TextExtraSmall = styled.div`
   font-size: 9pt;
   text-align: left;
@@ -72,4 +79,9 @@ export const TextBonus = styled.span`
   line-height: 1.5;
   font-weight: bold;
   color: #d53f8c;
+`;
+
+export const MainContainer = styled(Container)`
+  padding-left: 18px;
+  padding-right: 18px;
 `;
