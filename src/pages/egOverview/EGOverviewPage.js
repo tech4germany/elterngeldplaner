@@ -32,9 +32,11 @@ const EGOverviewPage = () => {
               <>
                 <TextBasis>Basis</TextBasis>
                 <TextBold>elterngeld</TextBold>
-                <TextSmall style={{ marginTop: '2px' }}>
-                  Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
-                </TextSmall>
+                <div>
+                  <TextSmall style={{ marginTop: '2px' }}>
+                    Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
+                  </TextSmall>
+                </div>
               </>
             }
           />
@@ -44,9 +46,11 @@ const EGOverviewPage = () => {
               <>
                 <TextBold>Elterngeld</TextBold>
                 <TextPlus>Plus</TextPlus>
-                <TextSmall style={{ marginTop: '2px' }}>
-                  2 Monate ElterngeldPlus im Tausch gegen einen Monat Basiselterngeld.
-                </TextSmall>
+                <div>
+                  <TextSmall style={{ marginTop: '2px' }}>
+                    2 Monate ElterngeldPlus im Tausch gegen einen Monat Basiselterngeld.
+                  </TextSmall>
+                </div>
               </>
             }
           />
@@ -56,9 +60,11 @@ const EGOverviewPage = () => {
               <>
                 <TextBold>Partnerschafts</TextBold>
                 <TextBonus>Bonus</TextBonus>
-                <TextSmall style={{ marginTop: '2px' }}>
-                  2, 3 oder 4 zusätzliche ElterngeldPlus-Monate für jedes Elternteil.
-                </TextSmall>
+                <div>
+                  <TextSmall style={{ marginTop: '2px' }}>
+                    2, 3 oder 4 zusätzliche ElterngeldPlus-Monate für jedes Elternteil.
+                  </TextSmall>
+                </div>
               </>
             }
           />

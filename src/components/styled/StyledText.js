@@ -31,6 +31,14 @@ export const LargeTitleBonus = styled.span`
   color: #d53f8c;
 `;
 
+export const LargeTextBold = styled.div`
+  font-size: 11.5pt;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
 export const TextNormal = styled.div`
   font-size: 10.5pt;
   text-align: left;

@@ -4,6 +4,7 @@ import { LargeTitle, TextNormal } from './styled/StyledText';
 
 const PageTemplate = ({ pageTitle, description, children }) => {
   return (
+    // TODO: save padding as constant
     <Container
       fluid
       className="justify-content-center"

@@ -3,6 +3,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Box, Grid, GridItem, Button } from '@chakra-ui/react';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
+import { IoIosArrowDown } from 'react-icons/io';
 import { useFormik } from 'formik';
 import Month from './Month';
 import Overlay from './Overlay';
@@ -14,10 +15,19 @@ import useSticky from '../../hooks/useSticky';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
-import { TextBold } from '../../components/styled/StyledText';
+import {
+  TextBold,
+  TextNormal,
+  LargeTextBold,
+  TextExtraSmall,
+  TextSmall
+} from '../../components/styled/StyledText';
 
 const Planer = () => {
-  const [egPlan, { updateMonth, updateAdditionalIncome, resetPlan, getSumParent }] = useEGcalc();
+  const [
+    egPlan,
+    { updateMonth, updateAdditionalIncome, resetPlan, getSumParent, getTotalMonthsParent }
+  ] = useEGcalc();
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
@@ -145,9 +155,9 @@ const Planer = () => {
           className="d-flex-row justify-content-center"
           width="100%"
           height="35px"
-          fontSize="11pt"
-          fontWeight="semibold"
-          textDecoration="underline"
+          // fontSize="11pt"
+          // fontWeight="semibold"
+          // textDecoration="underline"
           color="gray.600" // TODO
           backgroundColor="transparent"
           marginTop="5px"
@@ -159,24 +169,64 @@ const Planer = () => {
             }
           }}>
           {/* <div style={{ fontSize: '11pt', marginTop: '5px' }}> */}
-          <AiFillDownCircle
+          <IoIosArrowDown
             style={{
               marginRight: '5px',
               transform:
                 shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
             }}
           />
-          {shownNrMonths === constants.numberMonths
-            ? 'weniger Monate anzeigen'
-            : 'alle Monate anzeigen'}
+          <TextBold>
+            {shownNrMonths === constants.numberMonths
+              ? 'weniger Monate anzeigen'
+              : 'alle Monate anzeigen'}
+          </TextBold>
         </Button>
-        <Box bg="tomato" w="100%" p={4} color="white">
-          This is the Box
-        </Box>
-        {/* <Row>
-        <Col>{getSumParent(0)} €</Col>
-        <Col>{getSumParent(1)} €</Col>
-      </Row> */}
+        <Row style={{ marginLeft: '-20px', marginRight: '-20px', marginTop: '10px' }}>
+          <Box
+            bg={constants.varianten.none.colorDeactivated}
+            w="100%"
+            style={{
+              paddingTop: '10px',
+              paddingBottom: '10px',
+              paddingLeft: '20px',
+              paddingRight: '20px'
+            }}>
+            <Container>
+              <Row>
+                <LargeTextBold style={{ padding: 0 }}>Gesamtsumme</LargeTextBold>
+              </Row>
+              <Row className="d-flex justify-content-around">
+                <Col>
+                  <Row>
+                    <TextNormal style={{ padding: 0 }}>{formData.names_parent[0]}</TextNormal>
+                  </Row>
+                  <Row className="text-left align-items-center">
+                    <Col xs={4} style={{ padding: 0 }}>
+                      <TextBold>{getSumParent(0)} €</TextBold>
+                    </Col>
+                    <Col xs={8} style={{ padding: 0 }}>
+                      <TextExtraSmall>{getTotalMonthsParent(0)} Monate</TextExtraSmall>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row>
+                    <TextNormal style={{ padding: 0 }}>{formData.names_parent[1]}</TextNormal>
+                  </Row>
+                  <Row className="text-left align-items-center">
+                    <Col xs={4} style={{ padding: 0 }}>
+                      <TextBold>{getSumParent(1)} €</TextBold>
+                    </Col>
+                    <Col xs={8} style={{ padding: 0 }}>
+                      <TextExtraSmall>{getTotalMonthsParent(1)} Monate</TextExtraSmall>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </Box>
+        </Row>
         <Row xs="auto" className="justify-content-center">
           <Button
             color="gray"
