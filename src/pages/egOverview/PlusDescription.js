@@ -22,8 +22,8 @@ const PlusDescription = () => {
                   Dadurch könnt ihr bis zu 28 Monate ElterngeldPlus-Monate beziehen
                 </ListItem>
                 <ListItem>
-                  Die Höhe von ElterngeldPlus entspricht der Hälfte eines Basiselterngeldmonats ohne
-                  zusätzlichem Einkommen
+                  Die Höhe von ElterngeldPlus ist gedeckelt auf die Hälfte eines
+                  Basiselterngeldmonats ohne zusätzlichem Einkommen
                 </ListItem>
                 <ListItem>
                   Ihr könnt, müsst aber nicht, in Teilzeit arbeiten (max. 32 Std.).
