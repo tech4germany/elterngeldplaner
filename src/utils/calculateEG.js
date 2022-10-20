@@ -8,21 +8,30 @@ const NONE = constants.varianten.none.id;
 const calculateEG = (income, variant, incomeChecked, additionalIncome) => {
   let elterngeld;
   let currentAdditionalIncome = 0;
+  const percentage = 0.65;
+
+  // if (income >= 1000 && income <= 1200) {
+  //   percentage = 0.67;
+  // }
+
   if (additionalIncome !== undefined && incomeChecked === true) {
     currentAdditionalIncome = additionalIncome;
   }
   switch (variant) {
     case BASIS:
-      elterngeld = Math.round((income - currentAdditionalIncome) * 0.65);
+      elterngeld = (income - currentAdditionalIncome) * percentage;
       if (elterngeld > 1800) {
         elterngeld = 1800;
       } else if (elterngeld < 300) {
         elterngeld = 300;
       }
       break;
+    case BONUS:
     case PLUS:
-      elterngeld = Math.round(income * 0.33);
-
+      elterngeld = (income - currentAdditionalIncome) * percentage;
+      if (elterngeld > income * percentage * 0.5) {
+        elterngeld = income * percentage * 0.5;
+      }
       if (elterngeld > 900) {
         elterngeld = 900;
       } else if (elterngeld < 150) {
@@ -35,18 +44,6 @@ const calculateEG = (income, variant, incomeChecked, additionalIncome) => {
       // }
 
       break;
-    case BONUS:
-      elterngeld = Math.round(income * 0.33);
-      if (elterngeld > 900) {
-        elterngeld = 900;
-      } else if (elterngeld < 150) {
-        elterngeld = 150;
-      }
-      // if (elterngeld + currentAdditionalIncome > income) {
-      //   elterngeld = Math.max(income - currentAdditionalIncome, 150);
-      // }
-
-      break;
     case NONE:
       elterngeld = 0;
       break;
@@ -54,7 +51,7 @@ const calculateEG = (income, variant, incomeChecked, additionalIncome) => {
       elterngeld = 0;
       break;
   }
-  return elterngeld;
+  return Math.round(elterngeld);
 };
 
 export default calculateEG;

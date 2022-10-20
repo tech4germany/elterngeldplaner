@@ -4,12 +4,7 @@ import {
   FormLabel,
   Switch,
   Flex,
-  Box,
-  Editable,
-  EditablePreview,
-  EditableInput,
   Grid,
-  Spacer,
   GridItem
 } from '@chakra-ui/react';
 import { Form } from 'react-bootstrap';
@@ -20,7 +15,7 @@ import FormContext from '../../context/FormContext';
 const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
   const [additionalIncome, setAdditionalIncome] = useState(0);
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
 
   useEffect(() => {
     setIncomeChecked(egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked);
@@ -78,7 +73,6 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
         </Flex>
       </GridItem>
       {egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked ? (
-        // <Grid templateRows="repeat(1, 1fr)" templateCols="repeat(2, 1fr)" rowGap={1}>
         <>
           <GridItem colSpan={2}>
             <Form.Control

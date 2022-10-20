@@ -7,7 +7,7 @@ import NavigationButton from '../../components/ui/NavigationButton';
 import { TextNormal } from '../../components/styled/StyledText';
 
 const NameInputPage = () => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
 
   const formik = useFormik({
     initialValues: {
@@ -35,15 +35,12 @@ const NameInputPage = () => {
             </Form.Label>
 
             <Form.Control
-              // value={formik.values.vornamen_elternteil['0']}
               defaultValue={formData.names_parent ? formData.names_parent['0'] : ''}
               type="text"
               id="names_parent['0']"
               name="names_parent['0']"
               placeholder="Vorname"
               onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
-              // value={formik.values.vornamen_elternteil['1']} // TODO: standardmäßig elternteil 1 /2
             />
           </Row>
           <Row style={{ marginTop: '10px' }}>
@@ -51,15 +48,12 @@ const NameInputPage = () => {
               <TextNormal>Name von Elternteil 2</TextNormal>
             </Form.Label>
             <Form.Control
-              // value={formik.values.vornamen_elternteil['1']}
               defaultValue={formData.names_parent ? formData.names_parent['1'] : ''}
               type="text"
               id="names_parent['1']"
               name="names_parent['1']"
               placeholder="Vorname"
               onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
-              // value={formik.values.vornamen_elternteil['2']} // TODO: formData vornamen (wenn vorher schon eingegeben und dann auf zurück geklickt wird)
             />
           </Row>
           <Row className="d-flex justify-content-between">
@@ -67,7 +61,6 @@ const NameInputPage = () => {
               <NavigationButton // TODO: submit?
                 buttonTitle="Zurück"
                 nextPage={activeStepIndex - 1}
-                // buttonVariant="outline"
                 isSecondary
               />
             </Col>

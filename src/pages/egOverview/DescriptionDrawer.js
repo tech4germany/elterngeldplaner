@@ -9,7 +9,6 @@ import {
   DrawerBody,
   useDisclosure
 } from '@chakra-ui/react';
-import { Card } from 'react-bootstrap';
 import { IoIosArrowForward } from 'react-icons/io';
 import { LargeTitleSpan } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';

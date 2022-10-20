@@ -1,22 +1,13 @@
 import React, { useContext } from 'react';
-import { Card, Container, ListGroup, Row, Col } from 'react-bootstrap';
-import { green } from '@mui/material/colors';
-import { Button } from '@chakra-ui/react';
-import { AiFillDownCircle } from 'react-icons/ai';
-import {
-  LargeTitle,
-  TextBold,
-  TextNormal,
-  TextExtraSmall,
-  LargeTextBold
-} from '../../components/styled/StyledText';
+import { Card, Container, Row, Col } from 'react-bootstrap';
+import { TextExtraSmall, LargeTextBold, TextNormal } from '../../components/styled/StyledText';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
 import calculateEG from '../../utils/calculateEG';
 import DescriptionDrawer from './DescriptionDrawer';
 
 const EGCard = ({ variant, title }) => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
 
   const getHeaderColor = () => {
     return constants.varianten[variant].colorDeactivated;

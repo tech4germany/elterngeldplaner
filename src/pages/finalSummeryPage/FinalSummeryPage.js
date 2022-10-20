@@ -8,7 +8,7 @@ import PageTemplate from '../../components/PageTemplate';
 import { TextNormal, TextBold } from '../../components/styled/StyledText';
 import NavigationButton from '../../components/ui/NavigationButton';
 import constants from '../../utils/constants.json';
-import zusammenfassung from '../../images/zusammenfassung.png';
+// import zusammenfassung from '../../images/zusammenfassung.png';
 
 const BASIS = constants.varianten.basis.id;
 const PLUS = constants.varianten.plus.id;
@@ -16,7 +16,7 @@ const BONUS = constants.varianten.bonus.id;
 const NONE = constants.varianten.none.id;
 
 const FinalSummeryPage = () => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
   const [emojiText, setEmojiText] = useState('');
   const numberEmojis = [
     '0️⃣1️⃣',
@@ -155,11 +155,10 @@ const FinalSummeryPage = () => {
           </TextNormal>
         </Card.Body>
       </Card>
-      {/* <img src={zusammenfassung} alt="Familienportal-Logo" width="100%" height="auto" /> */}
+      {/* <img src={zusammenfassung} alt="DummyPlatzhalter" width="100%" height="auto" /> */}
       <NavigationButton
         buttonTitle="Zurück zur Planung"
         nextPage={activeStepIndex - 1}
-        // buttonVariant="outline"
         isSecondary
       />
     </PageTemplate>

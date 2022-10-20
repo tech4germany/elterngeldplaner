@@ -28,18 +28,12 @@ const BirthDatePage = () => {
       <Container>
         <Form onSubmit={formik.handleSubmit}>
           <Row style={{ marginTop: '10px' }}>
-            {/* <Form.Label>
-              <TextNormal>Voraussichtliches Geburtsdatum</TextNormal>
-            </Form.Label> */}
-
             <Form.Control
               defaultValue={formData.birthDate ? formData.birthDate : ''}
               type="date"
               id="birthDate"
               name="birthDate"
               onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
-              // value={formik.values.vornamen_elternteil['1']} // TODO: standardmäßig elternteil 1 /2
             />
           </Row>
 
@@ -48,7 +42,6 @@ const BirthDatePage = () => {
               <NavigationButton // TODO: submit?
                 buttonTitle="Zurück"
                 nextPage={activeStepIndex - 1}
-                // buttonVariant="outline"
                 isSecondary
               />
             </Col>

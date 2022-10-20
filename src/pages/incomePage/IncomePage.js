@@ -7,7 +7,7 @@ import NavigationButton from '../../components/ui/NavigationButton';
 import { TextBold, TextNormal } from '../../components/styled/StyledText';
 
 const IncomePage = () => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
 
   const formik = useFormik({
     initialValues: {
@@ -45,15 +45,12 @@ const IncomePage = () => {
             </Form.Label>
 
             <Form.Control
-              // value={formik.values.income_parent['0']}
               defaultValue={formData.income_parent ? formData.income_parent['0'] : ''}
               type="number"
               id="income_parent['0']"
               name="income_parent['0']"
               placeholder="Monatl. Nettoeinkommen in €"
               onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['1'] : ''}
-              // value={formik.values.vornamen_elternteil['1']} // TODO: standardmäßig elternteil 1 /2
             />
           </Row>
           <Row style={{ marginTop: '10px' }}>
@@ -61,15 +58,12 @@ const IncomePage = () => {
               <TextBold>Einkommen von {formData.names_parent['1']}</TextBold>
             </Form.Label>
             <Form.Control
-              // value={formik.values.income_parent['1']}
               defaultValue={formData.income_parent ? formData.income_parent['1'] : ''}
               type="number"
               id="income_parent['1']"
               name="income_parent['1']"
               placeholder="Monatl. Nettoeinkommen in €"
               onChange={formik.handleChange}
-              // value={formData.vornamen_elternteil ? formData.vornamen_elternteil['2'] : ''}
-              // value={formik.values.vornamen_elternteil['2']} // TODO: formData vornamen (wenn vorher schon eingegeben und dann auf zurück geklickt wird)
             />
           </Row>
           <Row className="d-flex justify-content-between">
@@ -77,7 +71,6 @@ const IncomePage = () => {
               <NavigationButton // TODO: submit?
                 buttonTitle="Zurück"
                 nextPage={activeStepIndex - 1}
-                // buttonVariant="outline"
                 isSecondary
               />
             </Col>

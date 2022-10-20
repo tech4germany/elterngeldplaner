@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
 import { UnorderedList, ListItem } from '@chakra-ui/react';
-import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
+import { TextBold, TextNormal } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 
 const BasisDescription = () => {

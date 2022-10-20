@@ -1,12 +1,4 @@
-import {
-  Toast,
-  ToastContainer,
-  ButtonGroup,
-  ButtonToolbar,
-  Container,
-  Row,
-  Col
-} from 'react-bootstrap';
+import { Toast, ToastContainer, Row, Col } from 'react-bootstrap';
 import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/react';
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
@@ -19,7 +11,6 @@ const Overlay = ({
   monthSelected,
   setMonthSelected,
   egPlan,
-  isVisible,
   updateMonth,
   updateAdditionalIncome
 }) => {

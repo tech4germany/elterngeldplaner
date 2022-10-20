@@ -1,8 +1,6 @@
-import { Fragment, useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Box, Grid, GridItem, Button } from '@chakra-ui/react';
-import { AiFillDownCircle } from 'react-icons/ai';
-import { GrPowerReset, VscRefresh, VscMenu } from 'react-icons/vsc';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useFormik } from 'formik';
 import { RiArrowGoBackLine } from 'react-icons/ri';
@@ -35,18 +33,6 @@ const Planner = () => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
-  const [selectionOverlayProps, setSelectionOverlayProps] = useState({
-    isVisible: false
-  });
-
-  useEffect(() => {
-    setSelectionOverlayProps({
-      // monthid: monthSelected.monthid,
-      // parentid: monthSelected.parentid,
-      // egPlan,
-      isVisible: true
-    });
-  }, [egPlan, monthSelected]);
 
   const [monthComponents, setMonthComponents] = useState();
 
@@ -261,7 +247,6 @@ const Planner = () => {
         </Row>
         <Row xs="auto" className="justify-content-center">
           <Button
-            // color="gray"
             variant="ghost"
             size="xs"
             color={constants.navigationButtonColor}
@@ -293,7 +278,6 @@ const Planner = () => {
           monthSelected={monthSelected}
           setMonthSelected={setMonthSelected}
           egPlan={egPlan}
-          {...selectionOverlayProps}
           updateMonth={updateMonth}
           updateAdditionalIncome={updateAdditionalIncome}
         />
