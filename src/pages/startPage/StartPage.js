@@ -14,7 +14,11 @@ const StartPage = () => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
   return (
     <PageTemplate pageTitle="Der Elterngeldplaner">
-      <TextNormal>
+      <TextBold>
+        Dieser Elterngeldplaner ist ein Prototyp des Tech4Germany Fellowships 2022. Alle Angaben und
+        Ergebnisse sind daher nicht auf Richtigkeit geprüft.
+      </TextBold>
+      <TextNormal style={{ marginTop: '10px' }}>
         <p>
           Mit dem Elterngeldplaner könnt ihr unverbindlich euer Elterngeld berechnen und planen,
           wann ihr welche Elterngeld-Variante bekommen möchtet.

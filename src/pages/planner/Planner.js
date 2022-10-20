@@ -15,11 +15,12 @@ import Kontingent from './Kontingent';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
+import icons from '../../utils/icons';
+
 import {
   TextBold,
   TextNormal,
   LargeTextBold,
-  TextExtraSmall,
   TextSmall,
   TextSmallGray,
   TextNormalSpan
@@ -118,7 +119,7 @@ const Planner = () => {
               In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die
               Lebensmonate nach der Geburt verteilen.
             </TextNormal>
-            <TextNormal style={{ marginTop: '10px' }}>
+            <TextNormal style={{ marginTop: '10px', display: 'inline-block' }}>
               Die drei Varianten{' '}
               <TextNormalSpan
                 color={constants.varianten.basis.colorActivated}

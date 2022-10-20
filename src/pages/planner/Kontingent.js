@@ -4,6 +4,12 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import constants from '../../utils/constants.json';
 import KontingentItem from './KontingentItem';
 
+import basisIcon from '../../images/basisIcon.png';
+import plusIcon from '../../images/plusIcon.png';
+import bonusIcon from '../../images/bonusIcon.png';
+
+import icons from '../../utils/icons';
+
 const Kontingent = ({ egPlan }) => {
   const [kontingentItems, setKontingentItems] = useState({ basis: [], plus: [], bonus: [] });
   const [kontingentDisplay, setKontingentDisplay] = useState({ basis: [], plus: [], bonus: [] });
@@ -75,15 +81,22 @@ const Kontingent = ({ egPlan }) => {
     Object.keys(newKontingentDisplay).forEach((key) => {
       newKontingentDisplay[key].push(
         // TODO: Col nicht verwenden, da bootstrap nicht chakra
-        <Col key={key} className="d-flex align-items-center justify-content-center p-0">
-          <div
+        <div key={key} className="d-flex align-items-center justify-content-center p-0">
+          {/* <div
             style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
+          /> */}
+          <img
+            src={icons[key]}
+            alt="Icon EG-Variante"
+            width="14px"
+            height="auto"
+            style={{ marginRight: '3px' }}
           />
           <span
             style={{
-              marginRight: '4px'
-              // color: constants.varianten[key].colorActivated,
-              // fontWeight: 'bold'
+              marginRight: '4px',
+              color: constants.varianten[key].colorActivated,
+              fontWeight: 'bold'
             }}>
             {constants.varianten[key].abbrvOverlay}
           </span>
@@ -91,7 +104,7 @@ const Kontingent = ({ egPlan }) => {
             ? Math.ceil(availableKontingent[key]) * 2
             : Math.ceil(availableKontingent[key])}
           /{key === 'bonus' ? Math.ceil(maxKontingent[key]) * 2 : Math.ceil(maxKontingent[key])}
-        </Col>
+        </div>
       );
     });
     setKontingentDisplay(newKontingentDisplay);

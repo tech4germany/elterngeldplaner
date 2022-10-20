@@ -1,17 +1,6 @@
 import React, { useRef } from 'react';
-import {
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  Button,
-  useDisclosure
-} from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { VscMenu } from 'react-icons/vsc';
-import logo from '../../images/fpo-logo.jpg';
 import MenuDrawer from './MenuDrawer';
 
 const Header = ({ pageNames }) => {
@@ -24,9 +13,7 @@ const Header = ({ pageNames }) => {
         <Col>
           <MenuDrawer pageNames={pageNames} />
         </Col>
-        <Col>
-          <img src={logo} alt="Familienportal-Logo" width="65px" height="auto" />
-        </Col>
+        <Col>{/* <img src={logo} alt="Familienportal-Logo" width="65px" height="auto" /> */}</Col>
       </Row>
     </Container>
   );

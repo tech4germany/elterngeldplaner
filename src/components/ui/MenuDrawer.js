@@ -62,7 +62,7 @@ const MenuDrawer = ({ pageNames }) => {
           <DrawerBody>{getListGroupItems()} </DrawerBody>
         </DrawerContent>
       </Drawer>
-      <Button onClick={onOpen} variant="ghost" padding="0px">
+      <Button onClick={onOpen} variant="ghost" padding="0px" marginTop="4px" marginBottom="2px">
         <VscMenu style={{ width: '22px', height: 'auto' }} />
       </Button>
     </>

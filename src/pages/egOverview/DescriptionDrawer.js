@@ -17,7 +17,7 @@ import BasisDescription from './BasisDescription';
 import PlusDescription from './PlusDescription';
 import BonusDescription from './BonusDescription';
 
-const DescriptionDrawer = ({ variant }) => {
+const DescriptionDrawer = ({ variant, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleClick = () => {
@@ -67,6 +67,7 @@ const DescriptionDrawer = ({ variant }) => {
 
   return (
     <>
+      {children}
       <Button
         style={{ padding: '0px' }}
         color="gray.600" // TODO

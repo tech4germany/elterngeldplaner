@@ -8,6 +8,7 @@ import PageTemplate from '../../components/PageTemplate';
 import { TextNormal, TextBold } from '../../components/styled/StyledText';
 import NavigationButton from '../../components/ui/NavigationButton';
 import constants from '../../utils/constants.json';
+import zusammenfassung from '../../images/zusammenfassung.png';
 
 const BASIS = constants.varianten.basis.id;
 const PLUS = constants.varianten.plus.id;
@@ -64,13 +65,13 @@ const FinalSummeryPage = () => {
       for (let j = 0; j < formData.egPlan.length; j += 1) {
         switch (formData.egPlan[j].months[i].variant) {
           case BASIS:
-            newLine.push('🟩');
+            newLine.push('🟦');
             break;
           case PLUS:
-            newLine.push('🟪');
+            newLine.push('🟩');
             break;
           case BONUS:
-            newLine.push('🟥');
+            newLine.push('🟪');
             break;
           case NONE:
             newLine.push('⬜');
@@ -114,7 +115,6 @@ const FinalSummeryPage = () => {
   const handleShareButton = () => {
     // Check if navigator.share is supported by the browser
     if (navigator.share) {
-      //   console.log('Congrats! Your browser supports Web Share API');
       navigator
         .share({
           text: emojiText
@@ -151,11 +151,11 @@ const FinalSummeryPage = () => {
               <IoLink style={{ width: '25px', height: 'auto', marginRight: '10px' }} />
               Link zum Planungsstand
             </span>
-            Mit dem Link kannst du diese Version deiner Planung jederzeit wieder öffnen oder deine
-            Planung mit anderen Teilen.
+            Mit diesem Link kannst du diese Version deiner Planung mit anderen teilen.
           </TextNormal>
         </Card.Body>
       </Card>
+      {/* <img src={zusammenfassung} alt="Familienportal-Logo" width="100%" height="auto" /> */}
       <NavigationButton
         buttonTitle="Zurück zur Planung"
         nextPage={activeStepIndex - 1}

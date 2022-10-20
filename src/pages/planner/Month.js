@@ -2,10 +2,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { BiCoinStack } from 'react-icons/bi';
-import { slice } from 'lodash';
-import Overlay from './Overlay';
 import constants from '../../utils/constants.json';
-import colors from '../../utils/theme';
 
 const Month = ({
   monthid,
