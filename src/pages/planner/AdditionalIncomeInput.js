@@ -83,17 +83,15 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
           <GridItem colSpan={2}>
             <Form.Control
               className="d-flex"
-              size="sm"
+              size="md"
               type="number"
               placeholder="Nettoeinkommen"
               value={additionalIncome === 0 ? '' : additionalIncome}
               onChange={(e) => handleIncomeInputChange(e)}
             />
           </GridItem>
-          <GridItem colSpan={2} textAlign="left" lineHeight="1.15">
-            <Form.Text>
-              Trage dein voraussichtliches Nettoeinkommen im ausgewählten Lebensmonat ein.
-            </Form.Text>
+          <GridItem colSpan={2} textAlign="left" lineHeight="1.15" marginTop="5px">
+            <Form.Text>Trage das vsl. Einkommen für diesen Lebensmonat ein.</Form.Text>
           </GridItem>
         </>
       ) : (

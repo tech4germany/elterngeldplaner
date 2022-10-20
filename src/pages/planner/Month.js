@@ -33,7 +33,8 @@ const Month = ({
         }}
         // border={selected ? '4px' : '0px'}
         // borderColor="black"
-        outline={selected ? 'solid 3.7px black !important' : '0px !important'}
+        boxShadow={selected ? '0 0 0pt 2.5pt black' : 'none'}
+        // outline={selected ? 'solid 3.7px black !important' : '0px !important'}
         padding="5px"
         width="15vw"
         height="9vw"

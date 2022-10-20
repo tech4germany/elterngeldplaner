@@ -56,20 +56,29 @@ const Overlay = ({
             <Button
               backgroundColor={value.colorActivated}
               color={value.textColor}
+              boxShadow={
+                egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+                  ? '0 0 0pt 2.5pt black'
+                  : 'none'
+              }
               style={{
                 margin: '0px',
                 padding: '3px',
-                backgroundColor: `${value.colorActivated} !important`,
-                outline:
-                  egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                    ? 'solid 4px black !important'
-                    : '0px !important'
+                // boxShadow:
+                //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+                //     ? '0 0 0pt 2.5pt black'
+                //     : 'none',
+                backgroundColor: `${value.colorActivated} !important`
+                // outline:
+                //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+                //     ? 'solid 4px black !important'
+                //     : '0px !important'
               }}
-              outline={
-                egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                  ? 'solid 3.7px black !important'
-                  : '0px !important'
-              }
+              // outline={
+              //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+              //     ? 'solid 3.7px black !important'
+              //     : '0px !important'
+              // }
               // border={
               //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
               //     ? '4px'
