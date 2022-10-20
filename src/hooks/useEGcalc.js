@@ -178,7 +178,7 @@ const useEGcalc = () => {
   };
 
   const resetPlan = () => {
-    // setEgPlan(initialPlan); //TODO
+    setEgPlan(initialPlan); // TODO
   };
 
   const getSumParent = (parentid) => {
