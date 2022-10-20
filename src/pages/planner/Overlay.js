@@ -52,28 +52,42 @@ const Overlay = ({
     if (isSelected) {
       Object.values(constants.varianten).forEach((value) => {
         newButtons.push(
-          <GridItem colSpan={1} key={value.id}>
+          <GridItem colSpan={1} key={value.id} className="d-flex justify-content-center">
             <Button
               backgroundColor={value.colorActivated}
               color={value.textColor}
-              // colorScheme={value.colorScheme}
-              border={
+              style={{
+                margin: '0px',
+                padding: '3px',
+                backgroundColor: `${value.colorActivated} !important`,
+                outline:
+                  egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+                    ? 'solid 4px black !important'
+                    : '0px !important'
+              }}
+              outline={
                 egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                  ? '4px'
-                  : '0px'
+                  ? 'solid 3.7px black !important'
+                  : '0px !important'
               }
-              borderColor="black"
-              // borderColor={constants.navigationButtonColor}
+              // border={
+              //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
+              //     ? '4px'
+              //     : '0px'
+              // }
+              // borderColor="black"
               _active={{
                 bg: value.colorActivated
               }}
               _focus={{
                 bg: value.colorActivated
               }}
-              _hover={{ bg: value.colorActivated }}
+              _hover={{
+                bg: value.colorActivated
+              }}
               fontSize="11pt"
               fontWeight="semibold"
-              width="92%"
+              width="90%"
               height="100%"
               value={value.id}
               onClick={(e) => {

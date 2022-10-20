@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   //   FormControl,
   FormLabel,
@@ -15,9 +15,12 @@ import {
 import { Form } from 'react-bootstrap';
 import { TextNormal } from '../../components/styled/StyledText';
 
+import FormContext from '../../context/FormContext';
+
 const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }) => {
   const [incomeChecked, setIncomeChecked] = useState(false);
   const [additionalIncome, setAdditionalIncome] = useState(0);
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   useEffect(() => {
     setIncomeChecked(egPlan[monthSelected.parentid].months[monthSelected.monthid].incomeChecked);
@@ -61,10 +64,10 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
         <Flex>
           <FormLabel mb="0">
             <TextNormal style={{ lineHeight: '1.25' }}>
-              Ich habe in diesem Monat ein Einkommen
+              {formData.names_parent[monthSelected.parentid]} hat in diesem Monat ein Einkommen
             </TextNormal>
           </FormLabel>
-          <Spacer />
+          {/* <Spacer /> */}
           <Switch
             size="md"
             onChange={() => {

@@ -2,6 +2,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { BiCoinStack } from 'react-icons/bi';
+import { slice } from 'lodash';
 import Overlay from './Overlay';
 import constants from '../../utils/constants.json';
 import colors from '../../utils/theme';
@@ -19,10 +20,8 @@ const Month = ({
   useEffect(() => {
     setMonthButton(
       <Button
-        // colorScheme={constants.varianten[variant].colorScheme}
         backgroundColor={constants.varianten[variant].colorActivated}
         color={constants.varianten[variant].textColor}
-        // colorScheme={value.colorScheme}
         _active={{
           bg: constants.varianten[variant].colorActivated
         }}
@@ -32,8 +31,9 @@ const Month = ({
         _hover={{
           bg: constants.varianten[variant].colorActivated
         }}
-        border={selected ? '4px' : '0px'}
-        borderColor="black"
+        // border={selected ? '4px' : '0px'}
+        // borderColor="black"
+        outline={selected ? 'solid 3.7px black !important' : '0px !important'}
         padding="5px"
         width="15vw"
         height="9vw"
@@ -51,9 +51,6 @@ const Month = ({
     <Row className="justify-content-center">
       {parentId === 0 ? (
         <>
-          {/* <Col className="align-self-center p-0" xs={1}>
-            {additionalIncomeSelected ? <BiCoinStack color="LightSlateGray" /> : []}
-          </Col> */}
           <Col
             className="d-flex align-items-center justify-content-end p-0"
             xs={6}
@@ -89,9 +86,6 @@ const Month = ({
               []
             )}
           </Col>
-          {/* <Col className="d-flex align-self-center justify-content-center p-0" xs={1}>
-            {additionalIncomeSelected ? <BiCoinStack color="LightSlateGray" /> : []}
-          </Col> */}
         </>
       )}
     </Row>

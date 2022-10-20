@@ -16,8 +16,6 @@ const NavigationButton = ({
     <Container fluid>
       <Row className="justify-content-center p-0">
         <Button
-          // colorScheme="messenger"
-          // color="white"
           color={isSecondary ? constants.navigationButtonColor : 'white'}
           backgroundColor={isSecondary ? 'white' : constants.navigationButtonColor}
           _active={{
@@ -36,9 +34,9 @@ const NavigationButton = ({
           type="submit"
           width="100%"
           // variant={buttonVariant}
-          style={{ marginTop: '15px', marginBottom: '20px' }}
+          style={{ marginTop: '20px', marginBottom: '20px' }}
           onClick={() => {
-            setActiveStepIndex(nextPage);
+            setActiveStepIndex(nextPage); // TODO: evtl. eher bei onsubmit aufrufen?
           }}>
           {buttonTitle}
         </Button>
