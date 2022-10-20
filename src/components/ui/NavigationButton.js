@@ -34,7 +34,7 @@ const NavigationButton = ({
           type="submit"
           width="100%"
           // variant={buttonVariant}
-          style={{ marginTop: '15px', marginBottom: '20px' }}
+          style={{ marginTop: '20px', marginBottom: '20px' }}
           onClick={() => {
             setActiveStepIndex(nextPage); // TODO: evtl. eher bei onsubmit aufrufen?
           }}>

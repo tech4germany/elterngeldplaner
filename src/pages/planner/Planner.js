@@ -11,7 +11,6 @@ import Overlay from './Overlay';
 import constants from '../../utils/constants.json';
 import useEGcalc from '../../hooks/useEGcalc';
 import Kontingent from './Kontingent';
-import useSticky from '../../hooks/useSticky';
 // import { LargeTitle } from '../../components/styled/StyledText';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
@@ -36,10 +35,6 @@ const Planner = () => {
 
   const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
   const [selectionOverlayProps, setSelectionOverlayProps] = useState({
-    // TODO unnötig
-    // monthid: 0,
-    // parentid: 0,
-    // egPlan,
     isVisible: false
   });
 
@@ -269,7 +264,7 @@ const Planner = () => {
             variant="ghost"
             size="xs"
             color={constants.navigationButtonColor}
-            style={{ marginBottom: '15px', marginTop: '15px' }}
+            style={{ marginBottom: '5px', marginTop: '15px' }}
             onClick={() => {
               resetPlan();
             }}>
