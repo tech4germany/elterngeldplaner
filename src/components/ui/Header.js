@@ -1,12 +1,7 @@
-import React, { useRef } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
 import { Container, Row, Col } from 'react-bootstrap';
 import MenuDrawer from './MenuDrawer';
 
 const Header = ({ pageNames }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
-
   return (
     <Container className="justify-content-center text-center">
       <Row xs="auto" className="justify-content-between text-center align-items-center">

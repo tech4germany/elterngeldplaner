@@ -12,7 +12,7 @@ const PLUS = constants.varianten.plus.id;
 const BONUS = constants.varianten.bonus.id;
 const NONE = constants.varianten.none.id;
 
-const useEGcalc = () => {
+const useEGcalc = (initialEgPlan) => {
   // initialEgPlan
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
   const initialPlan = [];
@@ -38,6 +38,12 @@ const useEGcalc = () => {
   }
 
   const [egPlan, setEgPlan] = useState(initialPlan);
+
+  useEffect(() => {
+    if (initialEgPlan) {
+      setEgPlan(initialEgPlan);
+    }
+  }, []);
 
   // TODO: gibt es eine elegantere Lösung als nested try catch blocks?
   const handleErrors = (newEgPlan, parentid, monthid, variant, error) => {

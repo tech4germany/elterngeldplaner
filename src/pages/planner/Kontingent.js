@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { Grid, GridItem } from '@chakra-ui/react';
 import constants from '../../utils/constants.json';
 import KontingentItem from './KontingentItem';
@@ -17,15 +16,6 @@ const Kontingent = ({ egPlan }) => {
     basis: constants.varianten.basis.maxMonths - 0.5, // because 0.5 months left cannot be used for another basis month
     plus: constants.varianten.plus.maxMonths,
     bonus: constants.varianten.bonus.maxMonths / 2 - 0.5 // because PB can only be taken two months at a time
-  };
-
-  const circleStyle = {
-    display: 'flex',
-    width: '10px',
-    height: '10px',
-    // backgroundColor: 'green',
-    borderRadius: '50%',
-    marginRight: '3px'
   };
 
   useEffect(() => {
@@ -60,17 +50,11 @@ const Kontingent = ({ egPlan }) => {
     const newKontingentItems = { basis: [], plus: [], bonus: [] };
     Object.keys(kontingentItems).forEach((key) => {
       for (let i = 0; i < availableKontingent[key]; i += 1) {
-        newKontingentItems[key].push(
-          //   <Col xs="auto" key={key + i}>
-          <KontingentItem variant={key} isAvailable key={key + i} />
-          //   </Col>
-        );
+        newKontingentItems[key].push(<KontingentItem variant={key} isAvailable key={key + i} />);
       }
       for (let i = availableKontingent[key]; i < maxKontingent[key]; i += 1) {
         newKontingentItems[key].push(
-          //   <Col xs="auto" key={key + i}>
           <KontingentItem variant={key} isAvailable={false} key={key + i} />
-          //   </Col>
         );
       }
     });
@@ -82,9 +66,6 @@ const Kontingent = ({ egPlan }) => {
       newKontingentDisplay[key].push(
         // TODO: Col nicht verwenden, da bootstrap nicht chakra
         <div key={key} className="d-flex align-items-center justify-content-center p-0">
-          {/* <div
-            style={{ ...circleStyle, backgroundColor: constants.varianten[key].colorActivated }}
-          /> */}
           <img
             src={icons[key]}
             alt="Icon EG-Variante"

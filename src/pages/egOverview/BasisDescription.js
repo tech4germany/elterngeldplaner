@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
 import { UnorderedList, ListItem } from '@chakra-ui/react';
-import { TextBold, TextNormal } from '../../components/styled/StyledText';
+import { NormalTextBold, NormalText } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 
 const BasisDescription = () => {
@@ -11,9 +11,9 @@ const BasisDescription = () => {
         <Card style={{ backgroundColor: constants.varianten.basis.colorDeactivated }} border="0">
           <Card.Body>
             <Card.Title>
-              <TextBold> Zusammenfassung </TextBold>
+              <NormalTextBold> Zusammenfassung </NormalTextBold>
             </Card.Title>
-            <TextNormal>
+            <NormalText>
               <UnorderedList spacing={2}>
                 <ListItem>Euch stehen gemeinsam bis zu 14 Monate Basiselterngeld zu</ListItem>
                 <ListItem>
@@ -21,13 +21,13 @@ const BasisDescription = () => {
                 </ListItem>
                 <ListItem>Basiselterngeld kann nur bis zum 14. Lebensmonat genutzt werden</ListItem>
                 <ListItem>
-                  <TextBold>
+                  <NormalTextBold>
                     Wichtig: Wenn die Mutter in den ersten zwei Monaten Mutterschaftsgeld bezieht,
                     werden diese automatisch als Basiselterngeld-Monate gezählt.
-                  </TextBold>
+                  </NormalTextBold>
                 </ListItem>
               </UnorderedList>
-            </TextNormal>
+            </NormalText>
           </Card.Body>
         </Card>
       </Row>

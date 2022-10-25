@@ -1,48 +1,48 @@
 {
-    "varianten":{
-        "none": {
-            "id": "none",
-            "fullname": "Kein Elterngeld",
-            "abbrv": "+",
-            "abbrvOverlay": "Ohne",
-            "colorActivated": "#EDF2F7",
-            "colorDeactivated": "#EDF2F7",
-            "textColor": "black"
-        },
-        "basis": {
-            "id": "basis",
-            "fullname": "Basiselterngeld",
-            "abbrv": "B",
-            "abbrvOverlay": "Basis",
-            "colorActivated": "#4465DB",
-            "colorDeactivated": "#DAE0F8",
-            "textColor": "white",
-            "maxMonths": 14
-        },
-        "plus": {
-            "id": "plus",
-            "fullname": "ElterngeldPlus",
-            "abbrv": "E+",
-            "abbrvOverlay": "Plus",
-            "colorActivated": "#3C7D60",
-            "colorDeactivated": "#E2EBE7",
-            "textColor": "white",
-            "maxMonths": 28
-        },
-        "bonus": {
-            "id": "bonus",
-            "fullname": "Partnerschaftsbonus",
-            "abbrv": "PB",
-            "abbrvOverlay": "Bonus",
-            "colorActivated": "#9A44CE",
-            "colorDeactivated": "#F0E3F8",
-            "textColor": "white",
-            "maxMonths": 8
-        }
+  "varianten": {
+    "none": {
+      "id": "none",
+      "fullname": "Kein Elterngeld",
+      "abbrv": "+",
+      "abbrvOverlay": "Ohne",
+      "colorActivated": "#EDF2F7",
+      "colorDeactivated": "#EDF2F7",
+      "textColor": "black"
     },
+    "basis": {
+      "id": "basis",
+      "fullname": "Basiselterngeld",
+      "abbrv": "B",
+      "abbrvOverlay": "Basis",
+      "colorActivated": "#4465DB",
+      "colorDeactivated": "#DAE0F8",
+      "textColor": "white",
+      "maxMonths": 14
+    },
+    "plus": {
+      "id": "plus",
+      "fullname": "ElterngeldPlus",
+      "abbrv": "E+",
+      "abbrvOverlay": "Plus",
+      "colorActivated": "#3C7D60",
+      "colorDeactivated": "#E2EBE7",
+      "textColor": "white",
+      "maxMonths": 28
+    },
+    "bonus": {
+      "id": "bonus",
+      "fullname": "Partnerschaftsbonus",
+      "abbrv": "PB",
+      "abbrvOverlay": "Bonus",
+      "colorActivated": "#9A44CE",
+      "colorDeactivated": "#F0E3F8",
+      "textColor": "white",
+      "maxMonths": 8
+    }
+  },
 
-    "navigationButtonColor": "#2026AF",
-   
-    "numberMonths": 32,
-    "numberMonthsCollapsed": 18
+  "navigationButtonColor": "#2026AF",
+
+  "numberMonths": 32,
+  "numberMonthsCollapsed": 18
 }

@@ -1,16 +1,11 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Button } from '@chakra-ui/react';
 import { Row, Container } from 'react-bootstrap';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
 
-const NavigationButton = ({
-  buttonTitle,
-  nextPage,
-  // buttonVariant = 'solid',
-  isSecondary = false
-}) => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+const NavigationButton = ({ buttonTitle, nextPage, isSecondary = false }) => {
+  const { setActiveStepIndex } = useContext(FormContext);
 
   return (
     <Container fluid>
@@ -33,7 +28,6 @@ const NavigationButton = ({
           height="40px"
           type="submit"
           width="100%"
-          // variant={buttonVariant}
           style={{ marginTop: '20px', marginBottom: '20px' }}
           onClick={() => {
             setActiveStepIndex(nextPage); // TODO: evtl. eher bei onsubmit aufrufen?

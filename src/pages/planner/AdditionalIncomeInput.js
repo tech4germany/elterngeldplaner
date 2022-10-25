@@ -1,14 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {
-  //   FormControl,
-  FormLabel,
-  Switch,
-  Flex,
-  Grid,
-  GridItem
-} from '@chakra-ui/react';
+import { FormLabel, Switch, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { Form } from 'react-bootstrap';
-import { TextNormal } from '../../components/styled/StyledText';
+import { NormalText } from '../../components/styled/StyledText';
 
 import FormContext from '../../context/FormContext';
 
@@ -48,19 +41,13 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
   };
 
   return (
-    <Grid
-      mt="20px"
-      mb="10px"
-      // templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(2, 1fr)"
-      alignItems="center"
-      rowGap={1}>
+    <Grid mt="20px" mb="10px" templateColumns="repeat(2, 1fr)" alignItems="center" rowGap={1}>
       <GridItem colSpan={2} marginBottom="5px" marginTop="5px">
         <Flex>
           <FormLabel mb="0">
-            <TextNormal style={{ lineHeight: '1.25' }}>
+            <NormalText style={{ lineHeight: '1.25' }}>
               {formData.names_parent[monthSelected.parentid]} hat in diesem Monat ein Einkommen
-            </TextNormal>
+            </NormalText>
           </FormLabel>
           {/* <Spacer /> */}
           <Switch

@@ -1,6 +1,5 @@
 import './App.css';
-import { FormikContext } from 'formik';
-import { useState, createContext, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import {
   AlertDialog,
   AlertDialogHeader,
@@ -21,11 +20,10 @@ import BirthDatePage from './pages/birthDatePage/BirthDatePage';
 import IncomePage from './pages/incomePage/IncomePage';
 import EGOverviewPage from './pages/egOverview/EGOverviewPage';
 import FinalSummeryPage from './pages/finalSummeryPage/FinalSummeryPage';
-import { TextNormal } from './components/styled/StyledText';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(<StartPage />);
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex } = useContext(FormContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
@@ -66,7 +64,7 @@ const App = () => {
 
   const handleResize = () => {
     if (window.innerWidth > 768) {
-      // user is on desktop
+      // open alert dialog when user is on desktop
       onOpen();
     }
   };

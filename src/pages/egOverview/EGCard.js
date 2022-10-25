@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
-import { TextExtraSmall, LargeTextBold, TextNormal } from '../../components/styled/StyledText';
+import { ExtraSmallText, LargeTextBold, NormalText } from '../../components/styled/StyledText';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
 import calculateEG from '../../utils/calculateEG';
@@ -18,7 +18,7 @@ const EGCard = ({ variant, title }) => {
       <Col>
         <Row>
           <Col className="p-0">
-            <TextNormal>{formData.names_parent[parentid]}</TextNormal>
+            <NormalText>{formData.names_parent[parentid]}</NormalText>
           </Col>
         </Row>
         <Row>
@@ -28,7 +28,7 @@ const EGCard = ({ variant, title }) => {
             </LargeTextBold>
           </Col>
           <Col className="p-0 align-items-center" xs={7}>
-            <TextExtraSmall>pro Monat</TextExtraSmall>
+            <ExtraSmallText>pro Monat</ExtraSmallText>
           </Col>
         </Row>
       </Col>

@@ -1,8 +1,8 @@
 {
-    "bonusBothPartners": "Partnerschaftsbonus-Monate müssen immer von beiden Elternteilen gleichzeitig genommen werden.",
-    "bonusConsecutiveMonths": "Partnerschaftsbonus-Monate müssen aufeinander folgen.",
-    "bonusKontingentMin":"Ihr müsst beide mindestens 2 Monate Partnerschaftsbonus beziehen um ihn beanspruchen zu können.",
-    "bonusKontingentMax":"Dein Kontingent für Partnerschaftsbonus ist aufgebraucht.",
-    "partnerMonths": "Um die Partnermonate beanspruchen zu können, müssen beide Elternteile mind. 2 Monate Basiselterngeld bzw. 4 Monate ElterngeldPlus beziehen.",
-    "basisPlusKontingent": "Dein Kontingent für Basiselterngeld und ElterngeldPlus reicht hierfür nicht aus."
+  "bonusBothPartners": "Partnerschaftsbonus-Monate müssen immer von beiden Elternteilen gleichzeitig genommen werden.",
+  "bonusConsecutiveMonths": "Partnerschaftsbonus-Monate müssen aufeinander folgen.",
+  "bonusKontingentMin": "Ihr müsst beide mindestens 2 Monate Partnerschaftsbonus beziehen um ihn beanspruchen zu können.",
+  "bonusKontingentMax": "Dein Kontingent für Partnerschaftsbonus ist aufgebraucht.",
+  "partnerMonths": "Um die Partnermonate beanspruchen zu können, müssen beide Elternteile mind. 2 Monate Basiselterngeld bzw. 4 Monate ElterngeldPlus beziehen.",
+  "basisPlusKontingent": "Dein Kontingent für Basiselterngeld und ElterngeldPlus reicht hierfür nicht aus."
 }

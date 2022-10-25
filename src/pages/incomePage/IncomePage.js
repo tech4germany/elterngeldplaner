@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
-import { TextBold, TextNormal } from '../../components/styled/StyledText';
+import { NormalTextBold } from '../../components/styled/StyledText';
 
 const IncomePage = () => {
   const { activeStepIndex, formData, setFormData } = useContext(FormContext);
@@ -19,7 +19,6 @@ const IncomePage = () => {
     onSubmit: (values) => {
       const data = { ...formData, ...values };
       setFormData(data);
-      // setActiveStepIndex(activeStepIndex + 1);
     }
   });
 
@@ -40,8 +39,7 @@ const IncomePage = () => {
         <Form onSubmit={formik.handleSubmit}>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextBold>Einkommen von {formData.names_parent['0']}</TextBold>
-              {/* <TextNormal>Durchschnittliches Bruttoeinkommen pro Monat</TextNormal> */}
+              <NormalTextBold>Einkommen von {formData.names_parent['0']}</NormalTextBold>
             </Form.Label>
 
             <Form.Control
@@ -55,7 +53,7 @@ const IncomePage = () => {
           </Row>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextBold>Einkommen von {formData.names_parent['1']}</TextBold>
+              <NormalTextBold>Einkommen von {formData.names_parent['1']}</NormalTextBold>
             </Form.Label>
             <Form.Control
               defaultValue={formData.income_parent ? formData.income_parent['1'] : ''}
@@ -68,11 +66,7 @@ const IncomePage = () => {
           </Row>
           <Row className="d-flex justify-content-between">
             <Col>
-              <NavigationButton // TODO: submit?
-                buttonTitle="Zurück"
-                nextPage={activeStepIndex - 1}
-                isSecondary
-              />
+              <NavigationButton buttonTitle="Zurück" nextPage={activeStepIndex - 1} isSecondary />
             </Col>
             <Col>
               <NavigationButton buttonTitle="Weiter" nextPage={activeStepIndex + 1} />

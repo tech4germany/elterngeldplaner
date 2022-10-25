@@ -1,4 +1,4 @@
-import { Container, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { BiCoinStack } from 'react-icons/bi';
@@ -28,8 +28,6 @@ const Month = ({
         _hover={{
           bg: constants.varianten[variant].colorActivated
         }}
-        // border={selected ? '4px' : '0px'}
-        // borderColor="black"
         boxShadow={selected ? '0 0 0pt 2.5pt black' : 'none'}
         padding="5px"
         width="15vw"

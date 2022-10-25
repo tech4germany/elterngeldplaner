@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { Button } from '@chakra-ui/react';
 import { Card } from 'react-bootstrap';
 import { IoLink } from 'react-icons/io5';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
-import { TextNormal, TextBold } from '../../components/styled/StyledText';
+import { NormalText, NormalTextBold } from '../../components/styled/StyledText';
 import NavigationButton from '../../components/ui/NavigationButton';
 import constants from '../../utils/constants.json';
 // import zusammenfassung from '../../images/zusammenfassung.png';
@@ -16,7 +15,7 @@ const BONUS = constants.varianten.bonus.id;
 const NONE = constants.varianten.none.id;
 
 const FinalSummeryPage = () => {
-  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData } = useContext(FormContext);
   const [emojiText, setEmojiText] = useState('');
   const numberEmojis = [
     '0️⃣1️⃣',
@@ -134,9 +133,9 @@ const FinalSummeryPage = () => {
       <Card style={{ backgroundColor: constants.varianten.none.colorDeactivated }} border="0">
         <Card.Body>
           <Card.Title>
-            <TextBold> Planungsstand teilen und speichern </TextBold>
+            <NormalTextBold> Planungsstand teilen und speichern </NormalTextBold>
           </Card.Title>
-          <TextNormal>
+          <NormalText>
             <span
               role="presentation"
               onClick={handleShareButton}
@@ -152,10 +151,9 @@ const FinalSummeryPage = () => {
               Link zum Planungsstand
             </span>
             Mit diesem Link kannst du diese Version deiner Planung mit anderen teilen.
-          </TextNormal>
+          </NormalText>
         </Card.Body>
       </Card>
-      {/* <img src={zusammenfassung} alt="DummyPlatzhalter" width="100%" height="auto" /> */}
       <NavigationButton
         buttonTitle="Zurück zur Planung"
         nextPage={activeStepIndex - 1}

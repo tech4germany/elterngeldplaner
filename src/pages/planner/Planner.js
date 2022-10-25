@@ -16,21 +16,21 @@ import NavigationButton from '../../components/ui/NavigationButton';
 import icons from '../../utils/icons';
 
 import {
-  TextBold,
-  TextNormal,
+  NormalTextBold,
+  NormalText,
   LargeTextBold,
-  TextSmall,
-  TextSmallGray,
-  TextNormalSpan
+  SmallText,
+  SmallTextGray,
+  NormalTextSpan
 } from '../../components/styled/StyledText';
 
 const Planner = () => {
+  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
   const [
     egPlan,
     { updateMonth, updateAdditionalIncome, resetPlan, getSumParent, getTotalMonthsParent }
-  ] = useEGcalc();
+  ] = useEGcalc(formData.egPlan);
   const [monthSelected, setMonthSelected] = useState({ monthid: undefined, parentid: undefined });
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
 
   const [shownNrMonths, setShownNrMonths] = useState(constants.numberMonthsCollapsed);
 
@@ -72,7 +72,7 @@ const Planner = () => {
             />
           </GridItem>
           <GridItem colSpan={2} className="d-flex align-items-center justify-content-center">
-            <TextSmallGray>{i + 1}</TextSmallGray>
+            <SmallTextGray>{i + 1}</SmallTextGray>
           </GridItem>
           <GridItem colSpan={10}>
             <Month
@@ -101,31 +101,31 @@ const Planner = () => {
         pageTitle="Eure gemeinsame Planung"
         description={
           <>
-            <TextNormal>
+            <NormalText>
               In diesem Planer könnt ihr euer gemeinsames Kontingent an Elterngeld auf die
               Lebensmonate nach der Geburt verteilen.
-            </TextNormal>
-            <TextNormal style={{ marginTop: '10px', display: 'inline-block' }}>
+            </NormalText>
+            <NormalText style={{ marginTop: '10px', display: 'inline-block' }}>
               Die drei Varianten{' '}
-              <TextNormalSpan
+              <NormalTextSpan
                 color={constants.varianten.basis.colorActivated}
                 style={{ fontWeight: 'bold' }}>
                 Basis
-              </TextNormalSpan>
+              </NormalTextSpan>
               elterngeld, Elterngeld
-              <TextNormalSpan
+              <NormalTextSpan
                 color={constants.varianten.plus.colorActivated}
                 style={{ fontWeight: 'bold' }}>
                 Plus
-              </TextNormalSpan>{' '}
+              </NormalTextSpan>{' '}
               und Partnerschafts
-              <TextNormalSpan
+              <NormalTextSpan
                 color={constants.varianten.bonus.colorActivated}
                 style={{ fontWeight: 'bold' }}>
                 bonus
-              </TextNormalSpan>{' '}
+              </NormalTextSpan>{' '}
               könnt ihr dabei miteinander kombinieren.
-            </TextNormal>
+            </NormalText>
           </>
         }>
         <Row style={{ marginTop: '17px' }}>
@@ -144,17 +144,17 @@ const Planner = () => {
           </Row>
           <Row className="text-center" style={{ paddingTop: '4px', paddingBottom: '4px' }}>
             <Col className="align-self-center" style={{ fontWeight: 'bold' }}>
-              <TextBold>{formData.names_parent['0']}</TextBold>
+              <NormalTextBold>{formData.names_parent['0']}</NormalTextBold>
             </Col>
             <Col className="align-self-center" xs="auto">
-              <TextSmallGray style={{ lineHeight: '1.0', fontWeight: 'normal' }}>
+              <SmallTextGray style={{ lineHeight: '1.0', fontWeight: 'normal' }}>
                 Lebens-
                 <br />
                 monat
-              </TextSmallGray>
+              </SmallTextGray>
             </Col>
             <Col className="align-self-center" style={{ fontWeight: 600 }}>
-              <TextBold>{formData.names_parent['1']}</TextBold>
+              <NormalTextBold>{formData.names_parent['1']}</NormalTextBold>
             </Col>
           </Row>
         </Row>
@@ -186,11 +186,11 @@ const Planner = () => {
                 shownNrMonths === constants.numberMonths ? 'rotate(180deg)' : 'rotate(0deg)'
             }}
           />
-          <TextBold style={{ color: constants.navigationButtonColor }}>
+          <NormalTextBold style={{ color: constants.navigationButtonColor }}>
             {shownNrMonths === constants.numberMonths
               ? 'weniger Monate anzeigen'
               : 'alle Monate anzeigen'}
-          </TextBold>
+          </NormalTextBold>
         </Button>
         <Row style={{ marginLeft: '-20px', marginRight: '-20px', marginTop: '10px' }}>
           <Box
@@ -209,35 +209,35 @@ const Planner = () => {
               <Row className="d-flex justify-content-around">
                 <Col>
                   <Row>
-                    <TextSmall style={{ padding: 0, fontWeight: 'bold' }}>
+                    <SmallText style={{ padding: 0, fontWeight: 'bold' }}>
                       {formData.names_parent[0]}
-                    </TextSmall>
+                    </SmallText>
                   </Row>
                   <Row className="text-left align-items-center">
                     <Col xs={5} style={{ padding: 0 }}>
-                      <TextBold>{getSumParent(0)} €</TextBold>
+                      <NormalTextBold>{getSumParent(0)} €</NormalTextBold>
                     </Col>
                     <Col xs={7} style={{ padding: 0 }}>
-                      <TextSmallGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
+                      <SmallTextGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
                         {getTotalMonthsParent(0)} Monate
-                      </TextSmallGray>
+                      </SmallTextGray>
                     </Col>
                   </Row>
                 </Col>
                 <Col>
                   <Row>
-                    <TextSmall style={{ padding: 0, fontWeight: 'bold' }}>
+                    <SmallText style={{ padding: 0, fontWeight: 'bold' }}>
                       {formData.names_parent[1]}
-                    </TextSmall>
+                    </SmallText>
                   </Row>
                   <Row className="text-left align-items-center">
                     <Col xs={5} style={{ padding: 0 }}>
-                      <TextBold>{getSumParent(1)} €</TextBold>
+                      <NormalTextBold>{getSumParent(1)} €</NormalTextBold>
                     </Col>
                     <Col xs={7} style={{ padding: 0 }}>
-                      <TextSmallGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
+                      <SmallTextGray style={{ fontWeight: 'normal', textAlign: 'left' }}>
                         {getTotalMonthsParent(1)} Monate
-                      </TextSmallGray>
+                      </SmallTextGray>
                     </Col>
                   </Row>
                 </Col>
@@ -255,9 +255,9 @@ const Planner = () => {
               resetPlan();
             }}>
             <RiArrowGoBackLine style={{ marginRight: '5px', width: '15px', height: 'auto' }} />
-            <TextBold style={{ color: constants.navigationButtonColor }}>
+            <NormalTextBold style={{ color: constants.navigationButtonColor }}>
               Auswahl zurücksetzen
-            </TextBold>
+            </NormalTextBold>
           </Button>
         </Row>
 

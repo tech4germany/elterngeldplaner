@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
 import { UnorderedList, ListItem } from '@chakra-ui/react';
-import { TextBold, TextNormal } from '../../components/styled/StyledText';
+import { NormalTextBold, NormalText } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 
 const BonusDescription = () => {
@@ -11,9 +11,9 @@ const BonusDescription = () => {
         <Card style={{ backgroundColor: constants.varianten.bonus.colorDeactivated }} border="0">
           <Card.Body>
             <Card.Title>
-              <TextBold> Zusammenfassung </TextBold>
+              <NormalTextBold> Zusammenfassung </NormalTextBold>
             </Card.Title>
-            <TextNormal>
+            <NormalText>
               <UnorderedList spacing={2}>
                 <ListItem>
                   Ihr könnt jeweils bis zu 4 zusätzliche ElterngeldPlus-Monate bekommen, wenn beide
@@ -27,14 +27,14 @@ const BonusDescription = () => {
                   Die Höhe des Partnerschaftsbonus entspricht der des ElterngeldPlus
                 </ListItem>
                 <ListItem>
-                  <TextBold>
+                  <NormalTextBold>
                     Um den Partnerschaftsbonus nutzen zu können, müsst ihr diesen mindestens 2 und
                     höchstens 4 Lebensmonate gemeinsam beziehen. Diese Monate müssen direkt
                     aufeinander folgen.
-                  </TextBold>
+                  </NormalTextBold>
                 </ListItem>
               </UnorderedList>
-            </TextNormal>
+            </NormalText>
           </Card.Body>
         </Card>
       </Row>

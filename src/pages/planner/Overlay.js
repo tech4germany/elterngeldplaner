@@ -1,11 +1,11 @@
 import { Toast, ToastContainer, Row, Col } from 'react-bootstrap';
-import { Button, Alert, AlertIcon, useToast, GridItem, Grid } from '@chakra-ui/react';
+import { Button, useToast, GridItem, Grid } from '@chakra-ui/react';
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
 import constants from '../../utils/constants.json';
 import AdditionalIncomeInput from './AdditionalIncomeInput';
 import FormContext from '../../context/FormContext';
-import { TextBold } from '../../components/styled/StyledText';
+import { NormalTextBold } from '../../components/styled/StyledText';
 
 const Overlay = ({
   monthSelected,
@@ -17,10 +17,9 @@ const Overlay = ({
   const [buttons, setButtons] = useState([]);
   const [show, setShow] = useState(false);
   const toast = useToast();
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
 
   const getDateText = (monthid) => {
-    // const initialDate = DateTime.now();
     const initialDate = DateTime.fromISO(formData.birthDate);
     const dateTextStart = initialDate
       .plus({ months: monthid })
@@ -55,27 +54,8 @@ const Overlay = ({
               style={{
                 margin: '0px',
                 padding: '3px',
-                // boxShadow:
-                //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                //     ? '0 0 0pt 2.5pt black'
-                //     : 'none',
                 backgroundColor: `${value.colorActivated} !important`
-                // outline:
-                //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-                //     ? 'solid 4px black !important'
-                //     : '0px !important'
               }}
-              // outline={
-              //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-              //     ? 'solid 3.7px black !important'
-              //     : '0px !important'
-              // }
-              // border={
-              //   egPlan[monthSelected.parentid].months[monthSelected.monthid].variant === value.id
-              //     ? '4px'
-              //     : '0px'
-              // }
-              // borderColor="black"
               _active={{
                 bg: value.colorActivated
               }}
@@ -133,9 +113,9 @@ const Overlay = ({
         {show ? (
           <>
             <Toast.Header closeButton>
-              <TextBold className="me-auto">
+              <NormalTextBold className="me-auto">
                 {formData.names_parent[monthSelected.parentid]}
-              </TextBold>
+              </NormalTextBold>
             </Toast.Header>
             <Toast.Body>
               <Row className="pb-2">

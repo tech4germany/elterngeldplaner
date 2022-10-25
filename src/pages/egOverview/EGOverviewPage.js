@@ -1,17 +1,9 @@
 import { useContext } from 'react';
-import { Container, Form, Row, Col } from 'react-bootstrap';
-import { useFormik } from 'formik';
+import { Container, Row, Col } from 'react-bootstrap';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
-import {
-  TextBasis,
-  TextBold,
-  TextPlus,
-  TextNormal,
-  TextBonus,
-  TextSmall
-} from '../../components/styled/StyledText';
+import { NormalTextBold, SmallText } from '../../components/styled/StyledText';
 import EGCard from './EGCard';
 import constants from '../../utils/constants.json';
 
@@ -20,7 +12,6 @@ const EGOverviewPage = () => {
 
   return (
     <PageTemplate
-      // pageTitle="Das könnt ihr an Elterngeld bekommen"
       pageTitle="Euer voraussichtliches Elterngeld"
       description="Diese Übersicht zeigt euch wieviel Elterngeld ihr pro Monat bekommen könnt. Das Elterngeld
           gibt es in drei Varianten, welche ihr individuell miteinander kombinieren könnt.">
@@ -30,12 +21,14 @@ const EGOverviewPage = () => {
             variant={constants.varianten.basis.id}
             title={
               <>
-                <TextBold color={constants.varianten.basis.colorActivated}>Basis</TextBold>
-                <TextBold>elterngeld</TextBold>
+                <NormalTextBold color={constants.varianten.basis.colorActivated}>
+                  Basis
+                </NormalTextBold>
+                <NormalTextBold>elterngeld</NormalTextBold>
                 <div>
-                  <TextSmall style={{ marginTop: '2px' }}>
+                  <SmallText style={{ marginTop: '2px' }}>
                     Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
-                  </TextSmall>
+                  </SmallText>
                 </div>
               </>
             }
@@ -44,12 +37,14 @@ const EGOverviewPage = () => {
             variant={constants.varianten.plus.id}
             title={
               <>
-                <TextBold>Elterngeld</TextBold>
-                <TextBold color={constants.varianten.plus.colorActivated}>Plus</TextBold>
+                <NormalTextBold>Elterngeld</NormalTextBold>
+                <NormalTextBold color={constants.varianten.plus.colorActivated}>
+                  Plus
+                </NormalTextBold>
                 <div>
-                  <TextSmall style={{ marginTop: '2px' }}>
+                  <SmallText style={{ marginTop: '2px' }}>
                     2 Monate ElterngeldPlus im Tausch gegen einen Monat Basiselterngeld.
-                  </TextSmall>
+                  </SmallText>
                 </div>
               </>
             }
@@ -58,12 +53,14 @@ const EGOverviewPage = () => {
             variant={constants.varianten.bonus.id}
             title={
               <>
-                <TextBold>Partnerschafts</TextBold>
-                <TextBold color={constants.varianten.bonus.colorActivated}>bonus</TextBold>
+                <NormalTextBold>Partnerschafts</NormalTextBold>
+                <NormalTextBold color={constants.varianten.bonus.colorActivated}>
+                  bonus
+                </NormalTextBold>
                 <div>
-                  <TextSmall style={{ marginTop: '2px' }}>
+                  <SmallText style={{ marginTop: '2px' }}>
                     2, 3 oder 4 zusätzliche ElterngeldPlus-Monate für jedes Elternteil.
-                  </TextSmall>
+                  </SmallText>
                 </div>
               </>
             }
@@ -72,12 +69,7 @@ const EGOverviewPage = () => {
 
         <Row className="d-flex justify-content-between">
           <Col>
-            <NavigationButton // TODO: submit?
-              buttonTitle="Zurück"
-              nextPage={activeStepIndex - 1}
-              // buttonVariant="outline"
-              isSecondary
-            />
+            <NavigationButton buttonTitle="Zurück" nextPage={activeStepIndex - 1} isSecondary />
           </Col>
           <Col>
             <NavigationButton buttonTitle="Weiter" nextPage={activeStepIndex + 1} />

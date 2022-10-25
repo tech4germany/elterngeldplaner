@@ -17,18 +17,11 @@ const MenuDrawer = ({ pageNames }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
-  const [visitedPages, setVisitedPages] = useState({
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false
-  }); // TODO: dynamisch machen
+  const [visitedPages, setVisitedPages] = useState(new Set()); // TODO: dynamisch machen
 
   useEffect(() => {
-    setVisitedPages({ ...visitedPages, [activeStepIndex]: true });
+    const newVisitedPages = new Set(visitedPages);
+    setVisitedPages(newVisitedPages.add(activeStepIndex));
   }, [activeStepIndex]);
 
   const getListGroupItems = () => {
@@ -37,7 +30,7 @@ const MenuDrawer = ({ pageNames }) => {
       listItems.push(
         <ListGroup.Item
           key={`listItem${i}`}
-          disabled={!visitedPages[i]}
+          disabled={!visitedPages.has(i)}
           style={{ fontWeight: activeStepIndex === i ? 'bold' : 'normal' }}
           action
           onClick={() => {

@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
-import { TextNormal } from '../../components/styled/StyledText';
+import { NormalText } from '../../components/styled/StyledText';
 
 const NameInputPage = () => {
   const { activeStepIndex, formData, setFormData } = useContext(FormContext);
@@ -19,7 +19,6 @@ const NameInputPage = () => {
     onSubmit: (values) => {
       const data = { ...formData, ...values };
       setFormData(data);
-      // setActiveStepIndex(activeStepIndex + 1);
     }
   });
 
@@ -31,7 +30,7 @@ const NameInputPage = () => {
         <Form onSubmit={formik.handleSubmit}>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextNormal>Name von Elternteil 1</TextNormal>
+              <NormalText>Name von Elternteil 1</NormalText>
             </Form.Label>
 
             <Form.Control
@@ -45,7 +44,7 @@ const NameInputPage = () => {
           </Row>
           <Row style={{ marginTop: '10px' }}>
             <Form.Label>
-              <TextNormal>Name von Elternteil 2</TextNormal>
+              <NormalText>Name von Elternteil 2</NormalText>
             </Form.Label>
             <Form.Control
               defaultValue={formData.names_parent ? formData.names_parent['1'] : ''}

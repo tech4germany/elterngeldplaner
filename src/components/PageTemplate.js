@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { LargeTitle, TextNormal } from './styled/StyledText';
+import { LargeTitle, NormalText } from './styled/StyledText';
 
 const PageTemplate = ({ pageTitle, description, children }) => {
+  const paddingLeftRight = '18px';
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    // TODO: save padding as constant
     <Container
       fluid
       className="justify-content-center"
-      style={{ paddingLeft: '18px', paddingRight: '18px' }}>
+      style={{ paddingLeft: paddingLeftRight, paddingRight: paddingLeftRight }}>
       <Row className="d-flex bg-white">
         <LargeTitle>{pageTitle}</LargeTitle>
       </Row>
       <Row className="d-flex bg-white">
-        <TextNormal> {description}</TextNormal>
+        <NormalText> {description}</NormalText>
       </Row>
       <Row className="d-flex">
         <Container>{children}</Container>

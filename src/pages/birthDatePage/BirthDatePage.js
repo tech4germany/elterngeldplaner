@@ -5,10 +5,9 @@ import { DateTime } from 'luxon';
 import FormContext from '../../context/FormContext';
 import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
-import { TextNormal } from '../../components/styled/StyledText';
 
 const BirthDatePage = () => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
 
   const formik = useFormik({
     initialValues: {
@@ -17,7 +16,6 @@ const BirthDatePage = () => {
     onSubmit: (values) => {
       const data = { ...formData, ...values };
       setFormData(data);
-      // setActiveStepIndex(activeStepIndex + 1);
     }
   });
 
@@ -39,11 +37,7 @@ const BirthDatePage = () => {
 
           <Row className="d-flex justify-content-between">
             <Col>
-              <NavigationButton // TODO: submit?
-                buttonTitle="Zurück"
-                nextPage={activeStepIndex - 1}
-                isSecondary
-              />
+              <NavigationButton buttonTitle="Zurück" nextPage={activeStepIndex - 1} isSecondary />
             </Col>
             <Col>
               <NavigationButton buttonTitle="Weiter" nextPage={activeStepIndex + 1} />

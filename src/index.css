@@ -1,15 +1,10 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 /* TODO: import from file? */
 
 /* @font-face {
   font-family: 'Bundessans';
   src: local('Bundessans'), url(./fonts/BundesSans-Web-Regular.ttf) format('truetype');
 } */
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
 
 body {
   margin: 0;
@@ -17,8 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100% !important;
-  /* background-color: #282c34; */
-  /* color: white; */
 }
 
 code {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Row } from 'react-bootstrap';
-import { UnorderedList, ListItem, List } from '@chakra-ui/react';
-import { LargeTitle, TextBold, TextNormal } from '../../components/styled/StyledText';
+import { UnorderedList, ListItem } from '@chakra-ui/react';
+import { NormalTextBold, NormalText } from '../../components/styled/StyledText';
 import constants from '../../utils/constants.json';
 
 const PlusDescription = () => {
@@ -11,9 +11,9 @@ const PlusDescription = () => {
         <Card style={{ backgroundColor: constants.varianten.plus.colorDeactivated }} border="0">
           <Card.Body>
             <Card.Title>
-              <TextBold> Zusammenfassung </TextBold>
+              <NormalTextBold> Zusammenfassung </NormalTextBold>
             </Card.Title>
-            <TextNormal>
+            <NormalText>
               <UnorderedList spacing={2}>
                 <ListItem>
                   Ein Basiselterngeldmonat kann in zwei ElterngeldPlus-Monate umgewandelt werden
@@ -29,14 +29,14 @@ const PlusDescription = () => {
                   Ihr könnt, müsst aber nicht, in Teilzeit arbeiten (max. 32 Std.).
                 </ListItem>
                 <ListItem>
-                  <TextBold>
+                  <NormalTextBold>
                     Nach dem 14. Lebensmonat könnt ihr Elterngeld nur noch ohne gemeinsame
                     Unterbrechungen beziehen. Entweder in Form von ElterngeldPlus oder
                     Partnerschaftsbonus.
-                  </TextBold>
+                  </NormalTextBold>
                 </ListItem>
               </UnorderedList>
-            </TextNormal>
+            </NormalText>
           </Card.Body>
         </Card>
       </Row>
