@@ -15,6 +15,7 @@ import constants from '../../utils/constants.json';
 import BasisDescription from './BasisDescription';
 import PlusDescription from './PlusDescription';
 import BonusDescription from './BonusDescription';
+import icons from '../../utils/icons';
 
 const DescriptionDrawer = ({ variant, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -83,7 +84,22 @@ const DescriptionDrawer = ({ variant, children }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>{getVariantTitle()}</DrawerHeader>
+          <DrawerHeader>
+            <img
+              src={icons[variant]}
+              alt="Basis Icon"
+              width="21px"
+              height="auto"
+              style={{
+                float: 'left',
+                verticalAlign: 'bottom',
+                top: '7px',
+                marginRight: '5px',
+                position: 'relative'
+              }}
+            />
+            {getVariantTitle()}
+          </DrawerHeader>
           <DrawerBody>{getVariantDescription()}</DrawerBody>
         </DrawerContent>
       </Drawer>

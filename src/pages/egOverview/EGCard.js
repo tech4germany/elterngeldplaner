@@ -5,8 +5,9 @@ import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
 import calculateEG from '../../utils/calculateEG';
 import DescriptionDrawer from './DescriptionDrawer';
+import icons from '../../utils/icons';
 
-const EGCard = ({ variant, title }) => {
+const EGCard = ({ variant, title, shortDescription }) => {
   const { formData } = useContext(FormContext);
 
   const getHeaderColor = () => {
@@ -45,7 +46,23 @@ const EGCard = ({ variant, title }) => {
         }}>
         <Container className="p-0">
           <Row className="d-flex align-items-center justify-content-between">
-            <Col xs={11}>{title}</Col>
+            <Col xs={11} className="d-flex-row align-items-center">
+              <img
+                src={icons[variant]}
+                alt="Basis Icon"
+                width="14px"
+                height="auto"
+                style={{
+                  float: 'left',
+                  verticalAlign: 'bottom',
+                  top: '5px',
+                  marginRight: '5px',
+                  position: 'relative'
+                }}
+              />
+              {title}
+              {shortDescription}
+            </Col>
             <Col xs={1} className="d-flex justify-content-center">
               <DescriptionDrawer variant={variant} />
             </Col>
@@ -53,14 +70,12 @@ const EGCard = ({ variant, title }) => {
         </Container>
       </Card.Header>
       <Card.Body style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        {/* <Card.Text> */}
         <Container>
           <Row>
             {getOverviewOneParent(0)}
             {getOverviewOneParent(1)}
           </Row>
         </Container>
-        {/* </Card.Text> */}
       </Card.Body>
     </Card>
   );

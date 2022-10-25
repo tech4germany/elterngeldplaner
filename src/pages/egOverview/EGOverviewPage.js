@@ -5,6 +5,7 @@ import PageTemplate from '../../components/PageTemplate';
 import NavigationButton from '../../components/ui/NavigationButton';
 import { NormalTextBold, SmallText } from '../../components/styled/StyledText';
 import EGCard from './EGCard';
+import icons from '../../utils/icons';
 import constants from '../../utils/constants.json';
 
 const EGOverviewPage = () => {
@@ -21,16 +22,31 @@ const EGOverviewPage = () => {
             variant={constants.varianten.basis.id}
             title={
               <>
+                {/* <img
+                  src={icons.basis}
+                  alt="Basis Icon"
+                  width="14px"
+                  height="auto"
+                  style={{
+                    float: 'left',
+                    verticalAlign: 'bottom',
+                    top: '5px',
+                    marginRight: '5px',
+                    position: 'relative'
+                  }}
+                /> */}
                 <NormalTextBold color={constants.varianten.basis.colorActivated}>
                   Basis
                 </NormalTextBold>
                 <NormalTextBold>elterngeld</NormalTextBold>
-                <div>
-                  <SmallText style={{ marginTop: '2px' }}>
-                    Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
-                  </SmallText>
-                </div>
               </>
+            }
+            shortDescription={
+              <div>
+                <SmallText style={{ marginTop: '2px' }}>
+                  Für bis zu 14 Monate, die die Eltern untereinander aufteilen können.
+                </SmallText>
+              </div>
             }
           />
           <EGCard

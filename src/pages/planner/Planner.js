@@ -25,7 +25,7 @@ import {
 } from '../../components/styled/StyledText';
 
 const Planner = () => {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
+  const { activeStepIndex, formData, setFormData } = useContext(FormContext);
   const [
     egPlan,
     { updateMonth, updateAdditionalIncome, resetPlan, getSumParent, getTotalMonthsParent }
