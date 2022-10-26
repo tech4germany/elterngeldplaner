@@ -12,7 +12,7 @@ const PLUS = constants.varianten.plus.id;
 const BONUS = constants.varianten.bonus.id;
 const NONE = constants.varianten.none.id;
 
-const useEGcalc = (initialEgPlan) => {
+const useEGcalc = (currentEgPlan) => {
   // initialEgPlan
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext);
   const initialPlan = [];
@@ -20,7 +20,7 @@ const useEGcalc = (initialEgPlan) => {
     const initialPlanOneParent = { parentid: j, months: [] };
     for (let i = 0; i < constants.numberMonths; i += 1) {
       const initialAmount = {
-        [BASIS]: calculateEG(formData.income_parent[j], BASIS, 0),
+        [BASIS]: calculateEG(formData.income_parent[j], BASIS, 0), // TODO: Form Data ausgliedern?
         [PLUS]: calculateEG(formData.income_parent[j], PLUS, 0),
         [BONUS]: calculateEG(formData.income_parent[j], BONUS, 0),
         [NONE]: 0
@@ -28,7 +28,7 @@ const useEGcalc = (initialEgPlan) => {
 
       initialPlanOneParent.months.push({
         monthid: i,
-        variant: constants.varianten.none.id, // default variant is "none"
+        variant: NONE, // default variant is "none"
         amount: initialAmount, // current amount,
         additionalIncome: 0,
         incomeChecked: false
@@ -37,12 +37,48 @@ const useEGcalc = (initialEgPlan) => {
     initialPlan.push(initialPlanOneParent);
   }
 
-  const [egPlan, setEgPlan] = useState(initialPlan);
+  const [egPlan, setEgPlan] = useState(currentEgPlan || initialPlan);
+
+  const recalculate = () => {
+    const newEgPlan = [...egPlan];
+
+    for (let i = 0; i < egPlan.length; i += 1) {
+      for (let j = 0; j < egPlan[i].months.length; j += 1) {
+        const amounts = {
+          [BASIS]: calculateEG(
+            formData.income_parent[i],
+            BASIS,
+            egPlan[i].months[j].incomeChecked,
+            egPlan[i].months[j].additionalIncome
+          ),
+          [PLUS]: calculateEG(
+            formData.income_parent[i],
+            PLUS,
+            egPlan[i].months[j].incomeChecked,
+            egPlan[i].months[j].additionalIncome
+          ),
+          [BONUS]: calculateEG(
+            formData.income_parent[i],
+            BONUS,
+            egPlan[i].months[j].incomeChecked,
+            egPlan[i].months[j].additionalIncome
+          ),
+          [NONE]: 0
+        };
+
+        newEgPlan[i].months[j].amount = amounts;
+      }
+    }
+
+    setEgPlan(newEgPlan);
+  };
 
   useEffect(() => {
-    if (initialEgPlan) {
-      setEgPlan(initialEgPlan);
-    }
+    // if (currentEgPlan) {
+    //   setEgPlan(currentEgPlan);
+    //   // recalculate();
+    // }
+    recalculate(); // TODO:
   }, []);
 
   // TODO: gibt es eine elegantere Lösung als nested try catch blocks?

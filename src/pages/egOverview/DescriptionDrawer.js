@@ -94,7 +94,7 @@ const DescriptionDrawer = ({ variant, children }) => {
                 float: 'left',
                 verticalAlign: 'bottom',
                 top: '7px',
-                marginRight: '5px',
+                marginRight: '10px',
                 position: 'relative'
               }}
             />

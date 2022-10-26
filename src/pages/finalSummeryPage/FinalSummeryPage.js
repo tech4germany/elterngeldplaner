@@ -7,7 +7,6 @@ import PageTemplate from '../../components/PageTemplate';
 import { NormalText, NormalTextBold } from '../../components/styled/StyledText';
 import NavigationButton from '../../components/ui/NavigationButton';
 import constants from '../../utils/constants.json';
-// import zusammenfassung from '../../images/zusammenfassung.png';
 
 const BASIS = constants.varianten.basis.id;
 const PLUS = constants.varianten.plus.id;
