@@ -3,10 +3,6 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import constants from '../../utils/constants.json';
 import KontingentItem from './KontingentItem';
 
-import basisIcon from '../../images/basisIcon.png';
-import plusIcon from '../../images/plusIcon.png';
-import bonusIcon from '../../images/bonusIcon.png';
-
 import icons from '../../utils/icons';
 
 const Kontingent = ({ egPlan }) => {

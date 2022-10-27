@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Box, Grid, GridItem, Button } from '@chakra-ui/react';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -13,7 +13,6 @@ import Kontingent from './Kontingent';
 import PageTemplate from '../../components/PageTemplate';
 import FormContext from '../../context/FormContext';
 import NavigationButton from '../../components/ui/NavigationButton';
-import icons from '../../utils/icons';
 
 import {
   NormalTextBold,

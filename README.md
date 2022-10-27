@@ -1,17 +1,40 @@
-This is a prototype for the Elterngeldplaner of the BMFSFJ.
-It's designed for mobile-use only at the moment.
+# Elterngeldplaner Prototyp
 
-You can test the prototype via this link:
+The Elterngeldplaner is a prototype for the BMFSFJ, developed during the Tech4Germany fellowship 2022.
+It is currently designed for mobile devices only.
+
+You can test the prototype via these links:
+
+https://elterngeldplaner.de/
 
 https://elterngeldplaner-cce40.web.app/
 
-# Getting Started with Create React App
+## About
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Elterngeldplaner is a web application that helps parents understand, calculate and plan their parental allowance. Parental allowance is a benefit funded by the German social security system that substitutes the loss of earnings after the birth of a child. The parental allowance system is very flexible but highly complex and difficult to understand for parents.
 
-## Available Scripts
+Our goal was therefore to create a self-explanatory tool that invites users to play and interact with it, so parents can understand the parental allowance system through learning-by-doing and find out how to ideally split parental allowance among each other.
 
-In the project directory, you can run:
+## Development
+
+This prototype is a (frontend-only) React single-page-application. All calculations are performed locally.
+It was developed with the purpose of demonstrating and testing the UX/UI design and is not meant to be used for productive use in its current form.
+
+Features:
+
+- Form to retrieve basic required information of the users (names, birthdate, income)
+- Simplified calculation of the expected parental allowance
+- Interactive planner to allocate the different types of parental allowance (basic parental allowance, parental allowance plus, partnership bonus) between both parents
+- A selected number of checks and warnings for invalid selections according to legal regulations of the parental allowance
+- Sharing of a generated visual depiction (with Emojis) of the created plan
+
+## Setup
+
+In the project directory, you can run
+
+### `npm install`
+
+Installs all dependencies for this project
 
 ### `npm start`
 
@@ -21,11 +44,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -34,44 +52,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deployment
 
-### `npm run eject`
+This application is currently hosted on Firebase. To setup Firebase, follow the quick start instructions on their [Website](https://firebase.google.com/docs/hosting/quickstart).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To deploy the application, first run `npm run build` to build the app, then run `firebase deploy`.

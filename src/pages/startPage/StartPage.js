@@ -4,56 +4,8 @@ import { NormalText, NormalTextBold } from '../../components/styled/StyledText';
 import NavigationButton from '../../components/ui/NavigationButton';
 import FormContext from '../../context/FormContext';
 import constants from '../../utils/constants.json';
-import icons from '../../utils/icons';
 
 const StartPage = () => {
-  // const iconImgs = {
-  //   basis: (
-  //     <img
-  //       src={icons.basis}
-  //       alt="Basis Icon"
-  //       width="14px"
-  //       height="auto"
-  //       style={{
-  //         display: 'inline',
-  //         // float: 'left',
-  //         verticalAlign: 'baseline',
-  //         marginRight: '5px',
-  //         position: 'relative'
-  //       }}
-  //     />
-  //   ),
-  //   plus: (
-  //     <img
-  //       src={icons.plus}
-  //       alt="Basis Icon"
-  //       width="14px"
-  //       height="auto"
-  //       style={{
-  //         float: 'left',
-  //         verticalAlign: 'bottom',
-  //         top: '5px',
-  //         marginRight: '5px',
-  //         position: 'relative'
-  //       }}
-  //     />
-  //   ),
-  //   bonus: (
-  //     <img
-  //       src={icons.bonus}
-  //       alt="Basis Icon"
-  //       width="14px"
-  //       height="auto"
-  //       style={{
-  //         float: 'left',
-  //         verticalAlign: 'bottom',
-  //         top: '5px',
-  //         marginRight: '5px',
-  //         position: 'relative'
-  //       }}
-  //     />
-  //   )
-  // };
   const { activeStepIndex } = useContext(FormContext);
   return (
     <PageTemplate pageTitle="Der Elterngeldplaner">

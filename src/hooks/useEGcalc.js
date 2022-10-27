@@ -81,7 +81,6 @@ const useEGcalc = (currentEgPlan) => {
     recalculate(); // TODO:
   }, []);
 
-  // TODO: gibt es eine elegantere Lösung als nested try catch blocks?
   const handleErrors = (newEgPlan, parentid, monthid, variant, error) => {
     const updatedEgPlan = cloneDeep(newEgPlan);
     const otherParent = parentid === 0 ? 1 : 0;
