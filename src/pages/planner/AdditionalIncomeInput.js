@@ -69,6 +69,12 @@ const AdditionalIncomeInput = ({ monthSelected, egPlan, updateAdditionalIncome }
               placeholder="Nettoeinkommen"
               value={additionalIncome === 0 ? '' : additionalIncome}
               onChange={(e) => handleIncomeInputChange(e)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  e.target.blur();
+                }
+              }}
             />
           </GridItem>
           <GridItem colSpan={2} textAlign="left" lineHeight="1.15" marginTop="5px">

@@ -101,7 +101,7 @@ const Overlay = ({
   }, [monthSelected, egPlan]);
 
   return (
-    <ToastContainer position="bottom-center" containerPosition="fixed">
+    <ToastContainer position="bottom-start" containerPosition="sticky">
       <Toast
         show={show}
         className="shadow-lg"

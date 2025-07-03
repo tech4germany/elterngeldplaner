@@ -106,11 +106,11 @@ const App = () => {
   }, [activeStepIndex]);
 
   return (
-    <>
+    <div className="mobile-wrapper">
       {desktopAlertDialog}
       <Header pageNames={pageNames} />
       {currentPage}
-    </>
+    </div>
   );
 };
 

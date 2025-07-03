@@ -9,3 +9,25 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+
+@media (min-width: 500px) {
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .mobile-wrapper {
+    width: 390px; /* Mobile width like iPhone 14 */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background: white;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    border-radius: 16px; /* Optional: look more like a phone */
+    max-height: 720px;
+    height: 100vh;
+    position: relative;
+  }
+}
